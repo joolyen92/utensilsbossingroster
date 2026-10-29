@@ -124,7 +124,7 @@
 
     /* Main Container */
     .main-wrap {
-      max-width: 1380px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 24px 24px 0;
     }
@@ -247,61 +247,54 @@
     }
 
     /* ==========================================================
-       CINEMATIC BOSS EVENT POSTERS
+       CINEMATIC BOSS EVENT POSTERS (FEATURING TRANSPARENT CUTOUTS)
        ========================================================== */
     .boss-poster-card {
       position: relative;
       border-radius: 26px;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-      min-height: 220px;
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+      min-height: 250px;
       display: flex;
       align-items: center;
-      padding: 34px 40px;
+      justify-content: space-between;
+      padding: 34px 44px;
     }
 
-    /* Boss specific color themes */
-    .poster-vhilla {
-      background: 
-        linear-gradient(90deg, #0d060a 0%, rgba(13, 6, 10, 0.94) 50%, rgba(20, 83, 45, 0.4) 100%),
-        radial-gradient(circle at 80% 50%, rgba(34, 197, 94, 0.35) 0%, transparent 60%),
-        url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1400&auto=format&fit=crop');
-      background-size: cover;
-      border-color: rgba(34, 197, 94, 0.35);
+    /* Boss Theme Backgrounds */
+    .theme-vhilla {
+      background: linear-gradient(135deg, #120409 0%, #1f0814 45%, #05140b 100%);
+      border-color: rgba(239, 68, 68, 0.4);
+      --boss-glow: rgba(239, 68, 68, 0.35);
+      --card-accent: #ef4444;
     }
 
-    .poster-lucid {
-      background: 
-        linear-gradient(90deg, #13071a 0%, rgba(19, 7, 26, 0.94) 50%, rgba(217, 70, 239, 0.35) 100%),
-        radial-gradient(circle at 80% 50%, rgba(217, 70, 239, 0.4) 0%, transparent 60%),
-        url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1400&auto=format&fit=crop');
-      background-size: cover;
-      border-color: rgba(217, 70, 239, 0.35);
+    .theme-lucid {
+      background: linear-gradient(135deg, #13041a 0%, #20082b 45%, #080d22 100%);
+      border-color: rgba(217, 70, 239, 0.4);
+      --boss-glow: rgba(217, 70, 239, 0.35);
+      --card-accent: #d946ef;
     }
 
-    .poster-azazelle {
-      background: 
-        linear-gradient(90deg, #130e06 0%, rgba(19, 14, 6, 0.94) 50%, rgba(245, 158, 11, 0.35) 100%),
-        radial-gradient(circle at 80% 50%, rgba(245, 158, 11, 0.4) 0%, transparent 60%),
-        url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1400&auto=format&fit=crop');
-      background-size: cover;
-      border-color: rgba(245, 158, 11, 0.35);
+    .theme-azazelle {
+      background: linear-gradient(135deg, #0e0717 0%, #180928 45%, #1d1003 100%);
+      border-color: rgba(168, 85, 247, 0.4);
+      --boss-glow: rgba(168, 85, 247, 0.35);
+      --card-accent: #a855f7;
     }
 
-    .poster-will {
-      background: 
-        linear-gradient(90deg, #090918 0%, rgba(9, 9, 24, 0.94) 50%, rgba(99, 102, 241, 0.35) 100%),
-        radial-gradient(circle at 80% 50%, rgba(99, 102, 241, 0.4) 0%, transparent 60%),
-        url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1400&auto=format&fit=crop');
-      background-size: cover;
-      border-color: rgba(99, 102, 241, 0.35);
+    .theme-will {
+      background: linear-gradient(135deg, #040914 0%, #081226 45%, #181404 100%);
+      border-color: rgba(56, 189, 248, 0.4);
+      --boss-glow: rgba(56, 189, 248, 0.35);
+      --card-accent: #38bdf8;
     }
 
     .poster-content {
       position: relative;
       z-index: 2;
-      max-width: 680px;
+      max-width: 650px;
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -338,12 +331,12 @@
 
     .poster-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-size: clamp(2.1rem, 3.8vw, 3rem);
       font-weight: 800;
       letter-spacing: -0.5px;
       color: #ffffff;
       line-height: 1.1;
-      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8);
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
     }
 
     .poster-desc {
@@ -365,20 +358,66 @@
       margin-top: 4px;
     }
 
+    /* Right Showcase: Boss Art + Squad Metric */
+    .poster-right-showcase {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      z-index: 2;
+    }
+
+    .boss-art-portrait-wrap {
+      position: relative;
+      width: 170px;
+      height: 190px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .boss-art-halo {
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--boss-glow) 0%, transparent 70%);
+      filter: blur(16px);
+      z-index: 1;
+      animation: ambientPulse 3s ease-in-out infinite alternate;
+    }
+
+    .boss-transparent-img {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.75));
+      animation: floatArt 3.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatArt {
+      0% { transform: translateY(0px) scale(1); }
+      100% { transform: translateY(-8px) scale(1.03); }
+    }
+
+    @keyframes ambientPulse {
+      0% { opacity: 0.6; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1.1); }
+    }
+
     .poster-stats-box {
-      margin-left: auto;
-      background: rgba(8, 11, 20, 0.78);
+      background: rgba(8, 11, 20, 0.82);
       backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 20px;
-      padding: 18px 24px;
+      padding: 18px 22px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      z-index: 2;
+      min-width: 160px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      min-width: 175px;
     }
 
     .poster-stats-label {
@@ -413,7 +452,7 @@
     }
 
     /* ==========================================================
-       TEAM SECTIONS & CATCHA CARD GRID
+       TEAM SECTIONS & CATCHA 3D CARDS
        ========================================================== */
     .team-block {
       background: rgba(16, 20, 34, 0.4);
@@ -537,11 +576,30 @@
       text-align: center;
       gap: 10px;
       transition: all 0.2s ease;
+      position: relative;
     }
 
     .gacha-card.empty-slot:hover {
-      border-color: var(--accent-purple);
+      border-color: var(--card-accent, #8b5cf6);
       background: rgba(139, 92, 246, 0.08);
+    }
+
+    /* Watermark for empty card matched back to boss */
+    .empty-boss-watermark {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      opacity: 0.1;
+      filter: grayscale(1);
+      pointer-events: none;
+      transition: all 0.25s ease;
+    }
+
+    .gacha-card.empty-slot:hover .empty-boss-watermark {
+      opacity: 0.25;
+      filter: grayscale(0);
+      transform: scale(1.08);
     }
 
     .empty-icon-wrap {
@@ -555,6 +613,7 @@
       font-size: 1.4rem;
       color: var(--text-muted);
       border: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 2;
     }
 
     .empty-title {
@@ -562,11 +621,13 @@
       font-size: 0.95rem;
       font-weight: 700;
       color: #cbd5e1;
+      z-index: 2;
     }
 
     .empty-desc {
       font-size: 0.75rem;
       color: var(--text-muted);
+      z-index: 2;
     }
 
     /* Filled Card Styling */
@@ -770,7 +831,7 @@
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 24px;
       width: 100%;
-      max-width: 460px;
+      max-width: 480px;
       padding: 28px;
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
       position: relative;
@@ -844,17 +905,20 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    @media (max-width: 820px) {
+    @media (max-width: 900px) {
       .boss-poster-card {
         flex-direction: column;
         align-items: flex-start;
         padding: 24px 20px;
-        gap: 20px;
+        gap: 24px;
       }
-      .poster-stats-box {
-        margin-left: 0;
+      .poster-right-showcase {
         width: 100%;
-        align-items: flex-start;
+        justify-content: space-between;
+      }
+      .boss-art-portrait-wrap {
+        width: 130px;
+        height: 140px;
       }
       .hero-top-row { flex-direction: column; align-items: flex-start; }
       .nav-stats { display: none; }
@@ -863,6 +927,8 @@
 
     @media (max-width: 480px) {
       .card-grid { grid-template-columns: 1fr; }
+      .poster-right-showcase { flex-direction: column; align-items: center; }
+      .poster-stats-box { width: 100%; }
     }
   </style>
 </head>
@@ -939,20 +1005,71 @@
       </div>
 
       <div class="form-item">
-        <label>Class / Job</label>
+        <label>Class / Job (Global MapleStory Mobile Version)</label>
         <select class="select-field" id="modal-job">
-          <option value="Night Walker">🗡️ Night Walker</option>
-          <option value="Bishop">✨ Bishop (Holy Magic Shell)</option>
-          <option value="Sia Astelle">⭐ Sia Astelle</option>
-          <option value="Paladin">🛡️ Paladin (Sacrosanctity / Threaten)</option>
-          <option value="Shade">👊 Shade (Soul Splitter)</option>
-          <option value="Dual Blade">⚔️ Dual Blade</option>
-          <option value="Buccaneer">⚡ Buccaneer (Time Leap)</option>
-          <option value="Hero">🪓 Hero</option>
-          <option value="Bowmaster">🏹 Bowmaster</option>
-          <option value="Luminous">🔮 Luminous</option>
-          <option value="Phantom">🃏 Phantom</option>
-          <option value="Adele">🗡️ Adele</option>
+          <optgroup label="Sengoku & Special">
+            <option value="Hayato">🌸 Hayato</option>
+            <option value="Kanna">🦊 Kanna</option>
+            <option value="Sia Astelle">⭐ Sia Astelle</option>
+            <option value="Zen">🐉 Zen (Dragon Fighter)</option>
+          </optgroup>
+          <optgroup label="Explorers - Warriors">
+            <option value="Hero">🪓 Hero</option>
+            <option value="Paladin">🛡️ Paladin</option>
+            <option value="Dark Knight">🩸 Dark Knight</option>
+          </optgroup>
+          <optgroup label="Explorers - Magicians">
+            <option value="Bishop">✨ Bishop</option>
+            <option value="Arch Mage (F/P)">🔥 Arch Mage (Fire/Poison)</option>
+            <option value="Arch Mage (I/L)">⚡ Arch Mage (Ice/Lightning)</option>
+          </optgroup>
+          <optgroup label="Explorers - Bowmen">
+            <option value="Bowmaster">🏹 Bowmaster</option>
+            <option value="Marksman">🎯 Marksman</option>
+            <option value="Pathfinder">🌀 Pathfinder</option>
+          </optgroup>
+          <optgroup label="Explorers - Thieves">
+            <option value="Night Lord">⭐ Night Lord</option>
+            <option value="Shadower">🗡️ Shadower</option>
+            <option value="Dual Blade">⚔️ Dual Blade</option>
+          </optgroup>
+          <optgroup label="Explorers - Pirates">
+            <option value="Buccaneer">⚡ Buccaneer</option>
+            <option value="Corsair">🔫 Corsair</option>
+            <option value="Cannoneer">💣 Cannoneer</option>
+          </optgroup>
+          <optgroup label="Cygnus Knights">
+            <option value="Dawn Warrior">☀️ Dawn Warrior</option>
+            <option value="Wind Archer">🍃 Wind Archer</option>
+            <option value="Night Walker">🗡️ Night Walker</option>
+            <option value="Blaze Wizard">🔥 Blaze Wizard</option>
+            <option value="Thunder Breaker">⚡ Thunder Breaker</option>
+          </optgroup>
+          <optgroup label="Heroes">
+            <option value="Mercedes">🧝 Mercedes</option>
+            <option value="Aran">❄️ Aran</option>
+            <option value="Phantom">🃏 Phantom</option>
+            <option value="Luminous">🔮 Luminous</option>
+            <option value="Evan">🐉 Evan</option>
+            <option value="Shade">👊 Shade</option>
+          </optgroup>
+          <optgroup label="Resistance & Demons">
+            <option value="Demon Slayer">👿 Demon Slayer</option>
+            <option value="Demon Avenger">🩸 Demon Avenger</option>
+            <option value="Xenon">⚡ Xenon</option>
+            <option value="Battle Mage">🔮 Battle Mage</option>
+            <option value="Wild Hunter">🐆 Wild Hunter</option>
+            <option value="Mechanic">🤖 Mechanic</option>
+            <option value="Blaster">💥 Blaster</option>
+          </optgroup>
+          <optgroup label="Nova & Flora">
+            <option value="Adele">🗡️ Adele</option>
+            <option value="Ark">🦾 Ark</option>
+            <option value="Cadena">⛓️ Cadena</option>
+            <option value="Kaiser">🐉 Kaiser</option>
+            <option value="Angelic Buster">💖 Angelic Buster</option>
+            <option value="Illium">🔮 Illium</option>
+          </optgroup>
         </select>
       </div>
 
@@ -989,7 +1106,8 @@
 
   <script>
     /* ==========================================================
-       1. DATA STRUCTURE: 4 BOSSES x 4 SQUADS x 6 SLOTS (ALL BLANK)
+       1. DATA STRUCTURE: 4 BOSSES x 4 SQUADS x 6 SLOTS
+       Matched directly to your attached images
        ========================================================== */
     function createEmptySlots() {
       return Array.from({ length: 6 }, () => ({
@@ -997,7 +1115,7 @@
         job: "",
         cp: "",
         role: "",
-        status: "READY" // READY, CLEARED, SUB
+        status: "READY"
       }));
     }
 
@@ -1010,7 +1128,8 @@
         tier: 'Grand Commander',
         difficulty: 'Chaos Mode',
         levelReq: 'Lv. 240+ • 70M+ CP Rec',
-        posterTheme: 'poster-vhilla',
+        imageFile: 'verus hilla.jpeg',
+        posterTheme: 'theme-vhilla',
         desc: 'Escape the cursed strings of fate in the deepest abyss of the Labyrinth.',
         tactics: 'Gather green candles to recover souls; avoid red scythe threads to prevent instant death cages.',
         teams: [
@@ -1028,7 +1147,8 @@
         tier: 'Grand Commander',
         difficulty: 'Chaos Mode',
         levelReq: 'Lv. 235+ • 68M+ CP Rec',
-        posterTheme: 'poster-lucid',
+        imageFile: 'lucid.jpeg',
+        posterTheme: 'theme-lucid',
         desc: 'Overcome Lachelein’s dream illusions. Shatter the music box and survive the dragon breath.',
         tactics: 'Cleanse nightmare butterfly clouds; stack behind golems for breath; coordinate Phase 2 bind.',
         teams: [
@@ -1046,9 +1166,10 @@
         tier: 'Abyssal Commander',
         difficulty: 'Hard Mode',
         levelReq: 'Lv. 235+ • 65M+ CP Rec',
-        posterTheme: 'poster-azazelle',
+        imageFile: 'azazelle.jpeg',
+        posterTheme: 'theme-azazelle',
         desc: 'Pierce the abyssal tempest and withstand devastating lightning runes.',
-        tactics: 'Dodge ground runes; monitor corruption gauges; save burst buffs for the stagger stagger phase.',
+        tactics: 'Dodge ground runes; monitor corruption gauges; save burst buffs for the stagger phase.',
         teams: [
           { name: 'Team 1 (Squad A)', members: createEmptySlots() },
           { name: 'Team 2 (Squad B)', members: createEmptySlots() },
@@ -1064,7 +1185,8 @@
         tier: 'Grand Commander',
         difficulty: 'Chaos Mode',
         levelReq: 'Lv. 240+ • 72M+ CP Rec',
-        posterTheme: 'poster-will',
+        imageFile: 'will.webp',
+        posterTheme: 'theme-will',
         desc: 'Decipher the arachnid mirror illusions across light and dark dimensions.',
         tactics: 'Phase 1 dimension HP match; Phase 2 mirror reflection test; Phase 3 poison space control.',
         teams: [
@@ -1076,12 +1198,12 @@
       }
     ];
 
-    let bosses = JSON.parse(localStorage.getItem('msm_utensils_4boss_roster')) || DEFAULT_BOSSES;
+    let bosses = JSON.parse(localStorage.getItem('msm_utensils_4boss_v2')) || DEFAULT_BOSSES;
     let activeCategory = 'ALL';
     let sfxMuted = false;
 
     function persist() {
-      localStorage.setItem('msm_utensils_4boss_roster', JSON.stringify(bosses));
+      localStorage.setItem('msm_utensils_4boss_v2', JSON.stringify(bosses));
       updateGlobalStats();
     }
 
@@ -1140,14 +1262,34 @@
     }
 
     /* ==========================================================
-       3. RENDER ENGINE: BOSSES, TEAMS & CARDS
+       3. MAPLESTORY M GLOBAL CLASSES & ICONS
        ========================================================== */
     const jobAvatars = {
-      'Night Walker': '🗡️', 'Bishop': '✨', 'Sia Astelle': '⭐', 'Paladin': '🛡️',
-      'Shade': '👊', 'Dual Blade': '⚔️', 'Buccaneer': '⚡', 'Hero': '🪓',
-      'Bowmaster': '🏹', 'Luminous': '🔮', 'Phantom': '🃏', 'Adele': '🗡️'
+      // Sengoku & Special
+      'Hayato': '🌸', 'Kanna': '🦊', 'Sia Astelle': '⭐', 'Zen': '🐉',
+      // Explorers
+      'Hero': '🪓', 'Paladin': '🛡️', 'Dark Knight': '🩸',
+      'Bishop': '✨', 'Arch Mage (F/P)': '🔥', 'Arch Mage (I/L)': '⚡',
+      'Bowmaster': '🏹', 'Marksman': '🎯', 'Pathfinder': '🌀',
+      'Night Lord': '⭐', 'Shadower': '🗡️', 'Dual Blade': '⚔️',
+      'Buccaneer': '⚡', 'Corsair': '🔫', 'Cannoneer': '💣',
+      // Cygnus Knights
+      'Dawn Warrior': '☀️', 'Wind Archer': '🍃', 'Night Walker': '🗡️',
+      'Blaze Wizard': '🔥', 'Thunder Breaker': '⚡',
+      // Heroes
+      'Mercedes': '🧝', 'Aran': '❄️', 'Phantom': '🃏', 'Luminous': '🔮',
+      'Evan': '🐉', 'Shade': '👊',
+      // Resistance & Demons
+      'Demon Slayer': '👿', 'Demon Avenger': '🩸', 'Xenon': '⚡',
+      'Battle Mage': '🔮', 'Wild Hunter': '🐆', 'Mechanic': '🤖', 'Blaster': '💥',
+      // Nova & Flora
+      'Adele': '🗡️', 'Ark': '🦾', 'Cadena': '⛓️', 'Kaiser': '🐉',
+      'Angelic Buster': '💖', 'Illium': '🔮'
     };
 
+    /* ==========================================================
+       4. RENDER ENGINE: BOSSES, TEAMS & CARDS
+       ========================================================== */
     function render() {
       const container = document.getElementById('boss-container');
       container.innerHTML = '';
@@ -1160,7 +1302,6 @@
         const section = document.createElement('section');
         section.className = 'boss-section';
 
-        // Calculate boss overall clear count
         let totalAssigned = 0;
         let totalCleared = 0;
         boss.teams.forEach(t => {
@@ -1173,7 +1314,6 @@
         });
         const bossClearPct = totalAssigned > 0 ? Math.round((totalCleared / totalAssigned) * 100) : 0;
 
-        // Render each team block
         let teamsHtml = '';
         boss.teams.forEach((team, teamIdx) => {
           const teamCleared = team.members.filter(m => m.ign && m.status === 'CLEARED').length;
@@ -1182,10 +1322,11 @@
           let cardsHtml = '';
           team.members.forEach((m, slotIdx) => {
             if (!m.ign) {
-              // Empty Slot Card
+              // Empty Slot Card with Boss Watermark
               cardsHtml += `
                 <div class="gacha-card-wrapper" onclick="openModal('${boss.id}', ${teamIdx}, ${slotIdx})">
                   <div class="gacha-card empty-slot">
+                    <img src="${boss.imageFile}" class="empty-boss-watermark" alt="${boss.bossName}" onerror="this.style.display='none'">
                     <div class="empty-icon-wrap">+</div>
                     <div class="empty-title">Slot ${slotIdx + 1}</div>
                     <div class="empty-desc">Tap to assign raider</div>
@@ -1257,7 +1398,7 @@
           `;
         });
 
-        // Boss Poster Banner + 4 Teams
+        // Boss Poster with Transparent Cutout Art & Metagame Stats
         section.innerHTML = `
           <div class="boss-poster-card ${boss.posterTheme}">
             <div class="poster-content">
@@ -1274,11 +1415,18 @@
               </div>
             </div>
 
-            <div class="poster-stats-box">
-              <span class="poster-stats-label">Boss Cleared</span>
-              <div class="poster-stats-num">${totalCleared} / ${totalAssigned}</div>
-              <div class="poster-progress-bar">
-                <div class="poster-progress-fill" style="width: ${bossClearPct}%"></div>
+            <div class="poster-right-showcase">
+              <div class="boss-art-portrait-wrap">
+                <div class="boss-art-halo"></div>
+                <img src="${boss.imageFile}" class="boss-transparent-img" alt="${boss.bossName}" onerror="this.style.opacity='0.2'">
+              </div>
+
+              <div class="poster-stats-box">
+                <span class="poster-stats-label">Boss Cleared</span>
+                <div class="poster-stats-num">${totalCleared} / ${totalAssigned}</div>
+                <div class="poster-progress-bar">
+                  <div class="poster-progress-fill" style="width: ${bossClearPct}%"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -1294,7 +1442,6 @@
       updateGlobalStats();
     }
 
-    /* Cycle seal status: READY -> CLEARED -> SUB -> READY */
     function toggleSeal(bossId, teamIdx, slotIdx) {
       const boss = bosses.find(b => b.id === bossId);
       if (!boss) return;
@@ -1360,7 +1507,6 @@
       document.getElementById('global-clear-pct').textContent = `${pct}% (${totalCleared}/${totalAssigned})`;
     }
 
-    /* Reset All Weekly Status to READY */
     function resetAllWeeklyStatus() {
       if (!confirm('Reset all member clearance statuses back to READY for the new week?')) return;
       bosses.forEach(b => {
@@ -1376,7 +1522,7 @@
     }
 
     /* ==========================================================
-       4. MODAL ASSIGNMENT / EDIT
+       5. MODAL ASSIGNMENT / EDIT
        ========================================================== */
     function openModal(bossId, teamIdx, slotIdx) {
       const boss = bosses.find(b => b.id === bossId);
@@ -1392,7 +1538,7 @@
         : `Assign Slot ${slotIdx + 1} (${boss.bossName})`;
 
       document.getElementById('modal-ign').value = member.ign || '';
-      document.getElementById('modal-job').value = member.job || 'Night Walker';
+      document.getElementById('modal-job').value = member.job || 'Hayato';
       document.getElementById('modal-cp').value = member.cp || '';
       document.getElementById('modal-role').value = member.role || 'Main DPS';
 
@@ -1459,12 +1605,12 @@
     }
 
     /* ==========================================================
-       5. RESET COUNTDOWN TIMER (Thursday 00:00 SGT)
+       6. RESET COUNTDOWN TIMER (Thursday 00:00 SGT)
        ========================================================== */
     function updateCountdown() {
       const now = new Date();
       const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-      const serverTime = new Date(utc + 8 * 3600000); // UTC+8
+      const serverTime = new Date(utc + 8 * 3600000);
 
       let target = new Date(serverTime);
       const day = serverTime.getDay();
@@ -1486,7 +1632,7 @@
     updateCountdown();
 
     /* ==========================================================
-       6. DISCORD EXPORT
+       7. DISCORD EXPORT
        ========================================================== */
     function copyDiscordRoster() {
       let out = `🎴 **UTENSILS EXPEDITION ROSTER • ASIA 2 SCANIA**\n`;
