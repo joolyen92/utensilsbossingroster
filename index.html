@@ -3,1475 +3,1312 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MapleStory M - Guild Raid & Bossing Roster</title>
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Tone.js for optional audio chimes -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
-
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            msm: {
-              dark: '#080c16',
-              card: '#0f172a',
-              cardBorder: '#1e293b',
-              cyan: '#06b6d4',
-              neonCyan: '#00f2fe',
-              gold: '#f59e0b',
-              purple: '#a855f7',
-              red: '#ef4444',
-              green: '#10b981'
-            }
-          },
-          boxShadow: {
-            'glow-cyan': '0 0 15px -3px rgba(6, 182, 212, 0.35)',
-            'glow-purple': '0 0 15px -3px rgba(168, 85, 247, 0.35)',
-            'glow-gold': '0 0 15px -3px rgba(245, 158, 11, 0.35)'
-          }
-        }
-      }
-    }
-  </script>
-
+  <title>UTENSILS • MapleStory M Bossing Roster</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    :root {
+      --maple-orange: #ff7700;
+      --maple-gold: #ffbe1a;
+      --maple-yellow: #fff066;
+      --arcane-blue: #38bdf8;
+      --arcane-purple: #a855f7;
+      --card-bg: rgba(20, 24, 45, 0.82);
+      --card-border: rgba(168, 85, 247, 0.35);
+      --ready-color: #facc15;
+      --cleared-color: #22c55e;
+      --sub-color: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
 
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #070a12;
-      background-image: 
-        radial-gradient(at 0% 0%, rgba(168, 85, 247, 0.12) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.12) 0px, transparent 50%),
-        radial-gradient(at 50% 100%, rgba(30, 41, 59, 0.25) 0px, transparent 50%);
-      background-attachment: fixed;
+      font-family: 'Outfit', sans-serif;
+      background: radial-gradient(circle at 50% 20%, #1e1b4b 0%, #0f172a 50%, #090d16 100%);
+      color: #f1f5f9;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
     }
 
-    .title-font {
-      font-family: 'Cinzel', serif;
+    /* Falling Maple Leaves & Starfield Canvas */
+    #fx-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
     }
 
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #0b1120;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #1e293b;
-      border-radius: 9999px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #06b6d4;
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
     }
 
-    .glass-panel {
-      background: rgba(15, 23, 42, 0.75);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.07);
+    /* Header & Animated Mascot Theater */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(30, 27, 75, 0.9), rgba(59, 7, 100, 0.85));
+      border: 3px solid #ffbe1a;
+      border-radius: 28px;
+      padding: 28px 24px 20px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), inset 0 0 24px rgba(255, 190, 26, 0.25);
+      position: relative;
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      overflow: visible;
     }
 
-    .glass-card {
-      background: rgba(18, 26, 47, 0.65);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+    /* Bouncing Orange Mushroom Mascot */
+    .mascot-mushroom {
+      position: absolute;
+      top: -46px;
+      left: 32px;
+      width: 82px;
+      height: 82px;
+      animation: mapleBounce 1.4s ease-in-out infinite alternate;
+      filter: drop-shadow(0 10px 14px rgba(0,0,0,0.5));
+    }
+
+    /* Floating Pink Bean Mascot */
+    .mascot-pinkbean {
+      position: absolute;
+      top: -44px;
+      right: 32px;
+      width: 84px;
+      height: 84px;
+      animation: mapleFloat 2.8s ease-in-out infinite alternate;
+      filter: drop-shadow(0 12px 18px rgba(236, 72, 153, 0.45));
+    }
+
+    /* Mascot Keyframes */
+    @keyframes mapleBounce {
+      0% { transform: translateY(0) scale(1.05, 0.92); }
+      50% { transform: translateY(-22px) scale(0.96, 1.06); }
+      100% { transform: translateY(0) scale(1, 0.96); }
+    }
+
+    @keyframes mapleFloat {
+      0% { transform: translateY(0) rotate(-4deg); }
+      100% { transform: translateY(-16px) rotate(4deg); }
+    }
+
+    @keyframes slimeSquish {
+      0%, 100% { transform: scale(1, 1); }
+      50% { transform: scale(1.15, 0.85) translateY(4px); }
+    }
+
+    .guild-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(90deg, #ff7700, #ffbe1a);
+      color: #3b0764;
+      font-family: 'Fredoka', cursive;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 6px 18px;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(255, 119, 0, 0.4);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .main-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(180deg, #ffffff 25%, #ffbe1a 75%, #ff7700 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 6px 20px rgba(255, 119, 0, 0.4);
+      margin-bottom: 8px;
+    }
+
+    .sub-title {
+      color: #cbd5e1;
+      font-size: 1rem;
+      max-width: 640px;
+      margin-bottom: 18px;
+    }
+
+    /* Reset Bar styled like Maple EXP/Server Bar */
+    .reset-clock-card {
+      background: rgba(15, 23, 42, 0.85);
+      border: 2px solid rgba(255, 190, 26, 0.4);
+      padding: 10px 24px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Fredoka', cursive;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    .reset-label {
+      color: var(--maple-yellow);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .countdown-digits {
+      font-family: 'Press Start 2P', monospace;
+      color: #38bdf8;
+      font-size: 0.85rem;
+      background: #020617;
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1px solid #1e293b;
+      letter-spacing: 2px;
+    }
+
+    /* Control Toolbar */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+
+    .boss-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .btn-tab {
+      background: rgba(30, 41, 59, 0.8);
+      border: 2px solid rgba(148, 163, 184, 0.25);
+      color: #cbd5e1;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-family: 'Fredoka', cursive;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
       transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    .glass-card:hover {
-      border-color: rgba(6, 182, 212, 0.4);
+
+    .btn-tab:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: #38bdf8;
+      color: #fff;
       transform: translateY(-2px);
     }
 
-    /* Animated gradient accent */
-    .animated-border {
+    .btn-tab.active {
+      background: linear-gradient(135deg, #a855f7, #6366f1);
+      border-color: #ffbe1a;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(168, 85, 247, 0.5);
+    }
+
+    .action-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Chunky Maple Buttons */
+    .btn-maple {
+      background: linear-gradient(180deg, #ff9900 0%, #ff6600 100%);
+      color: #fff;
+      border: 2px solid #ffe600;
+      border-radius: 14px;
+      padding: 9px 18px;
+      font-family: 'Fredoka', cursive;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 5px 0 #b34700, 0 8px 18px rgba(255, 102, 0, 0.4);
+      transition: all 0.1s ease;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .btn-maple:hover {
+      background: linear-gradient(180deg, #ffa826 0%, #ff7711 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 7px 0 #b34700, 0 12px 20px rgba(255, 102, 0, 0.5);
+    }
+
+    .btn-maple:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 #b34700, 0 3px 8px rgba(255, 102, 0, 0.4);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(180deg, #475569 0%, #334155 100%);
+      border-color: #94a3b8;
+      box-shadow: 0 5px 0 #1e293b, 0 6px 14px rgba(0,0,0,0.3);
+    }
+    .btn-secondary:hover {
+      background: linear-gradient(180deg, #64748b 0%, #475569 100%);
+      box-shadow: 0 7px 0 #1e293b, 0 10px 18px rgba(0,0,0,0.4);
+    }
+    .btn-secondary:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 #1e293b;
+    }
+
+    /* Grid of Boss Squad Cards */
+    .squad-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 24px;
+    }
+
+    .boss-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 2px solid var(--card-border);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .boss-card:hover {
+      transform: translateY(-4px);
+      border-color: #ffbe1a;
+      box-shadow: 0 18px 40px rgba(168, 85, 247, 0.3);
+    }
+
+    /* Boss Header Banner */
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      border-bottom: 2px dashed rgba(255, 255, 255, 0.12);
+      padding-bottom: 12px;
+    }
+
+    .boss-identity {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .boss-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: #1e1b4b;
+      border: 2px solid #a855f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 4px 12px rgba(168, 85, 247, 0.35);
+    }
+
+    .boss-name {
+      font-family: 'Fredoka', cursive;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .boss-diff {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.8px;
+      display: inline-block;
+      margin-top: 2px;
+    }
+    .diff-hard { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
+    .diff-chaos { background: rgba(217, 70, 239, 0.2); color: #e879f9; border: 1px solid #d946ef; }
+
+    .party-counter {
+      font-family: 'Fredoka', cursive;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Raiders Slots */
+    .raider-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .raider-slot {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1.5px solid rgba(148, 163, 184, 0.15);
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .raider-slot:hover {
+      background: rgba(30, 41, 59, 0.95);
+      border-color: rgba(255, 190, 26, 0.5);
+      transform: translateX(3px);
+    }
+
+    .raider-slot.status-cleared {
+      border-color: rgba(34, 197, 94, 0.5);
+      background: rgba(20, 83, 45, 0.25);
+    }
+
+    .raider-slot.status-sub {
+      border-color: rgba(239, 68, 68, 0.5);
+      background: rgba(127, 29, 29, 0.25);
+    }
+
+    .raider-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .raider-job-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      background: #0f172a;
+      border: 1px solid rgba(255,255,255,0.15);
+      flex-shrink: 0;
+    }
+
+    .raider-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .raider-ign {
+      font-weight: 700;
+      color: #f8fafc;
+      font-size: 0.98rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .raider-subinfo {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .cp-tag {
+      color: var(--maple-yellow);
+      font-weight: 700;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.62rem;
+    }
+
+    /* Clearance Status Badges */
+    .status-badge {
+      font-family: 'Fredoka', cursive;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.2s ease;
+    }
+
+    .badge-ready {
+      background: rgba(250, 204, 21, 0.15);
+      color: #fde047;
+      border: 1px solid #facc15;
+    }
+
+    .badge-cleared {
+      background: rgba(34, 197, 94, 0.2);
+      color: #4ade80;
+      border: 1px solid #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+    }
+
+    .badge-sub {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      border: 1px solid #ef4444;
+      animation: pulseAlert 1.2s infinite;
+    }
+
+    @keyframes pulseAlert {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.75; transform: scale(0.96); }
+    }
+
+    /* Boss Mechanics Quick Tips Box */
+    .card-footer-tip {
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      border-left: 3px solid #ffbe1a;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(3, 7, 18, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .maple-modal {
+      background: linear-gradient(135deg, #1e1b4b, #0f172a);
+      border: 3px solid #ffbe1a;
+      border-radius: 24px;
+      padding: 26px;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 190, 26, 0.25);
       position: relative;
     }
-    .animated-border::before {
-      content: '';
+
+    .modal-title {
+      font-family: 'Fredoka', cursive;
+      font-size: 1.5rem;
+      color: var(--maple-yellow);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-bottom: 6px;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: #020617;
+      border: 1.5px solid #334155;
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: #ffbe1a;
+      box-shadow: 0 0 12px rgba(255, 190, 26, 0.3);
+    }
+
+    /* Floating Green Slime in bottom right */
+    .mascot-slime {
+      position: fixed;
+      bottom: 24px;
+      right: 28px;
+      width: 68px;
+      height: 68px;
+      z-index: 50;
+      cursor: pointer;
+      animation: slimeSquish 2s ease-in-out infinite;
+      filter: drop-shadow(0 10px 16px rgba(34, 197, 94, 0.45));
+    }
+
+    .slime-bubble {
       position: absolute;
-      inset: -1px;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(90deg, #06b6d4, #a855f7, #f59e0b);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0.6;
+      bottom: 80px;
+      right: 0;
+      background: rgba(15, 23, 42, 0.95);
+      border: 2px solid #22c55e;
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 14px;
+      font-family: 'Fredoka', cursive;
+      font-size: 0.85rem;
+      white-space: nowrap;
       pointer-events: none;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    }
+
+    .mascot-slime:hover .slime-bubble {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Notification Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 16px;
+      font-family: 'Fredoka', cursive;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      z-index: 200;
+      transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      border: 2px solid #a7f3d0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .mascot-mushroom, .mascot-pinkbean {
+        width: 58px;
+        height: 58px;
+        top: -34px;
+      }
+      .mascot-mushroom { left: 10px; }
+      .mascot-pinkbean { right: 10px; }
+      .hero-banner { padding-top: 24px; }
+      .toolbar { flex-direction: column; align-items: stretch; }
+      .boss-tabs { justify-content: center; }
+      .action-group { justify-content: center; }
+      .mascot-slime { display: none; }
     }
   </style>
 </head>
-<body class="text-slate-200 min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-black">
+<body>
 
-  <!-- Toast Container -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3.5 rounded-xl text-sm font-semibold shadow-2xl transition-all duration-300 transform translate-y-16 opacity-0 pointer-events-none glass-panel border border-cyan-500/40 text-cyan-300">
-    <i id="toastIcon" class="fa-solid fa-check-circle text-cyan-400"></i>
-    <span id="toastMsg">Action completed successfully!</span>
+  <!-- Falling Maple Leaves & Ambient Star FX Canvas -->
+  <canvas id="fx-canvas"></canvas>
+
+  <div class="container">
+    
+    <!-- Top Hero Banner with Maple Mascots -->
+    <header class="hero-banner">
+      <!-- Animated Orange Mushroom SVG Mascot -->
+      <div class="mascot-mushroom" title="Orange Mushroom!">
+        <svg viewBox="0 0 100 100" width="100%" height="100%">
+          <ellipse cx="50" cy="92" rx="30" ry="7" fill="rgba(0,0,0,0.35)" />
+          <!-- Mushroom Body/Stem -->
+          <ellipse cx="50" cy="68" rx="28" ry="24" fill="#fff5ea" stroke="#4a2711" stroke-width="3.5" />
+          <!-- Feet -->
+          <ellipse cx="36" cy="88" rx="14" ry="7" fill="#fde68a" stroke="#4a2711" stroke-width="3" />
+          <ellipse cx="64" cy="88" rx="14" ry="7" fill="#fde68a" stroke="#4a2711" stroke-width="3" />
+          <!-- Cute Eyes & Blushes -->
+          <ellipse cx="40" cy="68" rx="3.5" ry="5.5" fill="#2d1506" />
+          <ellipse cx="60" cy="68" rx="3.5" ry="5.5" fill="#2d1506" />
+          <ellipse cx="33" cy="74" rx="4.5" ry="2.5" fill="#f87171" opacity="0.6" />
+          <ellipse cx="67" cy="74" rx="4.5" ry="2.5" fill="#f87171" opacity="0.6" />
+          <path d="M 46 75 Q 50 79 54 75" stroke="#2d1506" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- Vibrant Orange Mushroom Cap -->
+          <path d="M 10 52 C 10 20, 90 20, 90 52 C 90 58, 80 58, 50 56 C 20 58, 10 58, 10 52 Z" fill="#ff5a00" stroke="#4a2711" stroke-width="3.5"/>
+          <!-- Cap White Spots -->
+          <ellipse cx="28" cy="38" rx="7" ry="5" fill="#fff" opacity="0.95" />
+          <ellipse cx="50" cy="28" rx="9" ry="6" fill="#fff" opacity="0.95" />
+          <ellipse cx="72" cy="38" rx="7" ry="5" fill="#fff" opacity="0.95" />
+        </svg>
+      </div>
+
+      <!-- Animated Pink Bean SVG Mascot -->
+      <div class="mascot-pinkbean" title="Pink Bean!">
+        <svg viewBox="0 0 100 100" width="100%" height="100%">
+          <ellipse cx="50" cy="94" rx="32" ry="6" fill="rgba(0,0,0,0.3)" />
+          <!-- Horns -->
+          <polygon points="32,24 24,6 40,16" fill="#4c1d95" stroke="#2e1065" stroke-width="3" />
+          <polygon points="68,24 76,6 60,16" fill="#4c1d95" stroke="#2e1065" stroke-width="3" />
+          <!-- Plump Pink Bean Body -->
+          <ellipse cx="50" cy="56" rx="36" ry="36" fill="#f472b6" stroke="#831843" stroke-width="3.5" />
+          <!-- White Belly -->
+          <ellipse cx="50" cy="65" rx="22" ry="20" fill="#fdf2f8" opacity="0.9" />
+          <!-- Cute Eyes & Rosy Cheeks -->
+          <circle cx="38" cy="50" r="4" fill="#500724" />
+          <circle cx="62" cy="50" r="4" fill="#500724" />
+          <circle cx="39" cy="49" r="1.3" fill="#fff" />
+          <circle cx="63" cy="49" r="1.3" fill="#fff" />
+          <ellipse cx="30" cy="57" rx="5" ry="3" fill="#fb7185" />
+          <ellipse cx="70" cy="57" rx="5" ry="3" fill="#fb7185" />
+          <path d="M 46 56 Q 50 61 54 56" stroke="#500724" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- Tiny Feet -->
+          <ellipse cx="34" cy="90" rx="10" ry="6" fill="#ec4899" stroke="#831843" stroke-width="3" />
+          <ellipse cx="66" cy="90" rx="10" ry="6" fill="#ec4899" stroke="#831843" stroke-width="3" />
+          <!-- Mini Golden Trident -->
+          <path d="M 78 30 L 78 80" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+          <path d="M 72 32 Q 78 40 84 32" stroke="#f59e0b" stroke-width="3" fill="none"/>
+        </svg>
+      </div>
+
+      <div class="guild-tag">🍁 Asia 2 • Scania • UTENSILS Guild</div>
+      <h1 class="main-title">EXPEDITION & BOSS ROSTER</h1>
+      <p class="sub-title">Weekly Commander & Root Abyss clearance hub. Click on any member to toggle clearance status!</p>
+
+      <!-- Weekly Reset Countdown Bar -->
+      <div class="reset-clock-card">
+        <span class="reset-label">⏳ WEEKLY RESET (THU 00:00 SGT):</span>
+        <span class="countdown-digits" id="reset-timer">--d --h --m --s</span>
+      </div>
+    </header>
+
+    <!-- Toolbar: Filter Tabs & Action Buttons -->
+    <section class="toolbar">
+      <div class="boss-tabs">
+        <button class="btn-tab active" onclick="filterBoss('ALL')">🍁 All Bosses</button>
+        <button class="btn-tab" onclick="filterBoss('LOTUS')">⚡ Hard Lotus</button>
+        <button class="btn-tab" onclick="filterBoss('DAMIEN')">⚔️ Hard Damien</button>
+        <button class="btn-tab" onclick="filterBoss('LUCID')">🦋 Hard Lucid</button>
+        <button class="btn-tab" onclick="filterBoss('CRA')">👑 Chaos Root Abyss</button>
+      </div>
+
+      <div class="action-group">
+        <button class="btn-maple" onclick="openAddModal()">✨ + Add Raider</button>
+        <button class="btn-maple btn-secondary" onclick="exportDiscord()">📋 Export Discord</button>
+        <button class="btn-maple btn-secondary" onclick="toggleAudio()" id="audio-btn">🔊 Sound: ON</button>
+      </div>
+    </section>
+
+    <!-- Squad Grid Container -->
+    <main class="squad-grid" id="squad-container">
+      <!-- Injected via JavaScript -->
+    </main>
+
   </div>
 
-  <!-- Top Navigation Bar -->
-  <header class="sticky top-0 z-40 border-b border-slate-800/80 glass-panel">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3 flex items-center justify-between gap-4">
-      
-      <!-- Brand & Title -->
-      <div class="flex items-center gap-3.5">
-        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-600 via-purple-600 to-amber-500 p-0.5 shadow-glow-cyan flex items-center justify-center">
-          <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-            <i class="fa-solid fa-dragon text-cyan-400 text-lg"></i>
-          </div>
-        </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <h1 class="font-extrabold text-lg sm:text-xl tracking-tight text-white flex items-center gap-1.5">
-              <span>MAPLESTORY</span>
-              <span class="text-xs px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold border border-amber-500/40">M</span>
-            </h1>
-            <span class="text-xs uppercase px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-400 border border-cyan-800/60 font-semibold tracking-wider hidden sm:inline-block">Raid Commander</span>
-          </div>
-          <p class="text-xs text-slate-400">Weekly Bossing Squads & Clearance Tracker</p>
-        </div>
-      </div>
-
-      <!-- Weekly Reset Countdown & Quick Actions -->
-      <div class="flex items-center gap-3 sm:gap-4">
-        <!-- Timer Badge -->
-        <div class="hidden md:flex items-center gap-2.5 px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-xs">
-          <i class="fa-regular fa-clock text-amber-400 animate-pulse"></i>
-          <div>
-            <span class="text-slate-400 text-[10px] uppercase font-bold block leading-none">Weekly Reset (Thu 00:00)</span>
-            <span id="countdownText" class="font-mono font-bold text-amber-300 text-sm">--d --h --m --s</span>
-          </div>
-        </div>
-
-        <!-- Audio FX Toggle -->
-        <button id="sfxToggleBtn" onclick="toggleAudio()" title="Sound Effects" class="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-colors flex items-center justify-center">
-          <i id="sfxIcon" class="fa-solid fa-volume-high text-xs"></i>
-        </button>
-
-        <!-- Discord Export Button -->
-        <button onclick="openExportModal()" class="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/40 text-xs font-bold transition-all hover:shadow-glow-purple">
-          <i class="fa-brands fa-discord text-sm"></i>
-          <span class="hidden sm:inline">Export Discord</span>
-        </button>
-
-        <!-- Add Member Button -->
-        <button onclick="openAddMemberModal()" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs shadow-glow-cyan transition-all">
-          <i class="fa-solid fa-user-plus"></i>
-          <span>Add Member</span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Subheader Quick Summary Stats Banner -->
-  <section class="border-b border-slate-800/60 bg-slate-950/40 py-3">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-xs">
-        
-        <!-- Total Members -->
-        <div class="flex items-center gap-3 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
-          <div class="w-8 h-8 rounded-lg bg-cyan-950/80 border border-cyan-800/60 text-cyan-400 flex items-center justify-center">
-            <i class="fa-solid fa-users text-sm"></i>
-          </div>
-          <div>
-            <div class="text-[11px] text-slate-400 uppercase font-semibold">Active Raiders</div>
-            <div id="statTotalMembers" class="text-base font-extrabold text-white">0</div>
-          </div>
-        </div>
-
-        <!-- Weekly Clears -->
-        <div class="flex items-center gap-3 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
-          <div class="w-8 h-8 rounded-lg bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 flex items-center justify-center">
-            <i class="fa-solid fa-circle-check text-sm"></i>
-          </div>
-          <div>
-            <div class="text-[11px] text-slate-400 uppercase font-semibold">Weekly Status</div>
-            <div class="text-base font-extrabold text-emerald-400 flex items-center gap-1.5">
-              <span id="statClearedRuns">0</span>
-              <span class="text-xs text-slate-500 font-normal">/</span>
-              <span id="statTotalRuns" class="text-xs text-slate-400">0 cleared</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Total CP Pool -->
-        <div class="flex items-center gap-3 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
-          <div class="w-8 h-8 rounded-lg bg-amber-950/80 border border-amber-800/60 text-amber-400 flex items-center justify-center">
-            <i class="fa-solid fa-bolt text-sm"></i>
-          </div>
-          <div>
-            <div class="text-[11px] text-slate-400 uppercase font-semibold">Guild Combat Power</div>
-            <div id="statTotalCP" class="text-base font-extrabold text-amber-300">0M CP</div>
-          </div>
-        </div>
-
-        <!-- Substitutes Needed -->
-        <div class="flex items-center gap-3 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
-          <div class="w-8 h-8 rounded-lg bg-red-950/80 border border-red-800/60 text-red-400 flex items-center justify-center">
-            <i class="fa-solid fa-triangle-exclamation text-sm"></i>
-          </div>
-          <div>
-            <div class="text-[11px] text-slate-400 uppercase font-semibold">Sub Needed</div>
-            <div id="statSubsNeeded" class="text-base font-extrabold text-red-400">0 spots</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Main Content Layout -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full flex flex-col gap-6">
-
-    <!-- Controls, Filter and View Switching -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 glass-panel p-4 rounded-2xl border border-slate-800">
-      
-      <!-- Search Input -->
-      <div class="relative flex-1 max-w-md">
-        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-        <input 
-          type="text" 
-          id="searchQuery" 
-          oninput="renderApp()"
-          placeholder="Search by IGN, class (e.g. Bishop, NW) or role..." 
-          class="w-full pl-9 pr-4 py-2 bg-slate-900/90 border border-slate-800 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
-        >
-      </div>
-
-      <!-- Filters & Category Navigation -->
-      <div class="flex flex-wrap items-center gap-2">
-        <div class="flex rounded-xl bg-slate-900 p-1 border border-slate-800 text-xs">
-          <button onclick="setFilterCategory('all')" id="tab-all" class="filter-tab px-3 py-1.5 rounded-lg font-semibold transition-all bg-cyan-500 text-slate-950">All Squads</button>
-          <button onclick="setFilterCategory('commanders')" id="tab-commanders" class="filter-tab px-3 py-1.5 rounded-lg font-semibold text-slate-400 hover:text-white transition-all">Commanders</button>
-          <button onclick="setFilterCategory('cra')" id="tab-cra" class="filter-tab px-3 py-1.5 rounded-lg font-semibold text-slate-400 hover:text-white transition-all">Root Abyss</button>
-          <button onclick="setFilterCategory('mechanics')" id="tab-mechanics" class="filter-tab px-3 py-1.5 rounded-lg font-semibold text-slate-400 hover:text-white transition-all">Boss Guide</button>
-        </div>
-
-        <!-- Quick Reset Clears button -->
-        <button onclick="resetWeeklyStatus()" title="Reset all statuses to 'Ready' for the new week" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-amber-400 text-xs font-semibold transition-colors flex items-center gap-1.5">
-          <i class="fa-solid fa-rotate-right text-[11px]"></i>
-          <span class="hidden sm:inline">Reset Clears</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- VIEW 1: SQUADS & ROSTERS -->
-    <div id="squadView" class="space-y-6">
-      <div id="squadsContainer" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Injected via JavaScript -->
-      </div>
-    </div>
-
-    <!-- VIEW 2: BOSS MECHANICS QUICK CHEAT SHEET -->
-    <div id="mechanicsView" class="hidden space-y-6">
-      <div class="glass-panel p-5 rounded-2xl border border-slate-800">
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <h2 class="text-base font-bold text-white flex items-center gap-2">
-              <i class="fa-solid fa-book-skull text-cyan-400"></i>
-              <span>MSM Boss Mechanics & Composition Field Guide</span>
-            </h2>
-            <p class="text-xs text-slate-400">Key party wipes, recommended CP, and essential skill rotations for raid leaders.</p>
-          </div>
-        </div>
-
-        <div id="mechanicsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <!-- Dynamically populated -->
-        </div>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="border-t border-slate-900 py-6 mt-12 bg-slate-950/60 text-xs text-slate-500">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-        <span>MapleStory M Raid Manager &bull; 100% Free & Client-Side Stored</span>
-      </div>
-      <div class="flex items-center gap-4 text-slate-400">
-        <button onclick="resetToDefaultData()" class="hover:text-cyan-400 transition-colors">Load Demo Data</button>
-        <span>&bull;</span>
-        <button onclick="clearAllData()" class="hover:text-red-400 transition-colors">Clear All Local Data</button>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ================= MODALS ================= -->
-
-  <!-- Add / Edit Member Modal -->
-  <div id="memberModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-200">
-    <div class="glass-panel w-full max-w-lg rounded-2xl border border-slate-700 shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto">
-      
-      <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-5">
-        <h3 id="modalTitle" class="text-base font-bold text-white flex items-center gap-2">
-          <i class="fa-solid fa-user-shield text-cyan-400"></i>
-          <span>Add Raid Member</span>
-        </h3>
-        <button onclick="closeMemberModal()" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-
-      <form id="memberForm" onsubmit="saveMember(event)" class="space-y-4 text-xs">
-        <input type="hidden" id="editMemberId">
-
-        <!-- IGN -->
-        <div>
-          <label class="block text-slate-400 font-semibold mb-1">Character IGN *</label>
-          <input 
-            type="text" 
-            id="inputIGN" 
-            required 
-            placeholder="e.g. ShadowHero99"
-            class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-cyan-500"
-          >
-        </div>
-
-        <!-- Class & Role (Grid) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="block text-slate-400 font-semibold mb-1">Job / Class *</label>
-            <select id="inputClass" required class="w-full px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-cyan-500">
-              <optgroup label="Magicians">
-                <option value="Bishop">Bishop (Essential)</option>
-                <option value="Sia Astelle">Sia Astelle</option>
-                <option value="Arch Mage (I/L)">Arch Mage (I/L)</option>
-                <option value="Arch Mage (F/P)">Arch Mage (F/P)</option>
-                <option value="Evan">Evan</option>
-                <option value="Luminous">Luminous</option>
-                <option value="Kinesis">Kinesis</option>
-              </optgroup>
-              <optgroup label="Thieves">
-                <option value="Night Walker">Night Walker</option>
-                <option value="Phantom">Phantom (Utility)</option>
-                <option value="Dual Blade">Dual Blade</option>
-                <option value="Night Lord">Night Lord</option>
-                <option value="Shadower">Shadower</option>
-              </optgroup>
-              <optgroup label="Warriors">
-                <option value="Paladin">Paladin (Threaten/Res)</option>
-                <option value="Dark Knight">Dark Knight</option>
-                <option value="Hero">Hero</option>
-                <option value="Adele">Adele</option>
-                <option value="Demon Slayer">Demon Slayer</option>
-                <option value="Demon Avenger">Demon Avenger</option>
-                <option value="Dawn Warrior">Dawn Warrior</option>
-                <option value="Aran">Aran</option>
-              </optgroup>
-              <optgroup label="Pirates">
-                <option value="Buccaneer">Buccaneer (Time Leap)</option>
-                <option value="Shade">Shade (Split / Debuff)</option>
-                <option value="Corsair">Corsair</option>
-                <option value="Mechanic">Mechanic</option>
-                <option value="Angelic Buster">Angelic Buster</option>
-              </optgroup>
-              <optgroup label="Bowmen">
-                <option value="Wind Archer">Wind Archer (Taunt)</option>
-                <option value="Bowmaster">Bowmaster</option>
-                <option value="Pathfinder">Pathfinder</option>
-                <option value="Mercedes">Mercedes</option>
-                <option value="Wild Hunter">Wild Hunter</option>
-              </optgroup>
-            </select>
-          </div>
-
-          <div>
-            <label class="block text-slate-400 font-semibold mb-1">Raid Role *</label>
-            <select id="inputRole" required class="w-full px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-cyan-500">
-              <option value="Main DPS">Main DPS</option>
-              <option value="Support (Bishop)">Support / Healer</option>
-              <option value="Binder / Debuff">Binder / Debuffer</option>
-              <option value="Time Leap / Reset">Time Leap (CD Reset)</option>
-              <option value="Flex / Sub">Flex / Fill</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Combat Power (CP) -->
-        <div>
-          <label class="block text-slate-400 font-semibold mb-1">
-            Combat Power (CP) 
-            <span class="text-slate-500 font-normal">(in millions, e.g. 125 for 125,000,000 CP)</span>
-          </label>
-          <div class="relative">
-            <input 
-              type="number" 
-              id="inputCP" 
-              min="1" 
-              step="0.1" 
-              required 
-              placeholder="e.g. 85.5"
-              class="w-full pl-3.5 pr-12 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-cyan-500"
-            >
-            <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-bold">M CP</span>
-          </div>
-        </div>
-
-        <!-- Squad Assignment & Run Status -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="block text-slate-400 font-semibold mb-1">Assigned Squad *</label>
-            <select id="inputSquad" required class="w-full px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-cyan-500">
-              <!-- Dynamically populated from squads -->
-            </select>
-          </div>
-
-          <div>
-            <label class="block text-slate-400 font-semibold mb-1">Weekly Status *</label>
-            <select id="inputStatus" required class="w-full px-3 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-cyan-500">
-              <option value="ready">Ready for Raid</option>
-              <option value="cleared">Cleared this Week</option>
-              <option value="sub_needed">Needs Substitute</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Notes / Discord Tag -->
-        <div>
-          <label class="block text-slate-400 font-semibold mb-1">Notes / Discord Tag / Timezone</label>
-          <input 
-            type="text" 
-            id="inputNotes" 
-            placeholder="e.g. Available after 8 PM UTC+8, has Level 5 Soul Split"
-            class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-cyan-500"
-          >
-        </div>
-
-        <!-- Actions -->
-        <div class="pt-4 border-t border-slate-800 flex items-center justify-between gap-3">
-          <button type="button" id="btnDeleteMember" onclick="deleteCurrentMember()" class="hidden px-3.5 py-2 rounded-xl bg-red-950/60 hover:bg-red-900/80 text-red-400 border border-red-800/60 font-bold transition-colors">
-            <i class="fa-solid fa-trash-can mr-1.5"></i> Remove
-          </button>
-          <div class="flex items-center gap-2 ml-auto">
-            <button type="button" onclick="closeMemberModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold transition-colors">Cancel</button>
-            <button type="submit" class="px-5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold shadow-glow-cyan transition-all">Save Member</button>
-          </div>
-        </div>
-
-      </form>
-    </div>
+  <!-- Animated Green Slime Mascot (Bottom-Right) -->
+  <div class="mascot-slime" onclick="playMapleSfx('slime')" title="Jiggle Slime!">
+    <div class="slime-bubble">Bloop! Clear all bosses today! 🍁</div>
+    <svg viewBox="0 0 100 100" width="100%" height="100%">
+      <ellipse cx="50" cy="88" rx="34" ry="7" fill="rgba(0,0,0,0.3)" />
+      <!-- Slime Body -->
+      <path d="M 50 15 C 30 15, 12 40, 15 65 C 16 82, 32 86, 50 86 C 68 86, 84 82, 85 65 C 88 40, 70 15, 50 15 Z" fill="#4ade80" stroke="#166534" stroke-width="3.5"/>
+      <ellipse cx="40" cy="25" rx="8" ry="4" fill="#bbf7d0" opacity="0.8" transform="rotate(-20 40 25)" />
+      <!-- Cute Eyes & Blushes -->
+      <circle cx="36" cy="55" r="4.5" fill="#064e3b" />
+      <circle cx="64" cy="55" r="4.5" fill="#064e3b" />
+      <circle cx="38" cy="53" r="1.5" fill="#fff" />
+      <circle cx="66" cy="53" r="1.5" fill="#fff" />
+      <ellipse cx="28" cy="62" rx="4" ry="2.5" fill="#f43f5e" opacity="0.6" />
+      <ellipse cx="72" cy="62" rx="4" ry="2.5" fill="#f43f5e" opacity="0.6" />
+      <path d="M 45 62 Q 50 67 55 62" stroke="#064e3b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    </svg>
   </div>
 
-  <!-- Discord Export Modal -->
-  <div id="exportModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-200">
-    <div class="glass-panel w-full max-w-xl rounded-2xl border border-slate-700 shadow-2xl p-6 relative">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
-        <h3 class="text-base font-bold text-white flex items-center gap-2">
-          <i class="fa-brands fa-discord text-indigo-400"></i>
-          <span>Formatted Discord Export</span>
-        </h3>
-        <button onclick="closeExportModal()" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+  <!-- Add Member Modal -->
+  <div class="modal-overlay" id="add-modal">
+    <div class="maple-modal">
+      <div class="modal-title">
+        <span>🍁 Add Raider to Squad</span>
+        <button onclick="closeAddModal()" style="background:none; border:none; color:#cbd5e1; font-size:1.5rem; cursor:pointer;">&times;</button>
       </div>
 
-      <p class="text-xs text-slate-400 mb-3">Copy and paste this markdown directly into your guild's Discord raid announcement or planning channel.</p>
+      <div class="form-group">
+        <label>Assign to Boss Squad</label>
+        <select class="form-select" id="form-squad-select">
+          <!-- Filled by JS -->
+        </select>
+      </div>
 
-      <textarea 
-        id="exportTextarea" 
-        readonly 
-        rows="12" 
-        class="w-full p-3 font-mono text-xs bg-slate-950 border border-slate-800 rounded-xl text-slate-300 focus:outline-none select-all"
-      ></textarea>
+      <div class="form-group">
+        <label>Character In-Game Name (IGN)</label>
+        <input type="text" class="form-input" id="form-ign" placeholder="e.g. NightKing99">
+      </div>
 
-      <div class="mt-4 flex items-center justify-between gap-3">
-        <span class="text-[11px] text-slate-500">Ready to paste into Discord chat</span>
-        <div class="flex items-center gap-2">
-          <button onclick="closeExportModal()" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs hover:bg-slate-700 transition-colors">Close</button>
-          <button onclick="copyExportText()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-glow-purple flex items-center gap-1.5 transition-all">
-            <i class="fa-regular fa-copy"></i>
-            <span>Copy to Clipboard</span>
-          </button>
-        </div>
+      <div class="form-group">
+        <label>Class / Job</label>
+        <select class="form-select" id="form-job">
+          <option value="Night Walker">🗡️ Night Walker</option>
+          <option value="Bishop">✨ Bishop (Holy Magic Shell)</option>
+          <option value="Sia Astelle">⭐ Sia Astelle</option>
+          <option value="Paladin">🛡️ Paladin (Sacrosanctity / Threaten)</option>
+          <option value="Shade">👊 Shade (Soul Splitter)</option>
+          <option value="Dual Blade">⚔️ Dual Blade</option>
+          <option value="Buccaneer">⚡ Buccaneer (Time Leap)</option>
+          <option value="Hero">🪓 Hero</option>
+          <option value="Bowmaster">🏹 Bowmaster</option>
+          <option value="Luminous">🔮 Luminous</option>
+          <option value="Phantom">🃏 Phantom</option>
+          <option value="Adele">🗡️ Adele</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Combat Power (CP in Millions)</label>
+        <input type="number" class="form-input" id="form-cp" placeholder="e.g. 52.5" step="0.5">
+      </div>
+
+      <div class="form-group">
+        <label>Roster Role</label>
+        <select class="form-select" id="form-role">
+          <option value="Main DPS">⚔️ Main DPS</option>
+          <option value="Burst DPS">💥 Burst DPS</option>
+          <option value="Healer / Bishop">✨ Healer / Support</option>
+          <option value="Binder / Splitter">⛓️ Binder / Splitter</option>
+          <option value="Time Leap Support">⏳ Time Leap Support</option>
+        </select>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+        <button class="btn-maple btn-secondary" onclick="closeAddModal()">Cancel</button>
+        <button class="btn-maple" onclick="submitNewMember()">Add Member</button>
       </div>
     </div>
   </div>
 
-  <!-- Boss Mechanics Details Modal -->
-  <div id="bossDetailsModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-200">
-    <div class="glass-panel w-full max-w-2xl rounded-2xl border border-slate-700 shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
-        <div class="flex items-center gap-3">
-          <div id="bossModalIcon" class="w-10 h-10 rounded-xl bg-cyan-950 border border-cyan-800/80 flex items-center justify-center text-cyan-400 text-lg">
-            <i class="fa-solid fa-skull"></i>
-          </div>
-          <div>
-            <h3 id="bossModalName" class="text-base font-bold text-white">Lotus (Hard)</h3>
-            <span id="bossModalDifficulty" class="text-[10px] px-2 py-0.5 rounded bg-purple-950 text-purple-400 border border-purple-800 font-semibold uppercase">Commander</span>
-          </div>
-        </div>
-        <button onclick="closeBossModal()" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-
-      <div class="space-y-4 text-xs">
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 p-3 rounded-xl bg-slate-900 border border-slate-800">
-          <div>
-            <span class="text-slate-400 block text-[10px] uppercase font-semibold">Recommended CP</span>
-            <span id="bossModalCP" class="text-amber-400 font-bold text-sm">80M+</span>
-          </div>
-          <div>
-            <span class="text-slate-400 block text-[10px] uppercase font-semibold">Party Size</span>
-            <span class="text-white font-bold text-sm">6 Raiders</span>
-          </div>
-          <div>
-            <span class="text-slate-400 block text-[10px] uppercase font-semibold">Key Support Class</span>
-            <span id="bossModalKeyJob" class="text-cyan-400 font-bold text-sm">Bishop & Shade</span>
-          </div>
-        </div>
-
-        <div>
-          <h4 class="text-xs uppercase font-bold text-slate-300 mb-2 flex items-center gap-1.5">
-            <i class="fa-solid fa-circle-exclamation text-amber-400"></i>
-            <span>Phase Wipe Mechanics & Strategies</span>
-          </h4>
-          <div id="bossModalMechanics" class="space-y-2 text-slate-300">
-            <!-- Dynamically populated -->
-          </div>
-        </div>
-
-        <div>
-          <h4 class="text-xs uppercase font-bold text-slate-300 mb-2 flex items-center gap-1.5">
-            <i class="fa-solid fa-gem text-purple-400"></i>
-            <span>Notable Loot & Rewards</span>
-          </h4>
-          <div id="bossModalDrops" class="p-3 bg-slate-900/60 rounded-xl border border-slate-800/80 text-slate-400 leading-relaxed">
-            <!-- Populated -->
-          </div>
-        </div>
-      </div>
-      
-      <div class="mt-6 pt-3 border-t border-slate-800 text-right">
-        <button onclick="closeBossModal()" class="px-5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition-colors">Got it</button>
-      </div>
-    </div>
+  <!-- Notification Toast -->
+  <div class="toast" id="toast">
+    <span>🍁 Discord Roster Copied to Clipboard!</span>
   </div>
 
-  <!-- APPLICATION SCRIPT LOGIC -->
   <script>
-    /* Default Initial Data for MapleStory M Bossing */
-    const DEFAULT_DATA = {
-      squads: [
-        {
-          id: 'sq-lotus-1',
-          name: 'Squad 1: Lotus (Hard)',
-          category: 'commanders',
-          bossKey: 'lotus',
-          schedule: 'Sat 20:00 UTC+8',
-          notes: 'High burst priority. Need Bishop door for laser slip-ups.'
-        },
-        {
-          id: 'sq-damien-1',
-          name: 'Squad 2: Damien (Chaos/Hard)',
-          category: 'commanders',
-          bossKey: 'damien',
-          schedule: 'Sun 21:00 UTC+8',
-          notes: 'Altar cleansing priority. Keep blue spheres away from DPS.'
-        },
-        {
-          id: 'sq-lucid-1',
-          name: 'Squad 3: Lucid (Progression)',
-          category: 'commanders',
-          bossKey: 'lucid',
-          schedule: 'Fri 21:30 UTC+8',
-          notes: 'P1 Golem clearers needed. Sia & Bishop shield on Dragon.'
-        },
-        {
-          id: 'sq-cra-1',
-          name: 'Squad 4: Chaos Root Abyss 4/4',
-          category: 'cra',
-          bossKey: 'cra',
-          schedule: 'Thu 12:00 UTC+8 (Post-Reset)',
-          notes: 'Pierre split skip, Von Bon clock time management.'
-        }
-      ],
-      members: [
-        {
-          id: 'm-1',
-          ign: 'Astraea',
-          class: 'Bishop',
-          role: 'Support (Bishop)',
-          cp: 145.0,
-          squadId: 'sq-lotus-1',
-          status: 'cleared',
-          notes: 'Max Holy Magic Shell & Pray. Discord: Astra#1001'
-        },
-        {
-          id: 'm-2',
-          ign: 'NightBlade',
-          class: 'Night Walker',
-          role: 'Main DPS',
-          cp: 210.5,
-          squadId: 'sq-lotus-1',
-          status: 'cleared',
-          notes: 'Necro 40 weapon, high burst for P3 Lotus.'
-        },
-        {
-          id: 'm-3',
-          ign: 'SpiritFox',
-          class: 'Shade',
-          role: 'Binder / Debuff',
-          cp: 130.0,
-          squadId: 'sq-lotus-1',
-          status: 'cleared',
-          notes: 'Soul Split on cooldown & binds.'
-        },
-        {
-          id: 'm-4',
-          ign: 'IronShield',
-          class: 'Paladin',
-          role: 'Binder / Debuff',
-          cp: 115.0,
-          squadId: 'sq-lotus-1',
-          status: 'ready',
-          notes: 'Threaten debuff + Sacrosanctity revive.'
-        },
-        {
-          id: 'm-5',
-          ign: 'Starlight',
-          class: 'Sia Astelle',
-          role: 'Main DPS',
-          cp: 180.2,
-          squadId: 'sq-lotus-1',
-          status: 'ready',
-          notes: 'Constellation party buffs + high consistent DPS.'
-        },
-        {
-          id: 'm-6',
-          ign: 'ValkyrieX',
-          class: 'Buccaneer',
-          role: 'Time Leap / Reset',
-          cp: 125.0,
-          squadId: 'sq-lotus-1',
-          status: 'sub_needed',
-          notes: 'Time Leap for party CD reset. AFK this weekend.'
-        },
-        // Damien Squad
-        {
-          id: 'm-7',
-          ign: 'Celestial',
-          class: 'Bishop',
-          role: 'Support (Bishop)',
-          cp: 160.0,
-          squadId: 'sq-damien-1',
-          status: 'ready',
-          notes: 'High healing uptime for stigma brands.'
-        },
-        {
-          id: 'm-8',
-          ign: 'GaleForce',
-          class: 'Wind Archer',
-          role: 'Main DPS',
-          cp: 195.0,
-          squadId: 'sq-damien-1',
-          status: 'ready',
-          notes: 'Emerald Flower dummy to bait Damien sword.'
-        },
-        {
-          id: 'm-9',
-          ign: 'ShadowLord',
-          class: 'Night Lord',
-          role: 'Main DPS',
-          cp: 220.0,
-          squadId: 'sq-damien-1',
-          status: 'ready',
-          notes: 'Spread Throw burst timing.'
-        },
-        {
-          id: 'm-10',
-          ign: 'PhantomThief',
-          class: 'Phantom',
-          role: 'Flex / Sub',
-          cp: 140.0,
-          squadId: 'sq-damien-1',
-          status: 'ready',
-          notes: 'Stolen buffs + emergency Holy Door.'
-        },
-        // CRA Squad
-        {
-          id: 'm-11',
-          ign: 'PyroMage',
-          class: 'Arch Mage (F/P)',
-          role: 'Main DPS',
-          cp: 110.0,
-          squadId: 'sq-cra-1',
-          status: 'cleared',
-          notes: 'Fast Chaos Vellum burn.'
-        },
-        {
-          id: 'm-12',
-          ign: 'KaiserD',
-          class: 'Hero',
-          role: 'Main DPS',
-          cp: 98.5,
-          squadId: 'sq-cra-1',
-          status: 'cleared',
-          notes: 'Worldreaver i-frame for Pierre hats.'
-        }
-      ]
-    };
-
-    /* Comprehensive MapleStory M Boss Guide Database */
-    const BOSS_DATABASE = {
-      lotus: {
-        name: 'Lotus (Hard / Chaos)',
-        tier: 'Commander',
-        reqCP: '80M - 120M CP',
-        keyJob: 'Bishop & Shade / Paladin',
-        icon: 'fa-robot',
-        color: 'text-cyan-400',
-        mechanics: [
-          '<strong>Phase 1 (Laser Core):</strong> Avoid the 4 rotating lasers. Use teleport or class flash jumps over lasers. If struck, instant OHKO unless shielded by Holy Magic Shell or i-frames.',
-          '<strong>Phase 2 (Platform & Debris):</strong> Floor goes electrifying. Raiders MUST stand on robot platforms that drop from the sky to avoid floor lightning instant kill.',
-          '<strong>Phase 3 (Black Holes & Trucks):</strong> Massive debris (trucks, machines) deal 100% max HP damage. Keep eyes on ground shadows and save burst for when Shade casts Soul Split.'
-        ],
-        drops: 'Absolab Weapon & Armor Essence, Lotus Soul Shards, Damage Skin (Core)'
+    /* ==========================================================
+       1. DATA STRUCTURE & INITIAL ROSTER
+       ========================================================== */
+    const DEFAULT_DATA = [
+      {
+        id: 'squad-lotus-1',
+        bossKey: 'LOTUS',
+        bossName: 'Hard Lotus (P1-P3)',
+        difficulty: 'Hard',
+        icon: '⚡',
+        tip: 'Spread platforms during P1 lasers. Bishop save Shell for P3 purple energy balls!',
+        members: [
+          { ign: 'VellfireBoss', job: 'Night Walker', cp: '68.5M', role: 'Main DPS', status: 'READY' },
+          { ign: 'HolyMercy', job: 'Bishop', cp: '45.0M', role: 'Healer / Bishop', status: 'READY' },
+          { ign: 'StarSia', job: 'Sia Astelle', cp: '54.2M', role: 'Main DPS', status: 'READY' },
+          { ign: 'SoulTaker', job: 'Shade', cp: '48.0M', role: 'Binder / Splitter', status: 'READY' },
+          { ign: 'CaptainTime', job: 'Buccaneer', cp: '42.1M', role: 'Time Leap Support', status: 'READY' },
+          { ign: 'IronGuard', job: 'Paladin', cp: '46.8M', role: 'Burst DPS', status: 'READY' }
+        ]
       },
-      damien: {
-        name: 'Damien (Hard / Chaos)',
-        tier: 'Commander',
-        reqCP: '110M - 150M CP',
-        keyJob: 'Bishop, Wind Archer (Dummy), Phantom',
-        icon: 'fa-fire-flame-curved',
-        color: 'text-red-400',
-        mechanics: [
-          '<strong>Stigma Brand Curse:</strong> Players accumulate brands over time (max 7). At 7 brands, instant death and spawns an aggressive flying demon sword. Clear brands at glowing altars by holding interaction.',
-          '<strong>Phase 1 Flying Swords:</strong> Blue floating sphere reduces all damage taken by 90% if you are inside it. Lure Damien OUTSIDE the blue zone before using big burst skills.',
-          '<strong>Phase 2 Airborne Barrage:</strong> Damien enters hyper phase. Wind Archer Emerald Flower dummy baits his directional dashes. Focus on surviving rather than greed.'
-        ],
-        drops: 'Absolab Armor Shards, Damien Soul Shards, Stigma Coins, Exclusive Titles'
+      {
+        id: 'squad-damien-1',
+        bossKey: 'DAMIEN',
+        bossName: 'Hard Damien (P1-P2)',
+        difficulty: 'Hard',
+        icon: '⚔️',
+        tip: 'Cleanse stigma brands at altars before 7 stacks! Save burst binds when Damien descends.',
+        members: [
+          { ign: 'VellfireBoss', job: 'Night Walker', cp: '68.5M', role: 'Main DPS', status: 'READY' },
+          { ign: 'BladeDancer', job: 'Dual Blade', cp: '61.0M', role: 'Burst DPS', status: 'READY' },
+          { ign: 'HolyMercy', job: 'Bishop', cp: '45.0M', role: 'Healer / Bishop', status: 'READY' },
+          { ign: 'PhantomThief', job: 'Phantom', cp: '49.5M', role: 'Main DPS', status: 'READY' },
+          { ign: 'SubWarrior', job: 'Hero', cp: '39.0M', role: 'Burst DPS', status: 'SUB' },
+          { ign: 'OpenSpot', job: 'Paladin', cp: '40.0M', role: 'Main DPS', status: 'READY' }
+        ]
       },
-      lucid: {
-        name: 'Lucid (Hard)',
-        tier: 'Commander',
-        reqCP: '150M - 200M CP',
-        keyJob: 'Bishop (Heals/Shell), Sia Astelle, High AoE DPS',
-        icon: 'fa-wand-magic-sparkles',
-        color: 'text-purple-400',
-        mechanics: [
-          '<strong>Phase 1 (Golems & Dragon Breath):</strong> Golems fall from the sky blocking pathways and dealing huge contact damage. Clear golems immediately. When the prompt "Lucid summons a powerful dragon" appears, hide behind the far edges or use invincibility.',
-          '<strong>Phase 2 (Flying Platforms Bullet Hell):</strong> Lucid floats freely. Platforms shatter after raiders stand on them too long. Watch for laser sweeps and butterflies that fill the screen.',
-          '<strong>Trumpet Cleanse:</strong> Keep interacting with the dream trumpet statues to clear accumulated butterflies before they trigger screen-wide raid wipes.'
-        ],
-        drops: 'Arcane Umbra Shards, Dream Fragment, Lucid Soul Shards'
+      {
+        id: 'squad-lucid-1',
+        bossKey: 'LUCID',
+        bossName: 'Hard Lucid (Dream Realm)',
+        difficulty: 'Hard',
+        icon: '🦋',
+        tip: 'Clear nightmare butterflies regularly. Group up for dragon breath survival on golems.',
+        members: [
+          { ign: 'StarSia', job: 'Sia Astelle', cp: '54.2M', role: 'Main DPS', status: 'READY' },
+          { ign: 'NightSlayer', job: 'Night Walker', cp: '58.0M', role: 'Main DPS', status: 'READY' },
+          { ign: 'HolyHeals', job: 'Bishop', cp: '44.0M', role: 'Healer / Bishop', status: 'READY' },
+          { ign: 'SoulTaker', job: 'Shade', cp: '48.0M', role: 'Binder / Splitter', status: 'READY' },
+          { ign: 'BowMastery', job: 'Bowmaster', cp: '51.3M', role: 'Burst DPS', status: 'READY' },
+          { ign: 'LumiGlow', job: 'Luminous', cp: '47.5M', role: 'Main DPS', status: 'READY' }
+        ]
       },
-      cra: {
-        name: 'Chaos Root Abyss (4/4)',
-        tier: 'Root Abyss',
-        reqCP: '30M - 60M CP',
-        keyJob: 'Paladin, Shade, Bishop',
-        icon: 'fa-tree',
-        color: 'text-emerald-400',
-        mechanics: [
-          '<strong>Chaos Pierre:</strong> Blue/Red hats invert damage. If your hat color matches Pierre, attacking HEALS him! Split phase happens at 30% HP; bind and burst before he splits into two.',
-          '<strong>Chaos Von Bon:</strong> Stand in black clock zones to speed up the raid timer; keep Von Bon in white clock zones. Jump when he leaps to avoid screen shockwaves.',
-          '<strong>Chaos Crimson Queen:</strong> 4 faces. Watch for the mirror face (destroy mirror quickly to save trapped raiders) and breath flame face (deals stacking dot).',
-          '<strong>Chaos Vellum:</strong> Constant yellow falling rocks that stun. Watch tail eruption circles on the ground. When he charges deep breath, sprint to the opposite corner.'
-        ],
-        drops: 'Fafnir Weapon & Top/Bottom Armor shards, CRA Title, Meso pouches'
-      },
-      arkarium: {
-        name: 'Arkarium (Commander)',
-        tier: 'Commander',
-        reqCP: '45M - 70M CP',
-        keyJob: 'Paladin (Threaten), Bishop (Door), High Burst',
-        icon: 'fa-eye',
-        color: 'text-amber-400',
-        mechanics: [
-          '<strong>Screen Crack OHKO:</strong> Arkarium casts Screen Shatter every 20-25% HP intervals. It kills everyone on screen regardless of defense.',
-          '<strong>Countermeasure:</strong> Use Holy Door, Paladin Sacrosanctity, or chain hard-bind him (Shade Soul Split + Paladin Smite) to burst down 100% to 0% before he can cast Screen Crack.'
-        ],
-        drops: 'Dominator Pendant, Primal Essence, Arkarium Soul Shards'
+      {
+        id: 'squad-cra-1',
+        bossKey: 'CRA',
+        bossName: 'Chaos Root Abyss (4 Doors)',
+        difficulty: 'Chaos',
+        icon: '👑',
+        tip: 'Pierre hat color match! Split Pierre when under 30% HP using Shade/Bind burst.',
+        members: [
+          { ign: 'VellfireBoss', job: 'Night Walker', cp: '68.5M', role: 'Main DPS', status: 'CLEARED' },
+          { ign: 'HolyMercy', job: 'Bishop', cp: '45.0M', role: 'Healer / Bishop', status: 'CLEARED' },
+          { ign: 'CaptainTime', job: 'Buccaneer', cp: '42.1M', role: 'Time Leap Support', status: 'CLEARED' },
+          { ign: 'BladeDancer', job: 'Dual Blade', cp: '61.0M', role: 'Burst DPS', status: 'CLEARED' }
+        ]
       }
-    };
+    ];
 
-    /* App State */
-    let currentCategory = 'all';
+    let squads = JSON.parse(localStorage.getItem('msm_maple_roster_v2')) || DEFAULT_DATA;
+    let currentFilter = 'ALL';
     let audioEnabled = true;
-    let appData = { squads: [], members: [] };
 
-    /* Audio Chime using Tone.js */
-    let synth = null;
-    function initSynth() {
-      if (!synth && window.Tone) {
-        try {
-          synth = new Tone.PolySynth(Tone.Synth, {
-            oscillator: { type: "triangle" },
-            envelope: { attack: 0.005, decay: 0.1, sustain: 0.1, release: 0.2 }
-          }).toDestination();
-          synth.volume.value = -12;
-        } catch(e) {
-          console.warn("Audio Context init pending user interaction");
-        }
-      }
+    function saveState() {
+      localStorage.setItem('msm_maple_roster_v2', JSON.stringify(squads));
     }
 
-    function playChime(type) {
-      if (!audioEnabled || !window.Tone) return;
-      initSynth();
-      try {
-        if (Tone.context.state !== 'running') {
-          Tone.start();
-        }
-        if (synth) {
-          if (type === 'clear') {
-            synth.triggerAttackRelease(["E5", "B5"], "16n");
-          } else if (type === 'click') {
-            synth.triggerAttackRelease("A4", "32n");
-          } else if (type === 'add') {
-            synth.triggerAttackRelease(["C5", "G5"], "16n");
-          }
-        }
-      } catch(e) {
-        // Fallback gracefully without interrupting user
+    /* ==========================================================
+       2. MAPLE SOUND SYNTHESIZER (Web Audio API)
+       ========================================================== */
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let actx = null;
+
+    function initAudio() {
+      if (!actx) {
+        actx = new AudioCtx();
+      }
+      if (actx.state === 'suspended') {
+        actx.resume();
       }
     }
 
     function toggleAudio() {
       audioEnabled = !audioEnabled;
-      const icon = document.getElementById('sfxIcon');
-      if (audioEnabled) {
-        icon.className = 'fa-solid fa-volume-high text-xs text-cyan-400';
-        showToast('Sound Effects Enabled', 'check');
-        playChime('click');
-      } else {
-        icon.className = 'fa-solid fa-volume-xmark text-xs text-slate-500';
-        showToast('Sound Effects Muted', 'info');
+      document.getElementById('audio-btn').textContent = audioEnabled ? '🔊 Sound: ON' : '🔇 Sound: OFF';
+    }
+
+    function playMapleSfx(type) {
+      if (!audioEnabled) return;
+      initAudio();
+
+      const now = actx.currentTime;
+      const osc = actx.createOscillator();
+      const gain = actx.createGain();
+      osc.connect(gain);
+      gain.connect(actx.destination);
+
+      if (type === 'click') {
+        // Crisp meso pickup blip
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(800, now);
+        osc.frequency.exponentialRampToValueAtTime(1200, now + 0.08);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+        osc.start(now);
+        osc.stop(now + 0.09);
+      } else if (type === 'clear') {
+        // Classic 8-bit style Maple Level Up arpeggio
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+        notes.forEach((freq, idx) => {
+          const subOsc = actx.createOscillator();
+          const subGain = actx.createGain();
+          subOsc.type = 'square';
+          subOsc.frequency.setValueAtTime(freq, now + idx * 0.07);
+          subGain.gain.setValueAtTime(0.12, now + idx * 0.07);
+          subGain.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.07 + 0.18);
+          subOsc.connect(subGain);
+          subGain.connect(actx.destination);
+          subOsc.start(now + idx * 0.07);
+          subOsc.stop(now + idx * 0.07 + 0.19);
+        });
+      } else if (type === 'sub') {
+        // Red warning double buzz
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(320, now);
+        osc.frequency.setValueAtTime(240, now + 0.08);
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.18);
+        osc.start(now);
+        osc.stop(now + 0.19);
+      } else if (type === 'slime') {
+        // Bloop jiggle tone
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(300, now);
+        osc.frequency.exponentialRampToValueAtTime(600, now + 0.12);
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+        osc.start(now);
+        osc.stop(now + 0.16);
       }
     }
 
-    /* Initialize or Load Data from LocalStorage */
-    function loadData() {
-      const saved = localStorage.getItem('msm_boss_roster_v2');
-      if (saved) {
-        try {
-          appData = JSON.parse(saved);
-        } catch (e) {
-          appData = JSON.parse(JSON.stringify(DEFAULT_DATA));
+    /* ==========================================================
+       3. RENDER ENGINE
+       ========================================================= */
+    const jobIcons = {
+      'Night Walker': '🗡️',
+      'Bishop': '✨',
+      'Sia Astelle': '⭐',
+      'Paladin': '🛡️',
+      'Shade': '👊',
+      'Dual Blade': '⚔️',
+      'Buccaneer': '⚡',
+      'Hero': '🪓',
+      'Bowmaster': '🏹',
+      'Luminous': '🔮',
+      'Phantom': '🃏',
+      'Adele': '🗡️'
+    };
+
+    function renderSquads() {
+      const container = document.getElementById('squad-container');
+      container.innerHTML = '';
+
+      const filtered = currentFilter === 'ALL' 
+        ? squads 
+        : squads.filter(s => s.bossKey === currentFilter);
+
+      filtered.forEach((squad) => {
+        const card = document.createElement('article');
+        card.className = 'boss-card';
+
+        const clearedCount = squad.members.filter(m => m.status === 'CLEARED').length;
+        const totalCount = squad.members.length;
+
+        let membersHtml = '';
+        squad.members.forEach((m, idx) => {
+          const statusClass = m.status === 'CLEARED' ? 'status-cleared' : (m.status === 'SUB' ? 'status-sub' : '');
+          const badgeClass = m.status === 'CLEARED' ? 'badge-cleared' : (m.status === 'SUB' ? 'badge-sub' : 'badge-ready');
+          const badgeText = m.status === 'CLEARED' ? '⭐ CLEARED' : (m.status === 'SUB' ? '🔴 SUB NEEDED' : '🟡 READY');
+          const jobIcon = jobIcons[m.job] || '⚔️';
+
+          membersHtml += `
+            <div class="raider-slot ${statusClass}" onclick="cycleStatus('${squad.id}', ${idx})">
+              <div class="raider-left">
+                <div class="raider-job-badge">${jobIcon}</div>
+                <div class="raider-meta">
+                  <div class="raider-ign">${escapeHtml(m.ign)}</div>
+                  <div class="raider-subinfo">
+                    <span>${escapeHtml(m.job)}</span> • 
+                    <span class="cp-tag">${m.cp}</span> • 
+                    <span>${m.role}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="status-badge ${badgeClass}">${badgeText}</div>
+            </div>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="card-top">
+            <div class="boss-identity">
+              <div class="boss-icon-wrap">${squad.icon}</div>
+              <div>
+                <div class="boss-name">${escapeHtml(squad.bossName)}</div>
+                <span class="boss-diff ${squad.difficulty === 'Chaos' ? 'diff-chaos' : 'diff-hard'}">${squad.difficulty} MODE</span>
+              </div>
+            </div>
+            <div class="party-counter">${clearedCount} / ${totalCount} Cleared</div>
+          </div>
+
+          <div class="raider-list">
+            ${membersHtml}
+          </div>
+
+          <div class="card-footer-tip">
+            <span>💡</span>
+            <span>${escapeHtml(squad.tip)}</span>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function cycleStatus(squadId, memberIdx) {
+      const squad = squads.find(s => s.id === squadId);
+      if (!squad) return;
+      const member = squad.members[memberIdx];
+
+      if (member.status === 'READY') {
+        member.status = 'CLEARED';
+        playMapleSfx('clear');
+      } else if (member.status === 'CLEARED') {
+        member.status = 'SUB';
+        playMapleSfx('sub');
+      } else {
+        member.status = 'READY';
+        playMapleSfx('click');
+      }
+
+      saveState();
+      renderSquads();
+    }
+
+    function filterBoss(bossKey) {
+      currentFilter = bossKey;
+      document.querySelectorAll('.btn-tab').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.includes(bossKey === 'ALL' ? 'All' : bossKey)) {
+          btn.classList.add('active');
         }
-      } else {
-        appData = JSON.parse(JSON.stringify(DEFAULT_DATA));
-        saveData();
-      }
+      });
+      playMapleSfx('click');
+      renderSquads();
     }
 
-    function saveData() {
-      localStorage.setItem('msm_boss_roster_v2', JSON.stringify(appData));
-    }
-
-    function resetToDefaultData() {
-      appData = JSON.parse(JSON.stringify(DEFAULT_DATA));
-      saveData();
-      renderApp();
-      showToast('Loaded Default Demo Roster', 'check');
-      playChime('click');
-    }
-
-    function clearAllData() {
-      appData = { squads: [], members: [] };
-      saveData();
-      renderApp();
-      showToast('All roster data cleared', 'info');
-    }
-
-    /* Weekly Reset Countdown (Every Thursday 00:00 UTC / Server Time) */
-    function updateCountdown() {
+    /* ==========================================================
+       4. RESET COUNTDOWN TIMER (Thursday 00:00 SGT / UTC+8)
+       ========================================================== */
+    function updateResetCountdown() {
+      const timerEl = document.getElementById('reset-timer');
       const now = new Date();
-      // Calculate upcoming Thursday 00:00 UTC
-      const nextReset = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0));
-      
-      const currentDay = now.getUTCDay(); // 0 is Sun, 4 is Thu
-      let daysUntilThursday = (4 - currentDay + 7) % 7;
-      if (daysUntilThursday === 0 && now.getUTCHours() >= 0) {
+
+      // Find next Thursday 00:00 UTC+8 (Server Time)
+      // Convert now to UTC milliseconds
+      const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const serverOffset = 8 * 3600000;
+      const serverTime = new Date(utcTime + serverOffset);
+
+      let targetReset = new Date(serverTime);
+      const dayOfWeek = serverTime.getDay(); // 0 = Sun, 4 = Thu
+      let daysUntilThursday = (4 - dayOfWeek + 7) % 7;
+
+      if (daysUntilThursday === 0 && (serverTime.getHours() > 0 || serverTime.getMinutes() > 0 || serverTime.getSeconds() > 0)) {
         daysUntilThursday = 7;
       }
-      
-      nextReset.setUTCDate(nextReset.getUTCDate() + daysUntilThursday);
 
-      const diff = nextReset - now;
-      if (diff <= 0) {
-        document.getElementById('countdownText').textContent = 'Resetting Now!';
-        return;
-      }
+      targetReset.setDate(serverTime.getDate() + daysUntilThursday);
+      targetReset.setHours(0, 0, 0, 0);
+
+      const diff = targetReset.getTime() - serverTime.getTime();
 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
 
-      document.getElementById('countdownText').textContent = 
-        `${days}d ${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s`;
+      const pad = (n) => String(n).padStart(2, '0');
+      timerEl.textContent = `${days}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
     }
 
-    /* Category Switching */
-    function setFilterCategory(category) {
-      currentCategory = category;
-      playChime('click');
+    setInterval(updateResetCountdown, 1000);
+    updateResetCountdown();
 
-      // Update Tabs styling
-      document.querySelectorAll('.filter-tab').forEach(btn => {
-        btn.className = 'filter-tab px-3 py-1.5 rounded-lg font-semibold text-slate-400 hover:text-white transition-all';
-      });
-
-      const activeBtn = document.getElementById(`tab-${category}`);
-      if (activeBtn) {
-        activeBtn.className = 'filter-tab px-3 py-1.5 rounded-lg font-semibold transition-all bg-cyan-500 text-slate-950 shadow-glow-cyan';
-      }
-
-      if (category === 'mechanics') {
-        document.getElementById('squadView').classList.add('hidden');
-        document.getElementById('mechanicsView').classList.remove('hidden');
-        renderMechanicsView();
-      } else {
-        document.getElementById('squadView').classList.remove('hidden');
-        document.getElementById('mechanicsView').classList.add('hidden');
-        renderApp();
-      }
+    /* ==========================================================
+       5. MODAL: ADD NEW MEMBER
+       ========================================================== */
+    function openAddModal() {
+      const select = document.getElementById('form-squad-select');
+      select.innerHTML = squads.map(s => `<option value="${s.id}">${escapeHtml(s.bossName)}</option>`).join('');
+      document.getElementById('add-modal').classList.add('active');
+      playMapleSfx('click');
     }
 
-    /* Render Main Squads View */
-    function renderApp() {
-      const container = document.getElementById('squadsContainer');
-      const searchQuery = document.getElementById('searchQuery').value.toLowerCase().trim();
+    function closeAddModal() {
+      document.getElementById('add-modal').classList.remove('active');
+      playMapleSfx('click');
+    }
 
-      // Recalculate Global Stats
-      let totalMembers = appData.members.length;
-      let clearedCount = 0;
-      let subsNeededCount = 0;
-      let totalCP = 0;
+    function submitNewMember() {
+      const squadId = document.getElementById('form-squad-select').value;
+      const ign = document.getElementById('form-ign').value.trim();
+      const job = document.getElementById('form-job').value;
+      const cpVal = document.getElementById('form-cp').value.trim() || '40';
+      const role = document.getElementById('form-role').value;
 
-      appData.members.forEach(m => {
-        if (m.status === 'cleared') clearedCount++;
-        if (m.status === 'sub_needed') subsNeededCount++;
-        totalCP += Number(m.cp) || 0;
-      });
-
-      document.getElementById('statTotalMembers').textContent = totalMembers;
-      document.getElementById('statClearedRuns').textContent = clearedCount;
-      document.getElementById('statTotalRuns').textContent = `${totalMembers} assignments`;
-      document.getElementById('statTotalCP').textContent = `${Math.round(totalCP).toLocaleString()}M CP`;
-      document.getElementById('statSubsNeeded').textContent = `${subsNeededCount} spots`;
-
-      // Filter squads
-      let squadsToRender = appData.squads;
-      if (currentCategory !== 'all') {
-        squadsToRender = squadsToRender.filter(s => s.category === currentCategory);
-      }
-
-      if (squadsToRender.length === 0) {
-        container.innerHTML = `
-          <div class="col-span-full py-16 text-center glass-panel rounded-2xl border border-slate-800">
-            <i class="fa-solid fa-shield-cat text-4xl text-slate-600 mb-3"></i>
-            <h3 class="text-sm font-bold text-slate-300">No squads match this category</h3>
-            <p class="text-xs text-slate-500 mt-1">Try switching tabs or click "Add Member" to assign to a new party.</p>
-          </div>
-        `;
+      if (!ign) {
+        alert('Please enter an IGN for the character!');
         return;
       }
 
-      let squadsHTML = '';
+      const squad = squads.find(s => s.id === squadId);
+      if (squad) {
+        squad.members.push({
+          ign: ign,
+          job: job,
+          cp: `${cpVal}M`,
+          role: role,
+          status: 'READY'
+        });
+        saveState();
+        renderSquads();
+        closeAddModal();
+        playMapleSfx('clear');
+        document.getElementById('form-ign').value = '';
+        document.getElementById('form-cp').value = '';
+      }
+    }
 
-      squadsToRender.forEach(squad => {
-        // Filter members for this squad
-        let squadMembers = appData.members.filter(m => m.squadId === squad.id);
-        
-        // Search filter
-        if (searchQuery) {
-          squadMembers = squadMembers.filter(m => 
-            m.ign.toLowerCase().includes(searchQuery) ||
-            m.class.toLowerCase().includes(searchQuery) ||
-            m.role.toLowerCase().includes(searchQuery) ||
-            (m.notes && m.notes.toLowerCase().includes(searchQuery))
-          );
-        }
+    /* ==========================================================
+       6. DISCORD ROSTER EXPORTER
+       ========================================================== */
+    function exportDiscord() {
+      let output = `🍁 **UTENSILS EXPEDITION ROSTER • MAPLESTORY M** 🍁\n`;
+      output += `*Weekly Server Reset: Thursdays 00:00 SGT*\n\n`;
 
-        // Squad specific stats
-        const squadCP = squadMembers.reduce((sum, m) => sum + (Number(m.cp) || 0), 0);
-        const squadCleared = squadMembers.filter(m => m.status === 'cleared').length;
-        const isAllCleared = squadMembers.length > 0 && squadCleared === squadMembers.length;
-
-        // Squad header boss info lookup
-        const bossInfo = BOSS_DATABASE[squad.bossKey] || null;
-
-        squadsHTML += `
-          <div class="glass-panel rounded-2xl border ${isAllCleared ? 'border-emerald-500/40 shadow-glow-cyan' : 'border-slate-800'} overflow-hidden flex flex-col">
-            
-            <!-- Squad Header -->
-            <div class="p-4 sm:p-5 border-b border-slate-800/80 bg-slate-900/50 flex flex-wrap items-center justify-between gap-3">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center justify-center text-cyan-400">
-                  <i class="fa-solid ${bossInfo ? bossInfo.icon : 'fa-dungeon'} text-base"></i>
-                </div>
-                <div>
-                  <div class="flex items-center gap-2">
-                    <h3 class="font-bold text-white text-sm sm:text-base">${escapeHTML(squad.name)}</h3>
-                    ${isAllCleared ? '<span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 font-bold uppercase"><i class="fa-solid fa-check mr-1"></i>Cleared</span>' : ''}
-                  </div>
-                  <div class="flex items-center gap-2.5 text-[11px] text-slate-400 mt-0.5">
-                    <span><i class="fa-regular fa-clock text-slate-500 mr-1"></i>${escapeHTML(squad.schedule)}</span>
-                    <span>&bull;</span>
-                    <span class="text-amber-400 font-semibold"><i class="fa-solid fa-bolt text-[10px] mr-1"></i>${Math.round(squadCP)}M CP</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Quick Action / Guide button -->
-              <div class="flex items-center gap-2">
-                ${bossInfo ? `
-                  <button onclick="openBossModal('${squad.bossKey}')" class="px-2.5 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-cyan-400 border border-slate-700 text-xs font-semibold transition-colors flex items-center gap-1.5" title="View Boss Mechanics">
-                    <i class="fa-solid fa-circle-info text-[11px]"></i>
-                    <span>Mechanics</span>
-                  </button>
-                ` : ''}
-                <button onclick="markSquadAllCleared('${squad.id}')" class="px-2.5 py-1.5 rounded-lg bg-emerald-950/40 hover:bg-emerald-900/60 text-emerald-300 border border-emerald-800/60 text-xs font-semibold transition-colors" title="Mark all members cleared">
-                  <i class="fa-solid fa-check-double mr-1"></i> Clear All
-                </button>
-              </div>
-            </div>
-
-            <!-- Notes Banner if present -->
-            ${squad.notes ? `
-              <div class="px-4 py-2 bg-slate-950/40 border-b border-slate-800/40 text-[11px] text-slate-400 flex items-center gap-2">
-                <i class="fa-solid fa-bullhorn text-amber-400/80 text-[10px]"></i>
-                <span class="truncate">${escapeHTML(squad.notes)}</span>
-              </div>
-            ` : ''}
-
-            <!-- Member List Cards inside Squad -->
-            <div class="p-3 sm:p-4 space-y-2.5 flex-1">
-              ${squadMembers.length === 0 ? `
-                <div class="py-8 text-center text-xs text-slate-500">
-                  <p>No raiders currently assigned to this squad.</p>
-                  <button onclick="openAddMemberModal('${squad.id}')" class="mt-2 text-cyan-400 hover:underline font-semibold">+ Assign Raider</button>
-                </div>
-              ` : squadMembers.map(m => renderMemberCard(m)).join('')}
-            </div>
-
-            <!-- Squad Footer Info -->
-            <div class="px-4 py-2.5 bg-slate-950/60 border-t border-slate-800/60 text-[11px] text-slate-500 flex items-center justify-between">
-              <span>Party Capacity: <strong class="text-slate-300">${squadMembers.length}/6</strong> raiders</span>
-              <button onclick="openAddMemberModal('${squad.id}')" class="text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1">
-                <i class="fa-solid fa-plus text-[10px]"></i> Add Raider
-              </button>
-            </div>
-
-          </div>
-        `;
+      squads.forEach(s => {
+        output += `⚔️ **${s.bossName}** [${s.members.filter(m => m.status === 'CLEARED').length}/${s.members.length} CLEARED]\n`;
+        s.members.forEach(m => {
+          const statusEmoji = m.status === 'CLEARED' ? '✅ [CLEARED]' : (m.status === 'SUB' ? '🚨 [SUB NEEDED]' : '🟡 [READY]');
+          output += `• ${statusEmoji} **${m.ign}** (${m.job} | ${m.cp} | ${m.role})\n`;
+        });
+        output += `\n`;
       });
 
-      container.innerHTML = squadsHTML;
-    }
-
-    /* Render Individual Raider Card */
-    function renderMemberCard(member) {
-      // Role color badge styling
-      let roleBadge = '';
-      if (member.role.includes('Bishop') || member.role.includes('Support')) {
-        roleBadge = '<span class="text-[10px] px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-800/60 font-semibold">Support</span>';
-      } else if (member.role.includes('Binder') || member.role.includes('Debuff')) {
-        roleBadge = '<span class="text-[10px] px-2 py-0.5 rounded bg-purple-950/80 text-purple-300 border border-purple-800/60 font-semibold">Binder</span>';
-      } else if (member.role.includes('Time Leap')) {
-        roleBadge = '<span class="text-[10px] px-2 py-0.5 rounded bg-blue-950/80 text-blue-300 border border-blue-800/60 font-semibold">Time Leap</span>';
-      } else {
-        roleBadge = '<span class="text-[10px] px-2 py-0.5 rounded bg-amber-950/80 text-amber-300 border border-amber-800/60 font-semibold">Main DPS</span>';
-      }
-
-      // Status indicator
-      let statusBtn = '';
-      if (member.status === 'cleared') {
-        statusBtn = `
-          <button onclick="toggleMemberStatus('${member.id}')" title="Click to toggle status" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] font-bold flex items-center gap-1.5 hover:bg-emerald-500/30 transition-all">
-            <i class="fa-solid fa-circle-check text-emerald-400"></i>
-            <span>Cleared</span>
-          </button>
-        `;
-      } else if (member.status === 'sub_needed') {
-        statusBtn = `
-          <button onclick="toggleMemberStatus('${member.id}')" title="Click to toggle status" class="px-2.5 py-1 rounded-lg bg-red-500/20 text-red-300 border border-red-500/40 text-[11px] font-bold flex items-center gap-1.5 hover:bg-red-500/30 transition-all">
-            <i class="fa-solid fa-user-xmark text-red-400"></i>
-            <span>Sub Needed</span>
-          </button>
-        `;
-      } else {
-        statusBtn = `
-          <button onclick="toggleMemberStatus('${member.id}')" title="Click to toggle status" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-[11px] font-bold flex items-center gap-1.5 transition-all">
-            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-            <span>Ready</span>
-          </button>
-        `;
-      }
-
-      return `
-        <div class="glass-card rounded-xl p-3 flex items-center justify-between gap-3 group">
-          <!-- Member Avatar & Info -->
-          <div class="flex items-center gap-3 min-w-0">
-            <div class="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center font-bold text-white text-xs text-cyan-300 shrink-0">
-              ${escapeHTML(member.ign.substring(0, 2).toUpperCase())}
-            </div>
-            <div class="min-w-0">
-              <div class="flex items-center gap-2">
-                <span class="font-bold text-white text-xs truncate">${escapeHTML(member.ign)}</span>
-                ${roleBadge}
-              </div>
-              <div class="flex items-center gap-2 text-[11px] text-slate-400 mt-0.5">
-                <span class="text-slate-300 font-medium">${escapeHTML(member.class)}</span>
-                <span>&bull;</span>
-                <span class="text-amber-400 font-bold">${Number(member.cp).toFixed(1)}M CP</span>
-                ${member.notes ? `<span class="hidden sm:inline text-slate-500 truncate text-[10px]">&bull; ${escapeHTML(member.notes)}</span>` : ''}
-              </div>
-            </div>
-          </div>
-
-          <!-- Actions -->
-          <div class="flex items-center gap-2 shrink-0">
-            ${statusBtn}
-            
-            <button onclick="openEditMemberModal('${member.id}')" class="w-7 h-7 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 flex items-center justify-center transition-colors" title="Edit member">
-              <i class="fa-solid fa-pen-to-square text-[11px]"></i>
-            </button>
-          </div>
-        </div>
-      `;
-    }
-
-    /* Render Boss Guide / Mechanics View */
-    function renderMechanicsView() {
-      const grid = document.getElementById('mechanicsGrid');
-      let html = '';
-
-      for (const [key, boss] of Object.entries(BOSS_DATABASE)) {
-        html += `
-          <div class="glass-card rounded-xl p-4 border border-slate-800 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-3">
-                <div class="flex items-center gap-2.5">
-                  <div class="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center ${boss.color}">
-                    <i class="fa-solid ${boss.icon}"></i>
-                  </div>
-                  <div>
-                    <h4 class="font-bold text-white text-sm">${boss.name}</h4>
-                    <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-900 text-cyan-400 font-semibold">${boss.tier}</span>
-                  </div>
-                </div>
-                <div class="text-right">
-                  <span class="text-[10px] text-slate-500 uppercase font-bold block">Rec. CP</span>
-                  <span class="text-xs text-amber-400 font-bold">${boss.reqCP}</span>
-                </div>
-              </div>
-
-              <div class="space-y-2 my-3 text-xs text-slate-300">
-                ${boss.mechanics.map(m => `<div class="p-2 rounded-lg bg-slate-950/60 border border-slate-900 leading-relaxed text-[11px]">${m}</div>`).join('')}
-              </div>
-            </div>
-
-            <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[11px]">
-              <span class="text-slate-400">Key Roles: <strong class="text-cyan-300 font-semibold">${boss.keyJob}</strong></span>
-              <button onclick="openBossModal('${key}')" class="text-cyan-400 hover:underline font-bold text-xs">View Full Details</button>
-            </div>
-          </div>
-        `;
-      }
-
-      grid.innerHTML = html;
-    }
-
-    /* Interactive Status Toggling */
-    function toggleMemberStatus(memberId) {
-      const member = appData.members.find(m => m.id === memberId);
-      if (!member) return;
-
-      if (member.status === 'ready') {
-        member.status = 'cleared';
-        playChime('clear');
-        showToast(`${member.ign} marked Cleared!`, 'check');
-      } else if (member.status === 'cleared') {
-        member.status = 'sub_needed';
-        playChime('click');
-        showToast(`${member.ign} marked as Needing Substitute`, 'info');
-      } else {
-        member.status = 'ready';
-        playChime('click');
-        showToast(`${member.ign} marked Ready`, 'check');
-      }
-
-      saveData();
-      renderApp();
-    }
-
-    function markSquadAllCleared(squadId) {
-      const squad = appData.squads.find(s => s.id === squadId);
-      appData.members.forEach(m => {
-        if (m.squadId === squadId) {
-          m.status = 'cleared';
-        }
+      navigator.clipboard.writeText(output).then(() => {
+        playMapleSfx('clear');
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3500);
       });
-      saveData();
-      renderApp();
-      playChime('clear');
-      showToast(`All raiders in ${squad ? squad.name : 'Squad'} marked Cleared!`, 'check');
     }
 
-    function resetWeeklyStatus() {
-      appData.members.forEach(m => {
-        m.status = 'ready';
+    function escapeHtml(str) {
+      return str.replace(/[&<>'"]/g, 
+        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+      );
+    }
+
+    /* ==========================================================
+       7. FALLING MAPLE LEAVES & PARTICLES (CANVAS)
+       ========================================================== */
+    const canvas = document.getElementById('fx-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    const leaves = [];
+    const stars = [];
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Create Autumn Leaves
+    for (let i = 0; i < 28; i++) {
+      leaves.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: 14 + Math.random() * 16,
+        speedY: 0.9 + Math.random() * 1.6,
+        speedX: -0.6 + Math.random() * 1.2,
+        rotation: Math.random() * Math.PI * 2,
+        rotationSpeed: (Math.random() - 0.5) * 0.04,
+        swayAmplitude: 20 + Math.random() * 30,
+        swaySpeed: 0.02 + Math.random() * 0.03,
+        swayOffset: Math.random() * Math.PI * 2,
+        color: ['#ff5a00', '#ff9900', '#ffbe1a', '#e11d48', '#d97706'][Math.floor(Math.random() * 5)]
       });
-      saveData();
-      renderApp();
-      playChime('click');
-      showToast('Weekly clearance reset for all guild raiders!', 'check');
     }
 
-    /* Member Add / Edit Modal Logic */
-    function populateSquadDropdown(selectedSquadId) {
-      const select = document.getElementById('inputSquad');
-      select.innerHTML = appData.squads.map(s => `
-        <option value="${s.id}" ${s.id === selectedSquadId ? 'selected' : ''}>${escapeHTML(s.name)}</option>
-      `).join('');
+    // Create Ambient Dream Stars
+    for (let i = 0; i < 60; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        r: Math.random() * 1.6 + 0.4,
+        alpha: Math.random(),
+        speed: 0.015 + Math.random() * 0.02
+      });
     }
 
-    function openAddMemberModal(defaultSquadId = null) {
-      playChime('click');
-      document.getElementById('modalTitle').innerHTML = '<i class="fa-solid fa-user-plus text-cyan-400 mr-2"></i>Add Raid Member';
-      document.getElementById('memberForm').reset();
-      document.getElementById('editMemberId').value = '';
-      document.getElementById('btnDeleteMember').classList.add('hidden');
-
-      const targetSquadId = defaultSquadId || (appData.squads.length > 0 ? appData.squads[0].id : '');
-      populateSquadDropdown(targetSquadId);
-
-      const modal = document.getElementById('memberModal');
-      modal.classList.remove('hidden');
-      setTimeout(() => modal.classList.remove('opacity-0'), 10);
+    function drawMapleLeaf(ctx, size, color) {
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      // Stylized 5-pointed Maple Leaf silhouette
+      ctx.moveTo(0, -size);
+      ctx.lineTo(size * 0.35, -size * 0.45);
+      ctx.lineTo(size * 0.85, -size * 0.55);
+      ctx.lineTo(size * 0.45, -size * 0.1);
+      ctx.lineTo(size * 0.75, size * 0.45);
+      ctx.lineTo(size * 0.25, size * 0.35);
+      ctx.lineTo(0, size * 0.85); // stem base
+      ctx.lineTo(-size * 0.25, size * 0.35);
+      ctx.lineTo(-size * 0.75, size * 0.45);
+      ctx.lineTo(-size * 0.45, -size * 0.1);
+      ctx.lineTo(-size * 0.85, -size * 0.55);
+      ctx.lineTo(-size * 0.35, -size * 0.45);
+      ctx.closePath();
+      ctx.fill();
     }
 
-    function openEditMemberModal(memberId) {
-      playChime('click');
-      const member = appData.members.find(m => m.id === memberId);
-      if (!member) return;
+    function animateFX() {
+      ctx.clearRect(0, 0, width, height);
 
-      document.getElementById('modalTitle').innerHTML = '<i class="fa-solid fa-user-pen text-cyan-400 mr-2"></i>Edit Raid Member';
-      document.getElementById('editMemberId').value = member.id;
-      document.getElementById('inputIGN').value = member.ign;
-      document.getElementById('inputClass').value = member.class;
-      document.getElementById('inputRole').value = member.role;
-      document.getElementById('inputCP').value = member.cp;
-      document.getElementById('inputStatus').value = member.status;
-      document.getElementById('inputNotes').value = member.notes || '';
-      document.getElementById('btnDeleteMember').classList.remove('hidden');
-
-      populateSquadDropdown(member.squadId);
-
-      const modal = document.getElementById('memberModal');
-      modal.classList.remove('hidden');
-      setTimeout(() => modal.classList.remove('opacity-0'), 10);
-    }
-
-    function closeMemberModal() {
-      const modal = document.getElementById('memberModal');
-      modal.classList.add('opacity-0');
-      setTimeout(() => modal.classList.add('hidden'), 200);
-    }
-
-    function saveMember(event) {
-      event.preventDefault();
-      const id = document.getElementById('editMemberId').value;
-      const ign = document.getElementById('inputIGN').value.trim();
-      const jobClass = document.getElementById('inputClass').value;
-      const role = document.getElementById('inputRole').value;
-      const cp = parseFloat(document.getElementById('inputCP').value) || 0;
-      const squadId = document.getElementById('inputSquad').value;
-      const status = document.getElementById('inputStatus').value;
-      const notes = document.getElementById('inputNotes').value.trim();
-
-      if (!ign) return;
-
-      if (id) {
-        // Edit existing
-        const index = appData.members.findIndex(m => m.id === id);
-        if (index !== -1) {
-          appData.members[index] = { id, ign, class: jobClass, role, cp, squadId, status, notes };
-          showToast(`Updated ${ign}`, 'check');
-        }
-      } else {
-        // Add new
-        const newMember = {
-          id: 'm-' + Date.now(),
-          ign,
-          class: jobClass,
-          role,
-          cp,
-          squadId,
-          status,
-          notes
-        };
-        appData.members.push(newMember);
-        showToast(`Added ${ign} to roster`, 'check');
-      }
-
-      playChime('add');
-      saveData();
-      closeMemberModal();
-      renderApp();
-    }
-
-    function deleteCurrentMember() {
-      const id = document.getElementById('editMemberId').value;
-      if (!id) return;
-      const member = appData.members.find(m => m.id === id);
-      const name = member ? member.ign : 'Member';
-      appData.members = appData.members.filter(m => m.id !== id);
-      saveData();
-      closeMemberModal();
-      renderApp();
-      showToast(`Removed ${name} from roster`, 'info');
-      playChime('click');
-    }
-
-    /* Boss Mechanics Modal Details */
-    function openBossModal(bossKey) {
-      playChime('click');
-      const boss = BOSS_DATABASE[bossKey];
-      if (!boss) return;
-
-      document.getElementById('bossModalName').textContent = boss.name;
-      document.getElementById('bossModalDifficulty').textContent = boss.tier;
-      document.getElementById('bossModalCP').textContent = boss.reqCP;
-      document.getElementById('bossModalKeyJob').textContent = boss.keyJob;
-
-      const mechanicsContainer = document.getElementById('bossModalMechanics');
-      mechanicsContainer.innerHTML = boss.mechanics.map(m => `
-        <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 leading-relaxed text-[11px]">
-          ${m}
-        </div>
-      `).join('');
-
-      document.getElementById('bossModalDrops').textContent = boss.drops;
-
-      const modal = document.getElementById('bossDetailsModal');
-      modal.classList.remove('hidden');
-      setTimeout(() => modal.classList.remove('opacity-0'), 10);
-    }
-
-    function closeBossModal() {
-      const modal = document.getElementById('bossDetailsModal');
-      modal.classList.add('opacity-0');
-      setTimeout(() => modal.classList.add('hidden'), 200);
-    }
-
-    /* Discord Export Generator */
-    function openExportModal() {
-      playChime('click');
-      let text = `🍁 **[MapleStory M - Weekly Raid Roster & Schedule]** 🍁\n`;
-      text += `⏰ Reset: Thursdays 00:00 UTC | Status: Updated\n\n`;
-
-      appData.squads.forEach(squad => {
-        const squadMembers = appData.members.filter(m => m.squadId === squad.id);
-        const totalCP = squadMembers.reduce((sum, m) => sum + (Number(m.cp) || 0), 0);
-        
-        text += `⚔️ **${squad.name}** (${squad.schedule})\n`;
-        text += `📊 *Party CP: ${Math.round(totalCP)}M CP | Members: ${squadMembers.length}/6*\n`;
-        
-        if (squadMembers.length === 0) {
-          text += `  └ *(No raiders assigned)*\n`;
-        } else {
-          squadMembers.forEach((m, idx) => {
-            let statusEmoji = '🟡'; // ready
-            if (m.status === 'cleared') statusEmoji = '🟢';
-            if (m.status === 'sub_needed') statusEmoji = '🔴 (SUB REQ)';
-            
-            text += `  ${idx + 1}. ${statusEmoji} **${m.ign}** (${m.class}) - ${m.cp}M CP [${m.role}]`;
-            if (m.notes) text += ` - *${m.notes}*`;
-            text += `\n`;
-          });
-        }
-        text += `\n`;
+      // Render Twinkling Stars
+      stars.forEach(s => {
+        s.alpha += s.speed;
+        const currentAlpha = Math.abs(Math.sin(s.alpha));
+        ctx.fillStyle = `rgba(255, 255, 255, ${currentAlpha * 0.75})`;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
       });
 
-      text += `📌 *Legend: 🟢 Cleared | 🟡 Ready | 🔴 Sub Needed*`;
+      // Render Falling Maple Leaves
+      leaves.forEach(l => {
+        l.y += l.speedY;
+        l.swayOffset += l.swaySpeed;
+        l.x += l.speedX + Math.sin(l.swayOffset) * 0.8;
+        l.rotation += l.rotationSpeed;
 
-      document.getElementById('exportTextarea').value = text;
-
-      const modal = document.getElementById('exportModal');
-      modal.classList.remove('hidden');
-      setTimeout(() => modal.classList.remove('opacity-0'), 10);
-    }
-
-    function closeExportModal() {
-      const modal = document.getElementById('exportModal');
-      modal.classList.add('opacity-0');
-      setTimeout(() => modal.classList.add('hidden'), 200);
-    }
-
-    function copyExportText() {
-      const textarea = document.getElementById('exportTextarea');
-      textarea.select();
-      textarea.setSelectionRange(0, 99999);
-      
-      // Use document.execCommand('copy') per environment compliance
-      try {
-        const successful = document.execCommand('copy');
-        if (successful) {
-          playChime('clear');
-          showToast('Discord Roster Copied to Clipboard!', 'check');
-        } else {
-          showToast('Failed to copy. Please manually copy text.', 'info');
+        if (l.y > height + 40) {
+          l.y = -30;
+          l.x = Math.random() * width;
         }
-      } catch (err) {
-        showToast('Please select and copy manually.', 'info');
-      }
+        if (l.x > width + 40) l.x = -30;
+        if (l.x < -40) l.x = width + 30;
+
+        ctx.save();
+        ctx.translate(l.x, l.y);
+        ctx.rotate(l.rotation);
+        drawMapleLeaf(ctx, l.size, l.color);
+        ctx.restore();
+      });
+
+      requestAnimationFrame(animateFX);
     }
 
-    /* Toast Notification Helper */
-    function showToast(message, type = 'check') {
-      const toast = document.getElementById('toast');
-      const toastMsg = document.getElementById('toastMsg');
-      const toastIcon = document.getElementById('toastIcon');
-
-      toastMsg.textContent = message;
-      if (type === 'check') {
-        toastIcon.className = 'fa-solid fa-circle-check text-cyan-400';
-      } else {
-        toastIcon.className = 'fa-solid fa-circle-info text-amber-400';
-      }
-
-      toast.classList.remove('translate-y-16', 'opacity-0');
-      toast.classList.add('translate-y-0', 'opacity-100');
-
-      setTimeout(() => {
-        toast.classList.add('translate-y-16', 'opacity-0');
-        toast.classList.remove('translate-y-0', 'opacity-100');
-      }, 2600);
-    }
-
-    /* Security Helper */
-    function escapeHTML(str) {
-      if (!str) return '';
-      return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-    }
-
-    /* Initial Startup */
-    window.addEventListener('DOMContentLoaded', () => {
-      loadData();
-      renderApp();
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
-    });
+    // Start Everything
+    renderSquads();
+    animateFX();
   </script>
 </body>
 </html>
