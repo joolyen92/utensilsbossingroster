@@ -41,17 +41,17 @@
       color: var(--text-primary);
       min-height: 100vh;
       overflow-x: hidden;
-      padding-bottom: 100px;
+      padding-bottom: 120px;
     }
 
-    /* Top Navigation Bar */
+    /* Top Catcha Navigation */
     .navbar {
       position: sticky;
       top: 0;
       z-index: 60;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      background: rgba(7, 9, 14, 0.88);
+      background: rgba(7, 9, 14, 0.9);
       border-bottom: 1px solid var(--border-subtle);
       padding: 14px 28px;
       display: flex;
@@ -233,21 +233,21 @@
       font-weight: 700;
     }
 
-    /* Deck Layout */
-    .decks-container {
+    /* Boss Section Layout */
+    .boss-list-container {
       display: flex;
       flex-direction: column;
-      gap: 50px;
+      gap: 56px;
     }
 
-    .deck-section {
+    .boss-section {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 28px;
     }
 
     /* ==========================================================
-       CINEMATIC BOSS POSTER BANNER (Catcha Gacha Event Style)
+       CINEMATIC BOSS EVENT POSTERS
        ========================================================== */
     .boss-poster-card {
       position: relative;
@@ -255,49 +255,47 @@
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-      min-height: 230px;
+      min-height: 220px;
       display: flex;
       align-items: center;
       padding: 34px 40px;
-      background-size: cover;
-      background-position: center right;
     }
 
-    /* Custom Boss Themes with Illustrated Art Vignettes */
-    .poster-lotus {
+    /* Boss specific color themes */
+    .poster-vhilla {
       background: 
-        linear-gradient(90deg, #090c17 0%, rgba(9, 12, 23, 0.94) 45%, rgba(15, 23, 42, 0.4) 100%),
-        radial-gradient(circle at 80% 50%, rgba(56, 189, 248, 0.35) 0%, transparent 60%),
+        linear-gradient(90deg, #0d060a 0%, rgba(13, 6, 10, 0.94) 50%, rgba(20, 83, 45, 0.4) 100%),
+        radial-gradient(circle at 80% 50%, rgba(34, 197, 94, 0.35) 0%, transparent 60%),
         url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1400&auto=format&fit=crop');
       background-size: cover;
-      border-color: rgba(56, 189, 248, 0.3);
-    }
-
-    .poster-damien {
-      background: 
-        linear-gradient(90deg, #12090b 0%, rgba(18, 9, 11, 0.94) 45%, rgba(38, 12, 16, 0.4) 100%),
-        radial-gradient(circle at 80% 50%, rgba(239, 68, 68, 0.4) 0%, transparent 60%),
-        url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1400&auto=format&fit=crop');
-      background-size: cover;
-      border-color: rgba(239, 68, 68, 0.35);
+      border-color: rgba(34, 197, 94, 0.35);
     }
 
     .poster-lucid {
       background: 
-        linear-gradient(90deg, #14091c 0%, rgba(20, 9, 28, 0.94) 45%, rgba(46, 16, 68, 0.4) 100%),
-        radial-gradient(circle at 80% 50%, rgba(217, 70, 239, 0.38) 0%, transparent 60%),
+        linear-gradient(90deg, #13071a 0%, rgba(19, 7, 26, 0.94) 50%, rgba(217, 70, 239, 0.35) 100%),
+        radial-gradient(circle at 80% 50%, rgba(217, 70, 239, 0.4) 0%, transparent 60%),
         url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1400&auto=format&fit=crop');
       background-size: cover;
       border-color: rgba(217, 70, 239, 0.35);
     }
 
-    .poster-cra {
+    .poster-azazelle {
       background: 
-        linear-gradient(90deg, #0e121a 0%, rgba(14, 18, 26, 0.94) 45%, rgba(20, 30, 48, 0.4) 100%),
-        radial-gradient(circle at 80% 50%, rgba(245, 158, 11, 0.35) 0%, transparent 60%),
-        url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1400&auto=format&fit=crop');
+        linear-gradient(90deg, #130e06 0%, rgba(19, 14, 6, 0.94) 50%, rgba(245, 158, 11, 0.35) 100%),
+        radial-gradient(circle at 80% 50%, rgba(245, 158, 11, 0.4) 0%, transparent 60%),
+        url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1400&auto=format&fit=crop');
       background-size: cover;
       border-color: rgba(245, 158, 11, 0.35);
+    }
+
+    .poster-will {
+      background: 
+        linear-gradient(90deg, #090918 0%, rgba(9, 9, 24, 0.94) 50%, rgba(99, 102, 241, 0.35) 100%),
+        radial-gradient(circle at 80% 50%, rgba(99, 102, 241, 0.4) 0%, transparent 60%),
+        url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1400&auto=format&fit=crop');
+      background-size: cover;
+      border-color: rgba(99, 102, 241, 0.35);
     }
 
     .poster-content {
@@ -325,8 +323,8 @@
       border-radius: 6px;
       font-family: 'Space Grotesk', sans-serif;
     }
-    .tier-hard { background: rgba(239, 68, 68, 0.25); color: #f87171; border: 1px solid #ef4444; }
     .tier-chaos { background: rgba(217, 70, 239, 0.25); color: #f0abfc; border: 1px solid #d946ef; }
+    .tier-hard { background: rgba(239, 68, 68, 0.25); color: #f87171; border: 1px solid #ef4444; }
 
     .req-badge {
       font-size: 0.72rem;
@@ -367,7 +365,6 @@
       margin-top: 4px;
     }
 
-    /* Poster Right: Quick Progress Metric */
     .poster-stats-box {
       margin-left: auto;
       background: rgba(8, 11, 20, 0.78);
@@ -381,7 +378,7 @@
       gap: 6px;
       z-index: 2;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      min-width: 170px;
+      min-width: 175px;
     }
 
     .poster-stats-label {
@@ -394,7 +391,7 @@
 
     .poster-stats-num {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.8rem;
+      font-size: 1.7rem;
       font-weight: 800;
       color: #fff;
     }
@@ -416,15 +413,71 @@
     }
 
     /* ==========================================================
-       HOLOGRAPHIC 3D CATCHA CARDS
+       TEAM SECTIONS & CATCHA CARD GRID
        ========================================================== */
+    .team-block {
+      background: rgba(16, 20, 34, 0.4);
+      border: 1px solid var(--border-subtle);
+      border-radius: 22px;
+      padding: 22px;
+      backdrop-filter: blur(10px);
+      margin-bottom: 24px;
+    }
+
+    .team-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .team-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .team-badge-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--accent-cyan);
+    }
+
+    .team-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .team-meta-stat {
+      font-size: 0.78rem;
+      font-weight: 700;
+      font-family: 'Space Grotesk', monospace;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
       perspective: 1200px;
     }
 
+    /* 3D Tilting Card */
     .gacha-card-wrapper {
       position: relative;
       cursor: pointer;
@@ -433,18 +486,19 @@
     }
 
     .gacha-card-wrapper:hover {
-      transform: translateY(-6px) scale(1.02);
+      transform: translateY(-5px) scale(1.02);
     }
 
     .gacha-card {
       position: relative;
       background: var(--bg-card);
-      border-radius: 20px;
+      border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, 0.12);
       overflow: hidden;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
       display: flex;
       flex-direction: column;
+      min-height: 250px;
     }
 
     /* Holographic Light Sheen */
@@ -471,27 +525,72 @@
       opacity: 1;
     }
 
-    .card-rarity-row {
+    /* Empty Card Slot State */
+    .gacha-card.empty-slot {
+      border: 2px dashed rgba(255, 255, 255, 0.18);
+      background: rgba(14, 18, 29, 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      text-align: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+    }
+
+    .gacha-card.empty-slot:hover {
+      border-color: var(--accent-purple);
+      background: rgba(139, 92, 246, 0.08);
+    }
+
+    .empty-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .empty-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #cbd5e1;
+    }
+
+    .empty-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Filled Card Styling */
+    .card-top-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 16px 8px;
+      padding: 12px 14px 6px;
       z-index: 2;
     }
 
     .rarity-pill {
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       font-weight: 800;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 6px;
+      padding: 2px 7px;
+      border-radius: 5px;
       font-family: 'Space Grotesk', sans-serif;
     }
     .rarity-arcane {
       background: linear-gradient(90deg, #ec4899, #8b5cf6);
       color: #ffffff;
-      box-shadow: 0 0 12px rgba(236, 72, 153, 0.4);
+      box-shadow: 0 0 10px rgba(236, 72, 153, 0.4);
     }
     .rarity-mythic {
       background: linear-gradient(90deg, #f59e0b, #ef4444);
@@ -503,116 +602,114 @@
       border: 1px solid rgba(6, 182, 212, 0.4);
     }
 
-    .card-stars {
-      color: #fbbf24;
-      font-size: 0.75rem;
-      letter-spacing: 1px;
-      text-shadow: 0 0 8px rgba(251, 191, 36, 0.5);
-    }
-
-    .card-art-box {
-      height: 110px;
-      margin: 4px 14px;
-      border-radius: 14px;
-      background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.85) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      position: relative;
+    .card-edit-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #cbd5e1;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .card-edit-btn:hover {
+      background: #ffffff;
+      color: #000;
+    }
+
+    .card-art-box {
+      height: 80px;
+      margin: 2px 12px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.8) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
       overflow: hidden;
     }
 
-    .art-glow {
-      position: absolute;
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(139, 92, 246, 0.35) 0%, transparent 70%);
-      filter: blur(12px);
-    }
-
     .character-avatar {
-      font-size: 3rem;
+      font-size: 2.5rem;
       z-index: 2;
-      filter: drop-shadow(0 6px 14px rgba(0,0,0,0.6));
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .gacha-card-wrapper:hover .character-avatar {
-      transform: scale(1.12);
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.6));
     }
 
     .card-details {
-      padding: 14px 16px;
+      padding: 10px 12px 12px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       z-index: 2;
     }
 
     .card-char-name {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .card-job-badge {
-      font-size: 0.72rem;
+    .card-job-pill {
+      font-size: 0.68rem;
       font-weight: 600;
       color: var(--text-secondary);
       background: rgba(255, 255, 255, 0.05);
-      padding: 2px 8px;
-      border-radius: 6px;
+      padding: 2px 6px;
+      border-radius: 5px;
       border: 1px solid var(--border-subtle);
+      display: inline-block;
     }
 
     .card-stats-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 10px;
-      border-radius: 12px;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 7px;
+      border-radius: 10px;
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .stat-cell {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 1px;
     }
 
     .stat-cell-label {
-      font-size: 0.65rem;
+      font-size: 0.58rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.4px;
       color: var(--text-muted);
     }
 
     .stat-cell-val {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       font-weight: 700;
       color: #ffffff;
     }
 
     .stat-cell-val.power {
       color: var(--accent-gold);
-      text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
     }
 
-    /* Foil Status Button */
+    /* Foil Status Seal */
     .status-foil-seal {
       width: 100%;
-      padding: 9px 12px;
-      border-radius: 12px;
-      font-size: 0.8rem;
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 0.74rem;
       font-weight: 700;
       font-family: 'Space Grotesk', sans-serif;
       letter-spacing: 0.5px;
@@ -620,9 +717,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       transition: all 0.2s ease;
       border: 1px solid transparent;
+      margin-top: 2px;
     }
 
     .status-ready {
@@ -635,7 +733,7 @@
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.2));
       color: #34d399;
       border-color: rgba(16, 185, 129, 0.5);
-      box-shadow: 0 0 16px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.3);
     }
 
     .status-sub {
@@ -650,12 +748,14 @@
       50% { opacity: 0.7; }
     }
 
-    /* Modal Styling */
+    /* ==========================================================
+       MODAL: ASSIGN / EDIT RAIDER
+       ========================================================== */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(4, 6, 12, 0.85);
-      backdrop-filter: blur(12px);
+      background: rgba(4, 6, 12, 0.88);
+      backdrop-filter: blur(14px);
       z-index: 100;
       display: none;
       align-items: center;
@@ -758,13 +858,17 @@
       }
       .hero-top-row { flex-direction: column; align-items: flex-start; }
       .nav-stats { display: none; }
+      .card-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
       .card-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Navigation -->
+  <!-- Top Catcha Navigation -->
   <nav class="navbar">
     <div class="brand-wrap">
       <div class="brand-logo">🎴</div>
@@ -790,188 +894,194 @@
     <!-- Hero Header -->
     <header class="hero-top-row">
       <div class="headline">
-        <h1>Boss Expedition Cards</h1>
-        <p>Interactive weekly commander rosters. Click any character card to cycle clear status!</p>
+        <h1>Command Expedition Hub</h1>
+        <p>4 Commanders • 4 Squads Each (Max 6 Members). Click any slot to assign or edit raiders!</p>
       </div>
 
       <div class="hero-actions">
         <button class="btn-action" onclick="toggleMute()" id="sound-btn">🔊 SFX On</button>
         <button class="btn-action" onclick="copyDiscordRoster()">📋 Discord Export</button>
-        <button class="btn-action primary" onclick="openAddModal()">✨ + Add Raider</button>
+        <button class="btn-action" onclick="resetAllWeeklyStatus()">🔄 Reset Week</button>
       </div>
     </header>
 
-    <!-- Category Pill Filter Tabs -->
+    <!-- Category Filter Tabs -->
     <div class="filter-bar">
       <button class="pill-tab active" onclick="setCategory('ALL')">✨ All Bosses</button>
-      <button class="pill-tab" onclick="setCategory('LOTUS')">⚡ Hard Lotus</button>
-      <button class="pill-tab" onclick="setCategory('DAMIEN')">⚔️ Hard Damien</button>
-      <button class="pill-tab" onclick="setCategory('LUCID')">🦋 Hard Lucid</button>
-      <button class="pill-tab" onclick="setCategory('CRA')">👑 Chaos Root Abyss</button>
+      <button class="pill-tab" onclick="setCategory('VHILLA')">🩸 Verus Hilla</button>
+      <button class="pill-tab" onclick="setCategory('LUCID')">🦋 Chaos Lucid</button>
+      <button class="pill-tab" onclick="setCategory('AZAZELLE')">⚔️ Hard Azazelle</button>
+      <button class="pill-tab" onclick="setCategory('WILL')">🕸️ Chaos Will</button>
     </div>
 
-    <!-- Main Boss Decks Container -->
-    <main class="decks-container" id="decks-container">
+    <!-- Main Boss Container -->
+    <main class="boss-list-container" id="boss-container">
       <!-- Injected via JavaScript -->
     </main>
 
   </div>
 
-  <!-- Add Member Modal -->
-  <div class="modal-backdrop" id="add-modal">
+  <!-- Modal: Assign / Edit Raider Slot -->
+  <div class="modal-backdrop" id="edit-modal">
     <div class="modal-card">
       <div class="modal-header">
-        <h3>✨ Mint Raider Card</h3>
-        <button onclick="closeAddModal()" style="background:none; border:none; color:var(--text-muted); font-size:1.4rem; cursor:pointer;">&times;</button>
+        <h3 id="modal-title">✨ Slot Assignment</h3>
+        <button onclick="closeModal()" style="background:none; border:none; color:var(--text-muted); font-size:1.4rem; cursor:pointer;">&times;</button>
       </div>
 
-      <div class="form-item">
-        <label>Select Boss Deck</label>
-        <select class="select-field" id="form-deck-id"></select>
-      </div>
+      <input type="hidden" id="target-boss-id">
+      <input type="hidden" id="target-team-idx">
+      <input type="hidden" id="target-slot-idx">
 
       <div class="form-item">
         <label>Character In-Game Name (IGN)</label>
-        <input type="text" class="input-field" id="form-ign" placeholder="e.g. NightKing">
+        <input type="text" class="input-field" id="modal-ign" placeholder="e.g. NightKing">
       </div>
 
       <div class="form-item">
         <label>Class / Job</label>
-        <select class="select-field" id="form-job">
-          <option value="Night Walker">Night Walker</option>
-          <option value="Bishop">Bishop</option>
-          <option value="Sia Astelle">Sia Astelle</option>
-          <option value="Paladin">Paladin</option>
-          <option value="Shade">Shade</option>
-          <option value="Dual Blade">Dual Blade</option>
-          <option value="Buccaneer">Buccaneer</option>
-          <option value="Hero">Hero</option>
-          <option value="Bowmaster">Bowmaster</option>
-          <option value="Luminous">Luminous</option>
-          <option value="Phantom">Phantom</option>
-          <option value="Adele">Adele</option>
+        <select class="select-field" id="modal-job">
+          <option value="Night Walker">🗡️ Night Walker</option>
+          <option value="Bishop">✨ Bishop (Holy Magic Shell)</option>
+          <option value="Sia Astelle">⭐ Sia Astelle</option>
+          <option value="Paladin">🛡️ Paladin (Sacrosanctity / Threaten)</option>
+          <option value="Shade">👊 Shade (Soul Splitter)</option>
+          <option value="Dual Blade">⚔️ Dual Blade</option>
+          <option value="Buccaneer">⚡ Buccaneer (Time Leap)</option>
+          <option value="Hero">🪓 Hero</option>
+          <option value="Bowmaster">🏹 Bowmaster</option>
+          <option value="Luminous">🔮 Luminous</option>
+          <option value="Phantom">🃏 Phantom</option>
+          <option value="Adele">🗡️ Adele</option>
         </select>
       </div>
 
       <div class="form-item">
-        <label>Combat Power (Millions)</label>
-        <input type="number" class="input-field" id="form-cp" placeholder="e.g. 58.5" step="0.5">
+        <label>Combat Power (CP in Millions)</label>
+        <input type="number" class="input-field" id="modal-cp" placeholder="e.g. 68.5" step="0.5">
       </div>
 
       <div class="form-item">
-        <label>Raid Role</label>
-        <select class="select-field" id="form-role">
-          <option value="Main DPS">Main DPS</option>
-          <option value="Burst DPS">Burst DPS</option>
-          <option value="Support / Shell">Support / Shell</option>
-          <option value="Binder / Split">Binder / Split</option>
-          <option value="Time Leap">Time Leap</option>
+        <label>Squad Role</label>
+        <select class="select-field" id="modal-role">
+          <option value="Main DPS">⚔️ Main DPS</option>
+          <option value="Burst DPS">💥 Burst DPS</option>
+          <option value="Support / Bishop">✨ Support / Bishop</option>
+          <option value="Binder / Split">⛓️ Binder / Split</option>
+          <option value="Time Leap Support">⏳ Time Leap Support</option>
         </select>
       </div>
 
-      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:24px;">
-        <button class="btn-action" onclick="closeAddModal()">Cancel</button>
-        <button class="btn-action primary" onclick="saveNewRaider()">Add to Roster</button>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:24px;">
+        <button class="btn-action" style="color:#f87171; border-color:rgba(239,68,68,0.3);" onclick="clearCurrentSlot()">🗑️ Clear Slot</button>
+        <div style="display:flex; gap:10px;">
+          <button class="btn-action" onclick="closeModal()">Cancel</button>
+          <button class="btn-action primary" onclick="saveSlotAssignment()">Save Raider</button>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Notification Toast -->
   <div class="toast-pill" id="toast">
-    <span>✨ Discord Roster Copied to Clipboard!</span>
+    <span id="toast-text">✨ Discord Roster Copied to Clipboard!</span>
   </div>
 
   <script>
     /* ==========================================================
-       1. DATA STRUCTURE WITH BOSS POSTER METADATA
+       1. DATA STRUCTURE: 4 BOSSES x 4 SQUADS x 6 SLOTS (ALL BLANK)
        ========================================================== */
-    const DEFAULT_DECKS = [
+    function createEmptySlots() {
+      return Array.from({ length: 6 }, () => ({
+        ign: "",
+        job: "",
+        cp: "",
+        role: "",
+        status: "READY" // READY, CLEARED, SUB
+      }));
+    }
+
+    const DEFAULT_BOSSES = [
       {
-        id: 'deck-lotus',
-        category: 'LOTUS',
-        posterTheme: 'poster-lotus',
-        tier: 'Commander',
-        difficulty: 'Hard Mode',
-        levelReq: 'Lv. 200+ • 45M+ CP Rec',
-        bossName: 'LOTUS',
-        subName: 'Core of Black Heaven',
-        desc: 'Infiltrate Gelimer’s core laboratory and dismantle the android commander through all three phases.',
-        tactics: 'P1 Laser floor swap; Bishop save Holy Magic Shell for P3 purple energy rain.',
-        members: [
-          { ign: 'VellfireBoss', job: 'Night Walker', avatar: '🥷', cp: '68.5M', role: 'Main DPS', stars: '★★★★★★★', rarity: 'arcane', status: 'READY' },
-          { ign: 'HolyMercy', job: 'Bishop', avatar: '✨', cp: '46.0M', role: 'Support / Shell', stars: '★★★★★', rarity: 'mythic', status: 'READY' },
-          { ign: 'StarSia', job: 'Sia Astelle', avatar: '⭐', cp: '54.2M', role: 'Main DPS', stars: '★★★★★★', rarity: 'arcane', status: 'READY' },
-          { ign: 'SoulTaker', job: 'Shade', avatar: '👊', cp: '48.0M', role: 'Binder / Split', stars: '★★★★★', rarity: 'legend', status: 'READY' },
-          { ign: 'CaptainTime', job: 'Buccaneer', avatar: '⚡', cp: '43.1M', role: 'Time Leap', stars: '★★★★★', rarity: 'legend', status: 'READY' },
-          { ign: 'IronGuard', job: 'Paladin', avatar: '🛡️', cp: '47.5M', role: 'Burst DPS', stars: '★★★★★', rarity: 'legend', status: 'READY' }
-        ]
-      },
-      {
-        id: 'deck-damien',
-        category: 'DAMIEN',
-        posterTheme: 'poster-damien',
-        tier: 'Commander',
-        difficulty: 'Hard Mode',
-        levelReq: 'Lv. 210+ • 50M+ CP Rec',
-        bossName: 'DAMIEN',
-        subName: 'Corrupted World Tree',
-        desc: 'Overcome the Sword of Destruction and cleanse demon stigmas before annihilation strikes the party.',
-        tactics: 'Cleanse Stigma altars before 7 stacks. Synchronize burst binds when Damien descends.',
-        members: [
-          { ign: 'VellfireBoss', job: 'Night Walker', avatar: '🥷', cp: '68.5M', role: 'Main DPS', stars: '★★★★★★★', rarity: 'arcane', status: 'READY' },
-          { ign: 'BladeDancer', job: 'Dual Blade', avatar: '⚔️', cp: '61.0M', role: 'Burst DPS', stars: '★★★★★★', rarity: 'arcane', status: 'READY' },
-          { ign: 'HolyMercy', job: 'Bishop', avatar: '✨', cp: '46.0M', role: 'Support / Shell', stars: '★★★★★', rarity: 'mythic', status: 'READY' },
-          { ign: 'PhantomThief', job: 'Phantom', avatar: '🃏', cp: '50.2M', role: 'Main DPS', stars: '★★★★★', rarity: 'legend', status: 'READY' },
-          { ign: 'SubNeeded', job: 'Hero', avatar: '🪓', cp: '39.0M', role: 'Burst DPS', stars: '★★★★', rarity: 'legend', status: 'SUB' },
-          { ign: 'OpenSlot', job: 'Paladin', avatar: '🛡️', cp: '40.0M', role: 'Main DPS', stars: '★★★★', rarity: 'legend', status: 'READY' }
-        ]
-      },
-      {
-        id: 'deck-lucid',
-        category: 'LUCID',
-        posterTheme: 'poster-lucid',
-        tier: 'Commander',
-        difficulty: 'Hard Mode',
-        levelReq: 'Lv. 220+ • 55M+ CP Rec',
-        bossName: 'LUCID',
-        subName: 'Clocktower of Nightmares',
-        desc: 'Traverse Lachelein’s dream illusions. Shatter the music box and avoid the deadly dragon breath.',
-        tactics: 'Clear nightmare butterfly clusters. Form stack on golems during dragon fire breath.',
-        members: [
-          { ign: 'StarSia', job: 'Sia Astelle', avatar: '⭐', cp: '54.2M', role: 'Main DPS', stars: '★★★★★★', rarity: 'arcane', status: 'READY' },
-          { ign: 'NightSlayer', job: 'Night Walker', avatar: '🗡️', cp: '58.0M', role: 'Main DPS', stars: '★★★★★★', rarity: 'arcane', status: 'READY' },
-          { ign: 'HolyHeals', job: 'Bishop', avatar: '✨', cp: '44.0M', role: 'Support / Shell', stars: '★★★★★', rarity: 'mythic', status: 'READY' },
-          { ign: 'SoulTaker', job: 'Shade', avatar: '👊', cp: '48.0M', role: 'Binder / Split', stars: '★★★★★', rarity: 'legend', status: 'READY' },
-          { ign: 'BowMastery', job: 'Bowmaster', avatar: '🏹', cp: '51.3M', role: 'Burst DPS', stars: '★★★★★', rarity: 'legend', status: 'READY' },
-          { ign: 'LumiGlow', job: 'Luminous', avatar: '🔮', cp: '47.5M', role: 'Main DPS', stars: '★★★★★', rarity: 'legend', status: 'READY' }
-        ]
-      },
-      {
-        id: 'deck-cra',
-        category: 'CRA',
-        posterTheme: 'poster-cra',
-        tier: 'Abyss Lord',
+        id: 'boss-vhilla',
+        category: 'VHILLA',
+        bossName: 'VERUS HILLA',
+        subName: 'Labyrinth of Suffering',
+        tier: 'Grand Commander',
         difficulty: 'Chaos Mode',
-        levelReq: 'Lv. 180+ • 35M+ CP Rec',
-        bossName: 'CHAOS ROOT ABYSS',
-        subName: 'Colosseum of the 4 Guardians',
-        desc: 'Conquer the 4 seal guardians: Chaos Von Bon, Pierre, Crimson Queen, and the subterranean Chaos Vellum.',
-        tactics: 'Pierre hat color match! Hold DPS before 30% HP and coordinate Shade/Bind split burst.',
-        members: [
-          { ign: 'VellfireBoss', job: 'Night Walker', avatar: '🥷', cp: '68.5M', role: 'Main DPS', stars: '★★★★★★★', rarity: 'arcane', status: 'CLEARED' },
-          { ign: 'HolyMercy', job: 'Bishop', avatar: '✨', cp: '46.0M', role: 'Support / Shell', stars: '★★★★★', rarity: 'mythic', status: 'CLEARED' },
-          { ign: 'CaptainTime', job: 'Buccaneer', avatar: '⚡', cp: '43.1M', role: 'Time Leap', stars: '★★★★★', rarity: 'legend', status: 'CLEARED' },
-          { ign: 'BladeDancer', job: 'Dual Blade', avatar: '⚔️', cp: '61.0M', role: 'Burst DPS', stars: '★★★★★★', rarity: 'arcane', status: 'CLEARED' }
+        levelReq: 'Lv. 240+ • 70M+ CP Rec',
+        posterTheme: 'poster-vhilla',
+        desc: 'Escape the cursed strings of fate in the deepest abyss of the Labyrinth.',
+        tactics: 'Gather green candles to recover souls; avoid red scythe threads to prevent instant death cages.',
+        teams: [
+          { name: 'Team 1 (Squad A)', members: createEmptySlots() },
+          { name: 'Team 2 (Squad B)', members: createEmptySlots() },
+          { name: 'Team 3 (Squad C)', members: createEmptySlots() },
+          { name: 'Team 4 (Squad D)', members: createEmptySlots() }
+        ]
+      },
+      {
+        id: 'boss-lucid',
+        category: 'LUCID',
+        bossName: 'CHAOS LUCID',
+        subName: 'Clocktower of Nightmares',
+        tier: 'Grand Commander',
+        difficulty: 'Chaos Mode',
+        levelReq: 'Lv. 235+ • 68M+ CP Rec',
+        posterTheme: 'poster-lucid',
+        desc: 'Overcome Lachelein’s dream illusions. Shatter the music box and survive the dragon breath.',
+        tactics: 'Cleanse nightmare butterfly clouds; stack behind golems for breath; coordinate Phase 2 bind.',
+        teams: [
+          { name: 'Team 1 (Squad A)', members: createEmptySlots() },
+          { name: 'Team 2 (Squad B)', members: createEmptySlots() },
+          { name: 'Team 3 (Squad C)', members: createEmptySlots() },
+          { name: 'Team 4 (Squad D)', members: createEmptySlots() }
+        ]
+      },
+      {
+        id: 'boss-azazelle',
+        category: 'AZAZELLE',
+        bossName: 'HARD AZAZELLE',
+        subName: 'Abyssal Domain',
+        tier: 'Abyssal Commander',
+        difficulty: 'Hard Mode',
+        levelReq: 'Lv. 235+ • 65M+ CP Rec',
+        posterTheme: 'poster-azazelle',
+        desc: 'Pierce the abyssal tempest and withstand devastating lightning runes.',
+        tactics: 'Dodge ground runes; monitor corruption gauges; save burst buffs for the stagger stagger phase.',
+        teams: [
+          { name: 'Team 1 (Squad A)', members: createEmptySlots() },
+          { name: 'Team 2 (Squad B)', members: createEmptySlots() },
+          { name: 'Team 3 (Squad C)', members: createEmptySlots() },
+          { name: 'Team 4 (Squad D)', members: createEmptySlots() }
+        ]
+      },
+      {
+        id: 'boss-will',
+        category: 'WILL',
+        bossName: 'CHAOS WILL',
+        subName: 'Mirror World of Esfera',
+        tier: 'Grand Commander',
+        difficulty: 'Chaos Mode',
+        levelReq: 'Lv. 240+ • 72M+ CP Rec',
+        posterTheme: 'poster-will',
+        desc: 'Decipher the arachnid mirror illusions across light and dark dimensions.',
+        tactics: 'Phase 1 dimension HP match; Phase 2 mirror reflection test; Phase 3 poison space control.',
+        teams: [
+          { name: 'Team 1 (Squad A)', members: createEmptySlots() },
+          { name: 'Team 2 (Squad B)', members: createEmptySlots() },
+          { name: 'Team 3 (Squad C)', members: createEmptySlots() },
+          { name: 'Team 4 (Squad D)', members: createEmptySlots() }
         ]
       }
     ];
 
-    let decks = JSON.parse(localStorage.getItem('catcha_poster_msm_v1')) || DEFAULT_DECKS;
+    let bosses = JSON.parse(localStorage.getItem('msm_utensils_4boss_roster')) || DEFAULT_BOSSES;
     let activeCategory = 'ALL';
     let sfxMuted = false;
 
     function persist() {
-      localStorage.setItem('catcha_poster_msm_v1', JSON.stringify(decks));
+      localStorage.setItem('msm_utensils_4boss_roster', JSON.stringify(bosses));
       updateGlobalStats();
     }
 
@@ -1030,98 +1140,151 @@
     }
 
     /* ==========================================================
-       3. RENDER BOSS POSTERS & CARDS
+       3. RENDER ENGINE: BOSSES, TEAMS & CARDS
        ========================================================== */
+    const jobAvatars = {
+      'Night Walker': '🗡️', 'Bishop': '✨', 'Sia Astelle': '⭐', 'Paladin': '🛡️',
+      'Shade': '👊', 'Dual Blade': '⚔️', 'Buccaneer': '⚡', 'Hero': '🪓',
+      'Bowmaster': '🏹', 'Luminous': '🔮', 'Phantom': '🃏', 'Adele': '🗡️'
+    };
+
     function render() {
-      const container = document.getElementById('decks-container');
+      const container = document.getElementById('boss-container');
       container.innerHTML = '';
 
-      const filtered = activeCategory === 'ALL' 
-        ? decks 
-        : decks.filter(d => d.category === activeCategory);
+      const filtered = activeCategory === 'ALL'
+        ? bosses
+        : bosses.filter(b => b.category === activeCategory);
 
-      filtered.forEach(deck => {
-        const clearedCount = deck.members.filter(m => m.status === 'CLEARED').length;
-        const totalCount = deck.members.length;
-        const clearPct = Math.round((clearedCount / totalCount) * 100) || 0;
-
+      filtered.forEach(boss => {
         const section = document.createElement('section');
-        section.className = 'deck-section';
+        section.className = 'boss-section';
 
-        let cardsHtml = '';
-        deck.members.forEach((m, idx) => {
-          const sealText = m.status === 'CLEARED' ? '✦ CLEARED' : (m.status === 'SUB' ? '⚠ SUB NEEDED' : 'READY');
-          const sealClass = m.status === 'CLEARED' ? 'status-cleared' : (m.status === 'SUB' ? 'status-sub' : 'status-ready');
+        // Calculate boss overall clear count
+        let totalAssigned = 0;
+        let totalCleared = 0;
+        boss.teams.forEach(t => {
+          t.members.forEach(m => {
+            if (m.ign) {
+              totalAssigned++;
+              if (m.status === 'CLEARED') totalCleared++;
+            }
+          });
+        });
+        const bossClearPct = totalAssigned > 0 ? Math.round((totalCleared / totalAssigned) * 100) : 0;
 
-          cardsHtml += `
-            <div class="gacha-card-wrapper" onclick="toggleSeal('${deck.id}', ${idx})" onmousemove="handleTilt(event, this)" onmouseleave="resetTilt(this)">
-              <div class="gacha-card">
-                <div class="card-holo-sheen"></div>
-                
-                <div class="card-rarity-row">
-                  <span class="rarity-pill rarity-${m.rarity}">${m.rarity}</span>
-                  <span class="card-stars">${m.stars}</span>
-                </div>
+        // Render each team block
+        let teamsHtml = '';
+        boss.teams.forEach((team, teamIdx) => {
+          const teamCleared = team.members.filter(m => m.ign && m.status === 'CLEARED').length;
+          const teamFilled = team.members.filter(m => m.ign).length;
 
-                <div class="card-art-box">
-                  <div class="art-glow"></div>
-                  <div class="character-avatar">${m.avatar}</div>
-                </div>
-
-                <div class="card-details">
-                  <div class="card-char-name">
-                    <span>${escapeStr(m.ign)}</span>
-                    <span class="card-job-badge">${escapeStr(m.job)}</span>
+          let cardsHtml = '';
+          team.members.forEach((m, slotIdx) => {
+            if (!m.ign) {
+              // Empty Slot Card
+              cardsHtml += `
+                <div class="gacha-card-wrapper" onclick="openModal('${boss.id}', ${teamIdx}, ${slotIdx})">
+                  <div class="gacha-card empty-slot">
+                    <div class="empty-icon-wrap">+</div>
+                    <div class="empty-title">Slot ${slotIdx + 1}</div>
+                    <div class="empty-desc">Tap to assign raider</div>
                   </div>
+                </div>
+              `;
+            } else {
+              // Filled Raider Card
+              const avatar = jobAvatars[m.job] || '⚔️';
+              const numCp = parseFloat(m.cp) || 0;
+              const rarity = numCp >= 70 ? 'arcane' : (numCp >= 55 ? 'mythic' : 'legend');
+              const sealText = m.status === 'CLEARED' ? '✦ CLEARED' : (m.status === 'SUB' ? '⚠ SUB NEEDED' : 'READY');
+              const sealClass = m.status === 'CLEARED' ? 'status-cleared' : (m.status === 'SUB' ? 'status-sub' : 'status-ready');
 
-                  <div class="card-stats-grid">
-                    <div class="stat-cell">
-                      <span class="stat-cell-label">Combat Power</span>
-                      <span class="stat-cell-val power">${m.cp}</span>
+              cardsHtml += `
+                <div class="gacha-card-wrapper" onmousemove="handleTilt(event, this)" onmouseleave="resetTilt(this)">
+                  <div class="gacha-card">
+                    <div class="card-holo-sheen"></div>
+                    
+                    <div class="card-top-row">
+                      <span class="rarity-pill rarity-${rarity}">${rarity}</span>
+                      <button class="card-edit-btn" onclick="openModal('${boss.id}', ${teamIdx}, ${slotIdx}); event.stopPropagation();" title="Edit Raider">✎</button>
                     </div>
-                    <div class="stat-cell">
-                      <span class="stat-cell-label">Roster Role</span>
-                      <span class="stat-cell-val">${m.role}</span>
+
+                    <div class="card-art-box" onclick="toggleSeal('${boss.id}', ${teamIdx}, ${slotIdx})">
+                      <div class="character-avatar">${avatar}</div>
+                    </div>
+
+                    <div class="card-details" onclick="toggleSeal('${boss.id}', ${teamIdx}, ${slotIdx})">
+                      <div class="card-char-name">${escapeStr(m.ign)}</div>
+                      <div>
+                        <span class="card-job-pill">${escapeStr(m.job || 'Class')}</span>
+                      </div>
+
+                      <div class="card-stats-grid">
+                        <div class="stat-cell">
+                          <span class="stat-cell-label">Combat Power</span>
+                          <span class="stat-cell-val power">${m.cp ? m.cp + 'M' : '--'}</span>
+                        </div>
+                        <div class="stat-cell">
+                          <span class="stat-cell-label">Role</span>
+                          <span class="stat-cell-val" style="font-size:0.75rem;">${m.role || 'DPS'}</span>
+                        </div>
+                      </div>
+
+                      <div class="status-foil-seal ${sealClass}">
+                        ${sealText}
+                      </div>
                     </div>
                   </div>
-
-                  <div class="status-foil-seal ${sealClass}">
-                    ${sealText}
-                  </div>
                 </div>
+              `;
+            }
+          });
+
+          teamsHtml += `
+            <div class="team-block">
+              <div class="team-header-row">
+                <div class="team-title-wrap">
+                  <div class="team-badge-icon">${teamIdx + 1}</div>
+                  <div class="team-title">${escapeStr(team.name)}</div>
+                </div>
+                <div class="team-meta-stat">${teamCleared}/${teamFilled} Cleared (Max 6)</div>
+              </div>
+              <div class="card-grid">
+                ${cardsHtml}
               </div>
             </div>
           `;
         });
 
-        // Cinematic Boss Poster Top Banner
+        // Boss Poster Banner + 4 Teams
         section.innerHTML = `
-          <div class="boss-poster-card ${deck.posterTheme}">
+          <div class="boss-poster-card ${boss.posterTheme}">
             <div class="poster-content">
               <div class="poster-badges">
-                <span class="tier-badge ${deck.difficulty.includes('Chaos') ? 'tier-chaos' : 'tier-hard'}">${deck.difficulty}</span>
-                <span class="req-badge">${deck.tier}</span>
-                <span class="req-badge">${deck.levelReq}</span>
+                <span class="tier-badge tier-chaos">${boss.difficulty}</span>
+                <span class="req-badge">${boss.tier}</span>
+                <span class="req-badge">${boss.levelReq}</span>
               </div>
-              <h2 class="poster-title">${deck.bossName} <span style="font-size:0.5em; opacity:0.8; font-weight:600;">• ${deck.subName}</span></h2>
-              <p class="poster-desc">${deck.desc}</p>
+              <h2 class="poster-title">${boss.bossName} <span style="font-size:0.5em; opacity:0.8; font-weight:600;">• ${boss.subName}</span></h2>
+              <p class="poster-desc">${boss.desc}</p>
               <div class="poster-tactics">
                 <span>💡 Tactics:</span>
-                <span>${deck.tactics}</span>
+                <span>${boss.tactics}</span>
               </div>
             </div>
 
             <div class="poster-stats-box">
-              <span class="poster-stats-label">Squad Clearance</span>
-              <div class="poster-stats-num">${clearedCount} / ${totalCount}</div>
+              <span class="poster-stats-label">Boss Cleared</span>
+              <div class="poster-stats-num">${totalCleared} / ${totalAssigned}</div>
               <div class="poster-progress-bar">
-                <div class="poster-progress-fill" style="width: ${clearPct}%"></div>
+                <div class="poster-progress-fill" style="width: ${bossClearPct}%"></div>
               </div>
             </div>
           </div>
 
-          <div class="card-grid">
-            ${cardsHtml}
+          <div class="teams-container">
+            ${teamsHtml}
           </div>
         `;
 
@@ -1131,10 +1294,12 @@
       updateGlobalStats();
     }
 
-    function toggleSeal(deckId, idx) {
-      const deck = decks.find(d => d.id === deckId);
-      if (!deck) return;
-      const member = deck.members[idx];
+    /* Cycle seal status: READY -> CLEARED -> SUB -> READY */
+    function toggleSeal(bossId, teamIdx, slotIdx) {
+      const boss = bosses.find(b => b.id === bossId);
+      if (!boss) return;
+      const member = boss.teams[teamIdx].members[slotIdx];
+      if (!member.ign) return;
 
       if (member.status === 'READY') {
         member.status = 'CLEARED';
@@ -1159,7 +1324,6 @@
       const centerY = rect.height / 2;
       const rotateX = ((y - centerY) / centerY) * -10;
       const rotateY = ((x - centerX) / centerX) * 10;
-
       cardEl.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
     }
 
@@ -1180,18 +1344,122 @@
     }
 
     function updateGlobalStats() {
-      let total = 0;
-      let cleared = 0;
-      decks.forEach(d => {
-        total += d.members.length;
-        cleared += d.members.filter(m => m.status === 'CLEARED').length;
+      let totalAssigned = 0;
+      let totalCleared = 0;
+      bosses.forEach(b => {
+        b.teams.forEach(t => {
+          t.members.forEach(m => {
+            if (m.ign) {
+              totalAssigned++;
+              if (m.status === 'CLEARED') totalCleared++;
+            }
+          });
+        });
       });
-      const pct = total === 0 ? 0 : Math.round((cleared / total) * 100);
-      document.getElementById('global-clear-pct').textContent = `${pct}% (${cleared}/${total})`;
+      const pct = totalAssigned === 0 ? 0 : Math.round((totalCleared / totalAssigned) * 100);
+      document.getElementById('global-clear-pct').textContent = `${pct}% (${totalCleared}/${totalAssigned})`;
+    }
+
+    /* Reset All Weekly Status to READY */
+    function resetAllWeeklyStatus() {
+      if (!confirm('Reset all member clearance statuses back to READY for the new week?')) return;
+      bosses.forEach(b => {
+        b.teams.forEach(t => {
+          t.members.forEach(m => {
+            if (m.ign) m.status = 'READY';
+          });
+        });
+      });
+      persist();
+      render();
+      showToast('🔄 All clearance statuses reset to READY!');
     }
 
     /* ==========================================================
-       4. RESET COUNTDOWN TIMER (Thursday 00:00 SGT)
+       4. MODAL ASSIGNMENT / EDIT
+       ========================================================== */
+    function openModal(bossId, teamIdx, slotIdx) {
+      const boss = bosses.find(b => b.id === bossId);
+      if (!boss) return;
+      const member = boss.teams[teamIdx].members[slotIdx];
+
+      document.getElementById('target-boss-id').value = bossId;
+      document.getElementById('target-team-idx').value = teamIdx;
+      document.getElementById('target-slot-idx').value = slotIdx;
+
+      document.getElementById('modal-title').textContent = member.ign 
+        ? `Edit Raider (Slot ${slotIdx + 1})` 
+        : `Assign Slot ${slotIdx + 1} (${boss.bossName})`;
+
+      document.getElementById('modal-ign').value = member.ign || '';
+      document.getElementById('modal-job').value = member.job || 'Night Walker';
+      document.getElementById('modal-cp').value = member.cp || '';
+      document.getElementById('modal-role').value = member.role || 'Main DPS';
+
+      document.getElementById('edit-modal').classList.add('show');
+      playSfx('card-click');
+    }
+
+    function closeModal() {
+      document.getElementById('edit-modal').classList.remove('show');
+    }
+
+    function saveSlotAssignment() {
+      const bossId = document.getElementById('target-boss-id').value;
+      const teamIdx = parseInt(document.getElementById('target-team-idx').value);
+      const slotIdx = parseInt(document.getElementById('target-slot-idx').value);
+
+      const ign = document.getElementById('modal-ign').value.trim();
+      const job = document.getElementById('modal-job').value;
+      const cp = document.getElementById('modal-cp').value.trim();
+      const role = document.getElementById('modal-role').value;
+
+      if (!ign) {
+        alert('Please enter an IGN for the character!');
+        return;
+      }
+
+      const boss = bosses.find(b => b.id === bossId);
+      if (boss) {
+        boss.teams[teamIdx].members[slotIdx] = {
+          ign,
+          job,
+          cp,
+          role,
+          status: 'READY'
+        };
+        persist();
+        render();
+        closeModal();
+        playSfx('card-clear');
+        showToast(`✨ ${ign} assigned to ${boss.bossName} - Team ${teamIdx + 1}!`);
+      }
+    }
+
+    function clearCurrentSlot() {
+      const bossId = document.getElementById('target-boss-id').value;
+      const teamIdx = parseInt(document.getElementById('target-team-idx').value);
+      const slotIdx = parseInt(document.getElementById('target-slot-idx').value);
+
+      const boss = bosses.find(b => b.id === bossId);
+      if (boss) {
+        boss.teams[teamIdx].members[slotIdx] = {
+          ign: "",
+          job: "",
+          cp: "",
+          role: "",
+          status: "READY"
+        };
+        persist();
+        render();
+        closeModal();
+        playSfx('card-click');
+        showToast('🗑️ Slot cleared.');
+      }
+    }
+
+    /* ==========================================================
+       5. RESET COUNTDOWN TIMER (Thursday 00:00 SGT)
        ========================================================== */
     function updateCountdown() {
       const now = new Date();
@@ -1218,78 +1486,35 @@
     updateCountdown();
 
     /* ==========================================================
-       5. MODAL FORM ACTIONS
-       ========================================================== */
-    const jobAvatars = {
-      'Night Walker': '🥷', 'Bishop': '✨', 'Sia Astelle': '⭐', 'Paladin': '🛡️',
-      'Shade': '👊', 'Dual Blade': '⚔️', 'Buccaneer': '⚡', 'Hero': '🪓',
-      'Bowmaster': '🏹', 'Luminous': '🔮', 'Phantom': '🃏', 'Adele': '🗡️'
-    };
-
-    function openAddModal() {
-      const select = document.getElementById('form-deck-id');
-      select.innerHTML = decks.map(d => `<option value="${d.id}">${escapeStr(d.bossName)} - ${escapeStr(d.subName)}</option>`).join('');
-      document.getElementById('add-modal').classList.add('show');
-      playSfx('card-click');
-    }
-
-    function closeAddModal() {
-      document.getElementById('add-modal').classList.remove('show');
-    }
-
-    function saveNewRaider() {
-      const deckId = document.getElementById('form-deck-id').value;
-      const ign = document.getElementById('form-ign').value.trim();
-      const job = document.getElementById('form-job').value;
-      const cpVal = document.getElementById('form-cp').value.trim() || '45';
-      const role = document.getElementById('form-role').value;
-
-      if (!ign) {
-        alert('Please enter an IGN!');
-        return;
-      }
-
-      const deck = decks.find(d => d.id === deckId);
-      if (deck) {
-        deck.members.push({
-          ign: ign,
-          job: job,
-          avatar: jobAvatars[job] || '⚔️',
-          cp: `${cpVal}M`,
-          role: role,
-          stars: '★★★★★',
-          rarity: parseFloat(cpVal) >= 60 ? 'arcane' : (parseFloat(cpVal) >= 50 ? 'mythic' : 'legend'),
-          status: 'READY'
-        });
-        persist();
-        render();
-        closeAddModal();
-        playSfx('card-clear');
-        document.getElementById('form-ign').value = '';
-        document.getElementById('form-cp').value = '';
-      }
-    }
-
-    /* ==========================================================
        6. DISCORD EXPORT
        ========================================================== */
     function copyDiscordRoster() {
       let out = `🎴 **UTENSILS EXPEDITION ROSTER • ASIA 2 SCANIA**\n`;
-      decks.forEach(d => {
-        const clears = d.members.filter(m => m.status === 'CLEARED').length;
-        out += `\n⚔️ **${d.bossName} (${d.difficulty})** [${clears}/${d.members.length} Cleared]\n`;
-        d.members.forEach(m => {
-          const seal = m.status === 'CLEARED' ? '✅ [CLEARED]' : (m.status === 'SUB' ? '🚨 [SUB NEEDED]' : '🟡 [READY]');
-          out += `• ${seal} **${m.ign}** (${m.job} | ${m.cp} | ${m.role})\n`;
+      bosses.forEach(b => {
+        out += `\n⚔️ **${b.bossName} (${b.difficulty})**\n`;
+        b.teams.forEach((t, tIdx) => {
+          const filled = t.members.filter(m => m.ign);
+          if (filled.length > 0) {
+            out += `> **${t.name}** [${t.members.filter(m => m.ign && m.status === 'CLEARED').length}/${filled.length} Cleared]:\n`;
+            filled.forEach(m => {
+              const seal = m.status === 'CLEARED' ? '✅ [CLEARED]' : (m.status === 'SUB' ? '🚨 [SUB NEEDED]' : '🟡 [READY]');
+              out += `> • ${seal} **${m.ign}** (${m.job} | ${m.cp ? m.cp + 'M' : 'N/A'} | ${m.role})\n`;
+            });
+          }
         });
       });
 
       navigator.clipboard.writeText(out).then(() => {
         playSfx('card-clear');
-        const toast = document.getElementById('toast');
-        toast.classList.add('visible');
-        setTimeout(() => toast.classList.remove('visible'), 3200);
+        showToast('✨ Discord Roster Copied to Clipboard!');
       });
+    }
+
+    function showToast(text) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-text').textContent = text;
+      toast.classList.add('visible');
+      setTimeout(() => toast.classList.remove('visible'), 3200);
     }
 
     function escapeStr(str) {
