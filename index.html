@@ -3,22 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UTENSILS • MapleStory M Bossing Roster</title>
+  <title>UTENSILS • MapleStory M Expedition Cards</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --maple-orange: #ff7700;
-      --maple-gold: #ffbe1a;
-      --maple-yellow: #fff066;
-      --arcane-blue: #38bdf8;
-      --arcane-purple: #a855f7;
-      --card-bg: rgba(20, 24, 45, 0.82);
-      --card-border: rgba(168, 85, 247, 0.35);
-      --ready-color: #facc15;
-      --cleared-color: #22c55e;
-      --sub-color: #ef4444;
+      --bg-main: #090b11;
+      --bg-surface: #101422;
+      --bg-card: rgba(18, 23, 38, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(139, 92, 246, 0.35);
+      --accent-purple: #8b5cf6;
+      --accent-cyan: #06b6d4;
+      --accent-gold: #f59e0b;
+      --accent-green: #10b981;
+      --accent-rose: #f43f5e;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
     }
 
     * {
@@ -29,479 +32,546 @@
     }
 
     body {
-      font-family: 'Outfit', sans-serif;
-      background: radial-gradient(circle at 50% 20%, #1e1b4b 0%, #0f172a 50%, #090d16 100%);
-      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-main);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(236, 72, 153, 0.1) 0%, transparent 40%),
+        linear-gradient(180deg, rgba(16, 20, 34, 0.6) 0%, rgba(9, 11, 17, 1) 100%);
+      background-attachment: fixed;
+      color: var(--text-primary);
       min-height: 100vh;
       overflow-x: hidden;
-      position: relative;
+      padding-bottom: 90px;
     }
 
-    /* Falling Maple Leaves & Starfield Canvas */
-    #fx-canvas {
-      position: fixed;
+    /* Top Catcha-Style Navigation Bar */
+    .navbar {
+      position: sticky;
       top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .container {
-      position: relative;
-      z-index: 2;
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 24px 16px 80px;
-    }
-
-    /* Header & Animated Mascot Theater */
-    .hero-banner {
-      background: linear-gradient(135deg, rgba(30, 27, 75, 0.9), rgba(59, 7, 100, 0.85));
-      border: 3px solid #ffbe1a;
-      border-radius: 28px;
-      padding: 28px 24px 20px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), inset 0 0 24px rgba(255, 190, 26, 0.25);
-      position: relative;
-      margin-bottom: 30px;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(9, 11, 17, 0.85);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 14px 24px;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      text-align: center;
-      overflow: visible;
+      justify-content: space-between;
+      gap: 16px;
     }
 
-    /* Bouncing Orange Mushroom Mascot */
-    .mascot-mushroom {
-      position: absolute;
-      top: -46px;
-      left: 32px;
-      width: 82px;
-      height: 82px;
-      animation: mapleBounce 1.4s ease-in-out infinite alternate;
-      filter: drop-shadow(0 10px 14px rgba(0,0,0,0.5));
-    }
-
-    /* Floating Pink Bean Mascot */
-    .mascot-pinkbean {
-      position: absolute;
-      top: -44px;
-      right: 32px;
-      width: 84px;
-      height: 84px;
-      animation: mapleFloat 2.8s ease-in-out infinite alternate;
-      filter: drop-shadow(0 12px 18px rgba(236, 72, 153, 0.45));
-    }
-
-    /* Mascot Keyframes */
-    @keyframes mapleBounce {
-      0% { transform: translateY(0) scale(1.05, 0.92); }
-      50% { transform: translateY(-22px) scale(0.96, 1.06); }
-      100% { transform: translateY(0) scale(1, 0.96); }
-    }
-
-    @keyframes mapleFloat {
-      0% { transform: translateY(0) rotate(-4deg); }
-      100% { transform: translateY(-16px) rotate(4deg); }
-    }
-
-    @keyframes slimeSquish {
-      0%, 100% { transform: scale(1, 1); }
-      50% { transform: scale(1.15, 0.85) translateY(4px); }
-    }
-
-    .guild-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(90deg, #ff7700, #ffbe1a);
-      color: #3b0764;
-      font-family: 'Fredoka', cursive;
-      font-size: 0.95rem;
-      font-weight: 700;
-      padding: 6px 18px;
-      border-radius: 999px;
-      box-shadow: 0 4px 12px rgba(255, 119, 0, 0.4);
-      margin-bottom: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .main-title {
-      font-family: 'Fredoka', sans-serif;
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      font-weight: 700;
-      letter-spacing: 1px;
-      background: linear-gradient(180deg, #ffffff 25%, #ffbe1a 75%, #ff7700 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 6px 20px rgba(255, 119, 0, 0.4);
-      margin-bottom: 8px;
-    }
-
-    .sub-title {
-      color: #cbd5e1;
-      font-size: 1rem;
-      max-width: 640px;
-      margin-bottom: 18px;
-    }
-
-    /* Reset Bar styled like Maple EXP/Server Bar */
-    .reset-clock-card {
-      background: rgba(15, 23, 42, 0.85);
-      border: 2px solid rgba(255, 190, 26, 0.4);
-      padding: 10px 24px;
-      border-radius: 16px;
+    .brand-wrap {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-family: 'Fredoka', cursive;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
     }
 
-    .reset-label {
-      color: var(--maple-yellow);
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .countdown-digits {
-      font-family: 'Press Start 2P', monospace;
-      color: #38bdf8;
-      font-size: 0.85rem;
-      background: #020617;
-      padding: 6px 14px;
-      border-radius: 8px;
-      border: 1px solid #1e293b;
-      letter-spacing: 2px;
-    }
-
-    /* Control Toolbar */
-    .toolbar {
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ec4899, #8b5cf6);
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 26px;
+      justify-content: center;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
     }
 
-    .boss-tabs {
+    .brand-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
       display: flex;
-      flex-wrap: wrap;
+      align-items: center;
       gap: 8px;
     }
 
-    .btn-tab {
-      background: rgba(30, 41, 59, 0.8);
-      border: 2px solid rgba(148, 163, 184, 0.25);
-      color: #cbd5e1;
-      padding: 8px 16px;
-      border-radius: 12px;
-      font-family: 'Fredoka', cursive;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    .server-pill {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+
+    .nav-stats {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 12px;
     }
 
-    .btn-tab:hover {
-      background: rgba(56, 189, 248, 0.15);
-      border-color: #38bdf8;
-      color: #fff;
-      transform: translateY(-2px);
-    }
-
-    .btn-tab.active {
-      background: linear-gradient(135deg, #a855f7, #6366f1);
-      border-color: #ffbe1a;
-      color: #fff;
-      box-shadow: 0 4px 16px rgba(168, 85, 247, 0.5);
-    }
-
-    .action-group {
+    .stat-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      padding: 6px 14px;
+      border-radius: 100px;
       display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .stat-pill strong {
+      color: var(--text-primary);
+      font-family: 'Space Grotesk', monospace;
+    }
+
+    /* Hero Section with Collectible Dashboard Header */
+    .hero-container {
+      max-width: 1380px;
+      margin: 32px auto 24px;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .hero-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .headline h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, #ffffff 30%, #cbd5e1 70%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    .headline p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
       gap: 10px;
     }
 
-    /* Chunky Maple Buttons */
-    .btn-maple {
-      background: linear-gradient(180deg, #ff9900 0%, #ff6600 100%);
-      color: #fff;
-      border: 2px solid #ffe600;
-      border-radius: 14px;
-      padding: 9px 18px;
-      font-family: 'Fredoka', cursive;
-      font-weight: 700;
-      font-size: 0.95rem;
+    .btn-action {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 5px 0 #b34700, 0 8px 18px rgba(255, 102, 0, 0.4);
-      transition: all 0.1s ease;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .btn-maple:hover {
-      background: linear-gradient(180deg, #ffa826 0%, #ff7711 100%);
+    .btn-action:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.25);
       transform: translateY(-2px);
-      box-shadow: 0 7px 0 #b34700, 0 12px 20px rgba(255, 102, 0, 0.5);
     }
 
-    .btn-maple:active {
-      transform: translateY(4px);
-      box-shadow: 0 1px 0 #b34700, 0 3px 8px rgba(255, 102, 0, 0.4);
+    .btn-action.primary {
+      background: linear-gradient(135deg, #8b5cf6, #ec4899);
+      border: none;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
     }
 
-    .btn-secondary {
-      background: linear-gradient(180deg, #475569 0%, #334155 100%);
-      border-color: #94a3b8;
-      box-shadow: 0 5px 0 #1e293b, 0 6px 14px rgba(0,0,0,0.3);
-    }
-    .btn-secondary:hover {
-      background: linear-gradient(180deg, #64748b 0%, #475569 100%);
-      box-shadow: 0 7px 0 #1e293b, 0 10px 18px rgba(0,0,0,0.4);
-    }
-    .btn-secondary:active {
-      transform: translateY(4px);
-      box-shadow: 0 1px 0 #1e293b;
+    .btn-action.primary:hover {
+      box-shadow: 0 8px 26px rgba(139, 92, 246, 0.6);
+      transform: translateY(-2px);
     }
 
-    /* Grid of Boss Squad Cards */
-    .squad-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-      gap: 24px;
+    /* Filter Pill Tabs (Catcha Style) */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 4px 0 12px;
+      scrollbar-width: none;
+    }
+    .filter-bar::-webkit-scrollbar { display: none; }
+
+    .pill-tab {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .boss-card {
-      background: var(--card-bg);
+    .pill-tab:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .pill-tab.active {
+      background: #ffffff;
+      color: #090b11;
+      border-color: #ffffff;
+      box-shadow: 0 4px 18px rgba(255, 255, 255, 0.25);
+      font-weight: 700;
+    }
+
+    /* Deck Sections */
+    .decks-container {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .deck-section {
+      background: rgba(16, 20, 34, 0.4);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 24px;
       backdrop-filter: blur(12px);
-      border: 2px solid var(--card-border);
-      border-radius: 22px;
-      padding: 20px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
-      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .deck-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .deck-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .deck-emblem {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .deck-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .deck-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .deck-stats {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge-clear-rate {
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 8px;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-family: 'Space Grotesk', monospace;
+    }
+
+    /* 3D Catcha-Style Trading Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 22px;
+      perspective: 1200px;
+    }
+
+    /* Interactive Holographic Card */
+    .gacha-card-wrapper {
       position: relative;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+    }
+
+    .gacha-card-wrapper:hover {
+      transform: translateY(-6px) scale(1.02);
+    }
+
+    .gacha-card {
+      position: relative;
+      background: var(--bg-card);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      transition: border-color 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Holographic Shimmer Sheen Layer */
+    .card-holo-sheen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        125deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.03) 30%,
+        rgba(236, 72, 153, 0.18) 45%,
+        rgba(6, 182, 212, 0.2) 55%,
+        rgba(255, 255, 255, 0.15) 60%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      mix-blend-mode: color-dodge;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 10;
+    }
+
+    .gacha-card-wrapper:hover .card-holo-sheen {
+      opacity: 1;
+    }
+
+    /* Card Top Banner (Rarity & Stars) */
+    .card-rarity-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 16px 8px;
+      z-index: 2;
+    }
+
+    .rarity-pill {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .rarity-arcane {
+      background: linear-gradient(90deg, #ec4899, #8b5cf6);
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(236, 72, 153, 0.4);
+    }
+    .rarity-mythic {
+      background: linear-gradient(90deg, #f59e0b, #ef4444);
+      color: #ffffff;
+    }
+    .rarity-legend {
+      background: rgba(6, 182, 212, 0.2);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(6, 182, 212, 0.4);
+    }
+
+    .card-stars {
+      color: #fbbf24;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-shadow: 0 0 8px rgba(251, 191, 36, 0.5);
+    }
+
+    /* Card Artwork Display */
+    .card-art-box {
+      height: 120px;
+      margin: 4px 14px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.9) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
     }
 
-    .boss-card:hover {
-      transform: translateY(-4px);
-      border-color: #ffbe1a;
-      box-shadow: 0 18px 40px rgba(168, 85, 247, 0.3);
+    .art-glow {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.35) 0%, transparent 70%);
+      filter: blur(12px);
     }
 
-    /* Boss Header Banner */
-    .card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-      border-bottom: 2px dashed rgba(255, 255, 255, 0.12);
-      padding-bottom: 12px;
+    .character-avatar {
+      font-size: 3.2rem;
+      z-index: 2;
+      filter: drop-shadow(0 6px 14px rgba(0,0,0,0.6));
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .boss-identity {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .gacha-card-wrapper:hover .character-avatar {
+      transform: scale(1.12);
     }
 
-    .boss-icon-wrap {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: #1e1b4b;
-      border: 2px solid #a855f7;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-      box-shadow: 0 4px 12px rgba(168, 85, 247, 0.35);
-    }
-
-    .boss-name {
-      font-family: 'Fredoka', cursive;
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .boss-diff {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      font-weight: 800;
-      padding: 2px 8px;
-      border-radius: 6px;
-      letter-spacing: 0.8px;
-      display: inline-block;
-      margin-top: 2px;
-    }
-    .diff-hard { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
-    .diff-chaos { background: rgba(217, 70, 239, 0.2); color: #e879f9; border: 1px solid #d946ef; }
-
-    .party-counter {
-      font-family: 'Fredoka', cursive;
-      font-size: 0.85rem;
-      color: #94a3b8;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 4px 10px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    /* Raiders Slots */
-    .raider-list {
+    /* Card Body & Info */
+    .card-details {
+      padding: 14px 16px;
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-bottom: 16px;
+      z-index: 2;
     }
 
-    .raider-slot {
-      background: rgba(15, 23, 42, 0.85);
-      border: 1.5px solid rgba(148, 163, 184, 0.15);
-      border-radius: 14px;
-      padding: 10px 14px;
+    .card-char-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .raider-slot:hover {
-      background: rgba(30, 41, 59, 0.95);
-      border-color: rgba(255, 190, 26, 0.5);
-      transform: translateX(3px);
+    .card-job-badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
     }
 
-    .raider-slot.status-cleared {
-      border-color: rgba(34, 197, 94, 0.5);
-      background: rgba(20, 83, 45, 0.25);
+    /* Catcha Stat Bars (Power / Role) */
+    .card-stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .raider-slot.status-sub {
-      border-color: rgba(239, 68, 68, 0.5);
-      background: rgba(127, 29, 29, 0.25);
+    .stat-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
-    .raider-left {
+    .stat-cell-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+
+    .stat-cell-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .stat-cell-val.power {
+      color: var(--accent-gold);
+      text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+    }
+
+    /* Clearance Foil Seal Status */
+    .card-action-bar {
+      margin-top: 4px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      justify-content: space-between;
+      gap: 8px;
     }
 
-    .raider-job-badge {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
+    .status-foil-seal {
+      width: 100%;
+      padding: 9px 12px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
-      background: #0f172a;
-      border: 1px solid rgba(255,255,255,0.15);
-      flex-shrink: 0;
-    }
-
-    .raider-meta {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .raider-ign {
-      font-weight: 700;
-      color: #f8fafc;
-      font-size: 0.98rem;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .raider-subinfo {
-      font-size: 0.78rem;
-      color: #94a3b8;
-      display: flex;
       gap: 8px;
-      align-items: center;
-    }
-
-    .cp-tag {
-      color: var(--maple-yellow);
-      font-weight: 700;
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.62rem;
-    }
-
-    /* Clearance Status Badges */
-    .status-badge {
-      font-family: 'Fredoka', cursive;
-      font-size: 0.8rem;
-      font-weight: 700;
-      padding: 5px 12px;
-      border-radius: 20px;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
       transition: all 0.2s ease;
+      border: 1px solid transparent;
     }
 
-    .badge-ready {
-      background: rgba(250, 204, 21, 0.15);
-      color: #fde047;
-      border: 1px solid #facc15;
+    .status-ready {
+      background: rgba(245, 158, 11, 0.12);
+      color: #fbbf24;
+      border-color: rgba(245, 158, 11, 0.35);
     }
 
-    .badge-cleared {
-      background: rgba(34, 197, 94, 0.2);
-      color: #4ade80;
-      border: 1px solid #22c55e;
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+    .status-cleared {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.2));
+      color: #34d399;
+      border-color: rgba(16, 185, 129, 0.5);
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.3);
     }
 
-    .badge-sub {
-      background: rgba(239, 68, 68, 0.2);
-      color: #f87171;
-      border: 1px solid #ef4444;
-      animation: pulseAlert 1.2s infinite;
+    .status-sub {
+      background: rgba(244, 63, 94, 0.15);
+      color: #fb7185;
+      border-color: rgba(244, 63, 94, 0.5);
+      animation: alertPulse 1.4s infinite;
     }
 
-    @keyframes pulseAlert {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.75; transform: scale(0.96); }
+    @keyframes alertPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
     }
 
-    /* Boss Mechanics Quick Tips Box */
-    .card-footer-tip {
-      background: rgba(0, 0, 0, 0.35);
-      border-radius: 12px;
-      padding: 10px 12px;
-      font-size: 0.78rem;
-      color: #cbd5e1;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      border-left: 3px solid #ffbe1a;
-    }
-
-    /* Modal Styling */
-    .modal-overlay {
+    /* Modal Sheet */
+    .modal-backdrop {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(3, 7, 18, 0.85);
-      backdrop-filter: blur(8px);
+      background: rgba(4, 6, 12, 0.85);
+      backdrop-filter: blur(12px);
       z-index: 100;
       display: none;
       align-items: center;
@@ -509,806 +579,609 @@
       padding: 20px;
     }
 
-    .modal-overlay.active {
+    .modal-backdrop.show {
       display: flex;
     }
 
-    .maple-modal {
-      background: linear-gradient(135deg, #1e1b4b, #0f172a);
-      border: 3px solid #ffbe1a;
+    .modal-card {
+      background: #111524;
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 24px;
-      padding: 26px;
       width: 100%;
-      max-width: 480px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 190, 26, 0.25);
+      max-width: 460px;
+      padding: 28px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
       position: relative;
     }
 
-    .modal-title {
-      font-family: 'Fredoka', cursive;
-      font-size: 1.5rem;
-      color: var(--maple-yellow);
-      margin-bottom: 16px;
+    .modal-header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
     }
 
-    .form-group {
-      margin-bottom: 14px;
+    .modal-header h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
     }
 
-    .form-group label {
+    .form-item {
+      margin-bottom: 16px;
+    }
+
+    .form-item label {
       display: block;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      color: #94a3b8;
+      color: var(--text-secondary);
       margin-bottom: 6px;
     }
 
-    .form-input, .form-select {
+    .input-field, .select-field {
       width: 100%;
-      padding: 10px 14px;
+      background: #090c17;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
-      background: #020617;
-      border: 1.5px solid #334155;
-      color: #fff;
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.95rem;
+      padding: 11px 14px;
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 0.92rem;
       outline: none;
       transition: border-color 0.2s;
     }
 
-    .form-input:focus, .form-select:focus {
-      border-color: #ffbe1a;
-      box-shadow: 0 0 12px rgba(255, 190, 26, 0.3);
+    .input-field:focus, .select-field:focus {
+      border-color: var(--accent-purple);
+      box-shadow: 0 0 14px rgba(139, 92, 246, 0.3);
     }
 
-    /* Floating Green Slime in bottom right */
-    .mascot-slime {
-      position: fixed;
-      bottom: 24px;
-      right: 28px;
-      width: 68px;
-      height: 68px;
-      z-index: 50;
-      cursor: pointer;
-      animation: slimeSquish 2s ease-in-out infinite;
-      filter: drop-shadow(0 10px 16px rgba(34, 197, 94, 0.45));
-    }
-
-    .slime-bubble {
-      position: absolute;
-      bottom: 80px;
-      right: 0;
-      background: rgba(15, 23, 42, 0.95);
-      border: 2px solid #22c55e;
-      color: #fff;
-      padding: 6px 14px;
-      border-radius: 14px;
-      font-family: 'Fredoka', cursive;
-      font-size: 0.85rem;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: all 0.25s ease;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
-    }
-
-    .mascot-slime:hover .slime-bubble {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Notification Toast */
-    .toast {
+    /* Toast */
+    .toast-pill {
       position: fixed;
       bottom: 24px;
       left: 50%;
       transform: translateX(-50%) translateY(100px);
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: #fff;
-      padding: 12px 24px;
-      border-radius: 16px;
-      font-family: 'Fredoka', cursive;
-      font-weight: 600;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      background: #10b981;
+      color: #ffffff;
+      padding: 10px 22px;
+      border-radius: 100px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
       z-index: 200;
-      transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-      border: 2px solid #a7f3d0;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .toast.show {
+    .toast-pill.visible {
       transform: translateX(-50%) translateY(0);
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .mascot-mushroom, .mascot-pinkbean {
-        width: 58px;
-        height: 58px;
-        top: -34px;
-      }
-      .mascot-mushroom { left: 10px; }
-      .mascot-pinkbean { right: 10px; }
-      .hero-banner { padding-top: 24px; }
-      .toolbar { flex-direction: column; align-items: stretch; }
-      .boss-tabs { justify-content: center; }
-      .action-group { justify-content: center; }
-      .mascot-slime { display: none; }
+    @media (max-width: 640px) {
+      .hero-top-row { flex-direction: column; align-items: flex-start; }
+      .nav-stats { display: none; }
+      .card-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Falling Maple Leaves & Ambient Star FX Canvas -->
-  <canvas id="fx-canvas"></canvas>
+  <!-- Top Catcha Navigation -->
+  <nav class="navbar">
+    <div class="brand-wrap">
+      <div class="brand-logo">🎴</div>
+      <div>
+        <div class="brand-title">UTENSILS <span class="server-pill">Asia 2 • Scania</span></div>
+      </div>
+    </div>
 
-  <div class="container">
-    
-    <!-- Top Hero Banner with Maple Mascots -->
-    <header class="hero-banner">
-      <!-- Animated Orange Mushroom SVG Mascot -->
-      <div class="mascot-mushroom" title="Orange Mushroom!">
-        <svg viewBox="0 0 100 100" width="100%" height="100%">
-          <ellipse cx="50" cy="92" rx="30" ry="7" fill="rgba(0,0,0,0.35)" />
-          <!-- Mushroom Body/Stem -->
-          <ellipse cx="50" cy="68" rx="28" ry="24" fill="#fff5ea" stroke="#4a2711" stroke-width="3.5" />
-          <!-- Feet -->
-          <ellipse cx="36" cy="88" rx="14" ry="7" fill="#fde68a" stroke="#4a2711" stroke-width="3" />
-          <ellipse cx="64" cy="88" rx="14" ry="7" fill="#fde68a" stroke="#4a2711" stroke-width="3" />
-          <!-- Cute Eyes & Blushes -->
-          <ellipse cx="40" cy="68" rx="3.5" ry="5.5" fill="#2d1506" />
-          <ellipse cx="60" cy="68" rx="3.5" ry="5.5" fill="#2d1506" />
-          <ellipse cx="33" cy="74" rx="4.5" ry="2.5" fill="#f87171" opacity="0.6" />
-          <ellipse cx="67" cy="74" rx="4.5" ry="2.5" fill="#f87171" opacity="0.6" />
-          <path d="M 46 75 Q 50 79 54 75" stroke="#2d1506" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <!-- Vibrant Orange Mushroom Cap -->
-          <path d="M 10 52 C 10 20, 90 20, 90 52 C 90 58, 80 58, 50 56 C 20 58, 10 58, 10 52 Z" fill="#ff5a00" stroke="#4a2711" stroke-width="3.5"/>
-          <!-- Cap White Spots -->
-          <ellipse cx="28" cy="38" rx="7" ry="5" fill="#fff" opacity="0.95" />
-          <ellipse cx="50" cy="28" rx="9" ry="6" fill="#fff" opacity="0.95" />
-          <ellipse cx="72" cy="38" rx="7" ry="5" fill="#fff" opacity="0.95" />
-        </svg>
+    <div class="nav-stats">
+      <div class="stat-pill">
+        <span>Reset:</span>
+        <strong id="live-countdown">--d --h --m</strong>
+      </div>
+      <div class="stat-pill">
+        <span>Total Clears:</span>
+        <strong id="global-clear-pct">0%</strong>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Header & Filter Bar -->
+  <header class="hero-container">
+    <div class="hero-top-row">
+      <div class="headline">
+        <h1>Bossing Expedition Cards</h1>
+        <p>Interactive weekly commander roster. Tap any card to toggle clearance seals.</p>
       </div>
 
-      <!-- Animated Pink Bean SVG Mascot -->
-      <div class="mascot-pinkbean" title="Pink Bean!">
-        <svg viewBox="0 0 100 100" width="100%" height="100%">
-          <ellipse cx="50" cy="94" rx="32" ry="6" fill="rgba(0,0,0,0.3)" />
-          <!-- Horns -->
-          <polygon points="32,24 24,6 40,16" fill="#4c1d95" stroke="#2e1065" stroke-width="3" />
-          <polygon points="68,24 76,6 60,16" fill="#4c1d95" stroke="#2e1065" stroke-width="3" />
-          <!-- Plump Pink Bean Body -->
-          <ellipse cx="50" cy="56" rx="36" ry="36" fill="#f472b6" stroke="#831843" stroke-width="3.5" />
-          <!-- White Belly -->
-          <ellipse cx="50" cy="65" rx="22" ry="20" fill="#fdf2f8" opacity="0.9" />
-          <!-- Cute Eyes & Rosy Cheeks -->
-          <circle cx="38" cy="50" r="4" fill="#500724" />
-          <circle cx="62" cy="50" r="4" fill="#500724" />
-          <circle cx="39" cy="49" r="1.3" fill="#fff" />
-          <circle cx="63" cy="49" r="1.3" fill="#fff" />
-          <ellipse cx="30" cy="57" rx="5" ry="3" fill="#fb7185" />
-          <ellipse cx="70" cy="57" rx="5" ry="3" fill="#fb7185" />
-          <path d="M 46 56 Q 50 61 54 56" stroke="#500724" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <!-- Tiny Feet -->
-          <ellipse cx="34" cy="90" rx="10" ry="6" fill="#ec4899" stroke="#831843" stroke-width="3" />
-          <ellipse cx="66" cy="90" rx="10" ry="6" fill="#ec4899" stroke="#831843" stroke-width="3" />
-          <!-- Mini Golden Trident -->
-          <path d="M 78 30 L 78 80" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
-          <path d="M 72 32 Q 78 40 84 32" stroke="#f59e0b" stroke-width="3" fill="none"/>
-        </svg>
+      <div class="hero-actions">
+        <button class="btn-action" onclick="toggleMute()" id="sound-btn">🔊 SFX On</button>
+        <button class="btn-action" onclick="copyDiscordRoster()">📋 Discord Export</button>
+        <button class="btn-action primary" onclick="openAddModal()">✨ + Add Raider</button>
       </div>
+    </div>
 
-      <div class="guild-tag">🍁 Asia 2 • Scania • UTENSILS Guild</div>
-      <h1 class="main-title">EXPEDITION & BOSS ROSTER</h1>
-      <p class="sub-title">Weekly Commander & Root Abyss clearance hub. Click on any member to toggle clearance status!</p>
+    <!-- Category Pill Carousel (Catcha Inspired) -->
+    <div class="filter-bar">
+      <button class="pill-tab active" onclick="setCategory('ALL')">✨ All Decks</button>
+      <button class="pill-tab" onclick="setCategory('LOTUS')">⚡ Hard Lotus</button>
+      <button class="pill-tab" onclick="setCategory('DAMIEN')">⚔️ Hard Damien</button>
+      <button class="pill-tab" onclick="setCategory('LUCID')">🦋 Hard Lucid</button>
+      <button class="pill-tab" onclick="setCategory('CRA')">👑 Chaos Root Abyss</button>
+    </div>
+  </header>
 
-      <!-- Weekly Reset Countdown Bar -->
-      <div class="reset-clock-card">
-        <span class="reset-label">⏳ WEEKLY RESET (THU 00:00 SGT):</span>
-        <span class="countdown-digits" id="reset-timer">--d --h --m --s</span>
-      </div>
-    </header>
-
-    <!-- Toolbar: Filter Tabs & Action Buttons -->
-    <section class="toolbar">
-      <div class="boss-tabs">
-        <button class="btn-tab active" onclick="filterBoss('ALL')">🍁 All Bosses</button>
-        <button class="btn-tab" onclick="filterBoss('LOTUS')">⚡ Hard Lotus</button>
-        <button class="btn-tab" onclick="filterBoss('DAMIEN')">⚔️ Hard Damien</button>
-        <button class="btn-tab" onclick="filterBoss('LUCID')">🦋 Hard Lucid</button>
-        <button class="btn-tab" onclick="filterBoss('CRA')">👑 Chaos Root Abyss</button>
-      </div>
-
-      <div class="action-group">
-        <button class="btn-maple" onclick="openAddModal()">✨ + Add Raider</button>
-        <button class="btn-maple btn-secondary" onclick="exportDiscord()">📋 Export Discord</button>
-        <button class="btn-maple btn-secondary" onclick="toggleAudio()" id="audio-btn">🔊 Sound: ON</button>
-      </div>
-    </section>
-
-    <!-- Squad Grid Container -->
-    <main class="squad-grid" id="squad-container">
-      <!-- Injected via JavaScript -->
-    </main>
-
-  </div>
-
-  <!-- Animated Green Slime Mascot (Bottom-Right) -->
-  <div class="mascot-slime" onclick="playMapleSfx('slime')" title="Jiggle Slime!">
-    <div class="slime-bubble">Bloop! Clear all bosses today! 🍁</div>
-    <svg viewBox="0 0 100 100" width="100%" height="100%">
-      <ellipse cx="50" cy="88" rx="34" ry="7" fill="rgba(0,0,0,0.3)" />
-      <!-- Slime Body -->
-      <path d="M 50 15 C 30 15, 12 40, 15 65 C 16 82, 32 86, 50 86 C 68 86, 84 82, 85 65 C 88 40, 70 15, 50 15 Z" fill="#4ade80" stroke="#166534" stroke-width="3.5"/>
-      <ellipse cx="40" cy="25" rx="8" ry="4" fill="#bbf7d0" opacity="0.8" transform="rotate(-20 40 25)" />
-      <!-- Cute Eyes & Blushes -->
-      <circle cx="36" cy="55" r="4.5" fill="#064e3b" />
-      <circle cx="64" cy="55" r="4.5" fill="#064e3b" />
-      <circle cx="38" cy="53" r="1.5" fill="#fff" />
-      <circle cx="66" cy="53" r="1.5" fill="#fff" />
-      <ellipse cx="28" cy="62" rx="4" ry="2.5" fill="#f43f5e" opacity="0.6" />
-      <ellipse cx="72" cy="62" rx="4" ry="2.5" fill="#f43f5e" opacity="0.6" />
-      <path d="M 45 62 Q 50 67 55 62" stroke="#064e3b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    </svg>
-  </div>
+  <!-- Main Decks Container -->
+  <main class="decks-container" id="decks-container">
+    <!-- Rendered dynamically via JavaScript -->
+  </main>
 
   <!-- Add Member Modal -->
-  <div class="modal-overlay" id="add-modal">
-    <div class="maple-modal">
-      <div class="modal-title">
-        <span>🍁 Add Raider to Squad</span>
-        <button onclick="closeAddModal()" style="background:none; border:none; color:#cbd5e1; font-size:1.5rem; cursor:pointer;">&times;</button>
+  <div class="modal-backdrop" id="add-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>✨ Mint Raider Card</h3>
+        <button onclick="closeAddModal()" style="background:none; border:none; color:var(--text-muted); font-size:1.4rem; cursor:pointer;">&times;</button>
       </div>
 
-      <div class="form-group">
-        <label>Assign to Boss Squad</label>
-        <select class="form-select" id="form-squad-select">
-          <!-- Filled by JS -->
-        </select>
+      <div class="form-item">
+        <label>Select Expedition Deck</label>
+        <select class="select-field" id="form-deck-id"></select>
       </div>
 
-      <div class="form-group">
+      <div class="form-item">
         <label>Character In-Game Name (IGN)</label>
-        <input type="text" class="form-input" id="form-ign" placeholder="e.g. NightKing99">
+        <input type="text" class="input-field" id="form-ign" placeholder="e.g. ShadowBlade">
       </div>
 
-      <div class="form-group">
+      <div class="form-item">
         <label>Class / Job</label>
-        <select class="form-select" id="form-job">
-          <option value="Night Walker">🗡️ Night Walker</option>
-          <option value="Bishop">✨ Bishop (Holy Magic Shell)</option>
-          <option value="Sia Astelle">⭐ Sia Astelle</option>
-          <option value="Paladin">🛡️ Paladin (Sacrosanctity / Threaten)</option>
-          <option value="Shade">👊 Shade (Soul Splitter)</option>
-          <option value="Dual Blade">⚔️ Dual Blade</option>
-          <option value="Buccaneer">⚡ Buccaneer (Time Leap)</option>
-          <option value="Hero">🪓 Hero</option>
-          <option value="Bowmaster">🏹 Bowmaster</option>
-          <option value="Luminous">🔮 Luminous</option>
-          <option value="Phantom">🃏 Phantom</option>
-          <option value="Adele">🗡️ Adele</option>
+        <select class="select-field" id="form-job">
+          <option value="Night Walker">Night Walker</option>
+          <option value="Bishop">Bishop</option>
+          <option value="Sia Astelle">Sia Astelle</option>
+          <option value="Paladin">Paladin</option>
+          <option value="Shade">Shade</option>
+          <option value="Dual Blade">Dual Blade</option>
+          <option value="Buccaneer">Buccaneer</option>
+          <option value="Hero">Hero</option>
+          <option value="Bowmaster">Bowmaster</option>
+          <option value="Luminous">Luminous</option>
+          <option value="Phantom">Phantom</option>
+          <option value="Adele">Adele</option>
         </select>
       </div>
 
-      <div class="form-group">
-        <label>Combat Power (CP in Millions)</label>
-        <input type="number" class="form-input" id="form-cp" placeholder="e.g. 52.5" step="0.5">
+      <div class="form-item">
+        <label>Combat Power (Millions)</label>
+        <input type="number" class="input-field" id="form-cp" placeholder="e.g. 55.4" step="0.5">
       </div>
 
-      <div class="form-group">
-        <label>Roster Role</label>
-        <select class="form-select" id="form-role">
-          <option value="Main DPS">⚔️ Main DPS</option>
-          <option value="Burst DPS">💥 Burst DPS</option>
-          <option value="Healer / Bishop">✨ Healer / Support</option>
-          <option value="Binder / Splitter">⛓️ Binder / Splitter</option>
-          <option value="Time Leap Support">⏳ Time Leap Support</option>
+      <div class="form-item">
+        <label>Raid Role</label>
+        <select class="select-field" id="form-role">
+          <option value="Main DPS">Main DPS</option>
+          <option value="Burst DPS">Burst DPS</option>
+          <option value="Support / Shell">Support / Shell</option>
+          <option value="Binder / Split">Binder / Split</option>
+          <option value="Time Leap">Time Leap</option>
         </select>
       </div>
 
-      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
-        <button class="btn-maple btn-secondary" onclick="closeAddModal()">Cancel</button>
-        <button class="btn-maple" onclick="submitNewMember()">Add Member</button>
+      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:24px;">
+        <button class="btn-action" onclick="closeAddModal()">Cancel</button>
+        <button class="btn-action primary" onclick="saveNewRaider()">Add to Roster</button>
       </div>
     </div>
   </div>
 
-  <!-- Notification Toast -->
-  <div class="toast" id="toast">
-    <span>🍁 Discord Roster Copied to Clipboard!</span>
+  <!-- Toast Alert -->
+  <div class="toast-pill" id="toast">
+    <span>✨ Discord Roster Copied to Clipboard!</span>
   </div>
 
   <script>
     /* ==========================================================
-       1. DATA STRUCTURE & INITIAL ROSTER
+       1. DATA MODEL & LOCAL STORAGE
        ========================================================== */
-    const DEFAULT_DATA = [
+    const DEFAULT_DECKS = [
       {
-        id: 'squad-lotus-1',
-        bossKey: 'LOTUS',
-        bossName: 'Hard Lotus (P1-P3)',
-        difficulty: 'Hard',
-        icon: '⚡',
-        tip: 'Spread platforms during P1 lasers. Bishop save Shell for P3 purple energy balls!',
+        id: 'deck-lotus',
+        category: 'LOTUS',
+        title: 'Hard Lotus Expedition',
+        emblem: '⚡',
+        difficulty: 'Hard Mode',
+        mechanicTip: 'P1 Laser swap; Shell on P3 Purple Spheres.',
         members: [
-          { ign: 'VellfireBoss', job: 'Night Walker', cp: '68.5M', role: 'Main DPS', status: 'READY' },
-          { ign: 'HolyMercy', job: 'Bishop', cp: '45.0M', role: 'Healer / Bishop', status: 'READY' },
-          { ign: 'StarSia', job: 'Sia Astelle', cp: '54.2M', role: 'Main DPS', status: 'READY' },
-          { ign: 'SoulTaker', job: 'Shade', cp: '48.0M', role: 'Binder / Splitter', status: 'READY' },
-          { ign: 'CaptainTime', job: 'Buccaneer', cp: '42.1M', role: 'Time Leap Support', status: 'READY' },
-          { ign: 'IronGuard', job: 'Paladin', cp: '46.8M', role: 'Burst DPS', status: 'READY' }
+          { ign: 'VellfireBoss', job: 'Night Walker', avatar: '🥷', cp: '68.5M', role: 'Main DPS', stars: '★★★★★★★', rarity: 'arcane', status: 'READY' },
+          { ign: 'HolyMercy', job: 'Bishop', avatar: '✨', cp: '46.0M', role: 'Support / Shell', stars: '★★★★★', rarity: 'mythic', status: 'READY' },
+          { ign: 'StarSia', job: 'Sia Astelle', avatar: '⭐', cp: '54.2M', role: 'Main DPS', stars: '★★★★★★', rarity: 'arcane', status: 'READY' },
+          { ign: 'SoulTaker', job: 'Shade', avatar: '👊', cp: '48.0M', role: 'Binder / Split', stars: '★★★★★', rarity: 'legend', status: 'READY' },
+          { ign: 'CaptainTime', job: 'Buccaneer', avatar: '⚡', cp: '43.1M', role: 'Time Leap', stars: '★★★★★', rarity: 'legend', status: 'READY' },
+          { ign: 'IronGuard', job: 'Paladin', avatar: '🛡️', cp: '47.5M', role: 'Burst DPS', stars: '★★★★★', rarity: 'legend', status: 'READY' }
         ]
       },
       {
-        id: 'squad-damien-1',
-        bossKey: 'DAMIEN',
-        bossName: 'Hard Damien (P1-P2)',
-        difficulty: 'Hard',
-        icon: '⚔️',
-        tip: 'Cleanse stigma brands at altars before 7 stacks! Save burst binds when Damien descends.',
+        id: 'deck-damien',
+        category: 'DAMIEN',
+        title: 'Hard Damien Expedition',
+        emblem: '⚔️',
+        difficulty: 'Hard Mode',
+        mechanicTip: 'Cleanse Stigma altars before 7 stacks. Save binds.',
         members: [
-          { ign: 'VellfireBoss', job: 'Night Walker', cp: '68.5M', role: 'Main DPS', status: 'READY' },
-          { ign: 'BladeDancer', job: 'Dual Blade', cp: '61.0M', role: 'Burst DPS', status: 'READY' },
-          { ign: 'HolyMercy', job: 'Bishop', cp: '45.0M', role: 'Healer / Bishop', status: 'READY' },
-          { ign: 'PhantomThief', job: 'Phantom', cp: '49.5M', role: 'Main DPS', status: 'READY' },
-          { ign: 'SubWarrior', job: 'Hero', cp: '39.0M', role: 'Burst DPS', status: 'SUB' },
-          { ign: 'OpenSpot', job: 'Paladin', cp: '40.0M', role: 'Main DPS', status: 'READY' }
+          { ign: 'VellfireBoss', job: 'Night Walker', avatar: '🥷', cp: '68.5M', role: 'Main DPS', stars: '★★★★★★★', rarity: 'arcane', status: 'READY' },
+          { ign: 'BladeDancer', job: 'Dual Blade', avatar: '⚔️', cp: '61.0M', role: 'Burst DPS', stars: '★★★★★★', rarity: 'arcane', status: 'READY' },
+          { ign: 'HolyMercy', job: 'Bishop', avatar: '✨', cp: '46.0M', role: 'Support / Shell', stars: '★★★★★', rarity: 'mythic', status: 'READY' },
+          { ign: 'PhantomThief', job: 'Phantom', avatar: '🃏', cp: '50.2M', role: 'Main DPS', stars: '★★★★★', rarity: 'legend', status: 'READY' },
+          { ign: 'SubNeeded', job: 'Hero', avatar: '🪓', cp: '39.0M', role: 'Burst DPS', stars: '★★★★', rarity: 'legend', status: 'SUB' },
+          { ign: 'OpenSlot', job: 'Paladin', avatar: '🛡️', cp: '40.0M', role: 'Main DPS', stars: '★★★★', rarity: 'legend', status: 'READY' }
         ]
       },
       {
-        id: 'squad-lucid-1',
-        bossKey: 'LUCID',
-        bossName: 'Hard Lucid (Dream Realm)',
-        difficulty: 'Hard',
-        icon: '🦋',
-        tip: 'Clear nightmare butterflies regularly. Group up for dragon breath survival on golems.',
+        id: 'deck-lucid',
+        category: 'LUCID',
+        title: 'Hard Lucid Expedition',
+        emblem: '🦋',
+        difficulty: 'Hard Mode',
+        mechanicTip: 'Clear butterfly clouds; gather together for breath.',
         members: [
-          { ign: 'StarSia', job: 'Sia Astelle', cp: '54.2M', role: 'Main DPS', status: 'READY' },
-          { ign: 'NightSlayer', job: 'Night Walker', cp: '58.0M', role: 'Main DPS', status: 'READY' },
-          { ign: 'HolyHeals', job: 'Bishop', cp: '44.0M', role: 'Healer / Bishop', status: 'READY' },
-          { ign: 'SoulTaker', job: 'Shade', cp: '48.0M', role: 'Binder / Splitter', status: 'READY' },
-          { ign: 'BowMastery', job: 'Bowmaster', cp: '51.3M', role: 'Burst DPS', status: 'READY' },
-          { ign: 'LumiGlow', job: 'Luminous', cp: '47.5M', role: 'Main DPS', status: 'READY' }
+          { ign: 'StarSia', job: 'Sia Astelle', avatar: '⭐', cp: '54.2M', role: 'Main DPS', stars: '★★★★★★', rarity: 'arcane', status: 'READY' },
+          { ign: 'NightSlayer', job: 'Night Walker', avatar: '🗡️', cp: '58.0M', role: 'Main DPS', stars: '★★★★★★', rarity: 'arcane', status: 'READY' },
+          { ign: 'HolyHeals', job: 'Bishop', avatar: '✨', cp: '44.0M', role: 'Support / Shell', stars: '★★★★★', rarity: 'mythic', status: 'READY' },
+          { ign: 'SoulTaker', job: 'Shade', avatar: '👊', cp: '48.0M', role: 'Binder / Split', stars: '★★★★★', rarity: 'legend', status: 'READY' },
+          { ign: 'BowMastery', job: 'Bowmaster', avatar: '🏹', cp: '51.3M', role: 'Burst DPS', stars: '★★★★★', rarity: 'legend', status: 'READY' },
+          { ign: 'LumiGlow', job: 'Luminous', avatar: '🔮', cp: '47.5M', role: 'Main DPS', stars: '★★★★★', rarity: 'legend', status: 'READY' }
         ]
       },
       {
-        id: 'squad-cra-1',
-        bossKey: 'CRA',
-        bossName: 'Chaos Root Abyss (4 Doors)',
-        difficulty: 'Chaos',
-        icon: '👑',
-        tip: 'Pierre hat color match! Split Pierre when under 30% HP using Shade/Bind burst.',
+        id: 'deck-cra',
+        category: 'CRA',
+        title: 'Chaos Root Abyss',
+        emblem: '👑',
+        difficulty: 'Chaos Mode',
+        mechanicTip: 'Match Pierre hats! Split burst under 30% HP.',
         members: [
-          { ign: 'VellfireBoss', job: 'Night Walker', cp: '68.5M', role: 'Main DPS', status: 'CLEARED' },
-          { ign: 'HolyMercy', job: 'Bishop', cp: '45.0M', role: 'Healer / Bishop', status: 'CLEARED' },
-          { ign: 'CaptainTime', job: 'Buccaneer', cp: '42.1M', role: 'Time Leap Support', status: 'CLEARED' },
-          { ign: 'BladeDancer', job: 'Dual Blade', cp: '61.0M', role: 'Burst DPS', status: 'CLEARED' }
+          { ign: 'VellfireBoss', job: 'Night Walker', avatar: '🥷', cp: '68.5M', role: 'Main DPS', stars: '★★★★★★★', rarity: 'arcane', status: 'CLEARED' },
+          { ign: 'HolyMercy', job: 'Bishop', avatar: '✨', cp: '46.0M', role: 'Support / Shell', stars: '★★★★★', rarity: 'mythic', status: 'CLEARED' },
+          { ign: 'CaptainTime', job: 'Buccaneer', avatar: '⚡', cp: '43.1M', role: 'Time Leap', stars: '★★★★★', rarity: 'legend', status: 'CLEARED' },
+          { ign: 'BladeDancer', job: 'Dual Blade', avatar: '⚔️', cp: '61.0M', role: 'Burst DPS', stars: '★★★★★★', rarity: 'arcane', status: 'CLEARED' }
         ]
       }
     ];
 
-    let squads = JSON.parse(localStorage.getItem('msm_maple_roster_v2')) || DEFAULT_DATA;
-    let currentFilter = 'ALL';
-    let audioEnabled = true;
+    let decks = JSON.parse(localStorage.getItem('catcha_msm_roster_data')) || DEFAULT_DECKS;
+    let activeCategory = 'ALL';
+    let sfxMuted = false;
 
-    function saveState() {
-      localStorage.setItem('msm_maple_roster_v2', JSON.stringify(squads));
+    function persist() {
+      localStorage.setItem('catcha_msm_roster_data', JSON.stringify(decks));
+      updateGlobalStats();
     }
 
     /* ==========================================================
-       2. MAPLE SOUND SYNTHESIZER (Web Audio API)
+       2. TACTILE AUDIO SYNTHESIZER (Card Flips & Foil Seals)
        ========================================================== */
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     let actx = null;
 
-    function initAudio() {
-      if (!actx) {
-        actx = new AudioCtx();
-      }
-      if (actx.state === 'suspended') {
-        actx.resume();
-      }
-    }
+    function playSfx(type) {
+      if (sfxMuted) return;
+      if (!actx) actx = new AudioCtx();
+      if (actx.state === 'suspended') actx.resume();
 
-    function toggleAudio() {
-      audioEnabled = !audioEnabled;
-      document.getElementById('audio-btn').textContent = audioEnabled ? '🔊 Sound: ON' : '🔇 Sound: OFF';
-    }
-
-    function playMapleSfx(type) {
-      if (!audioEnabled) return;
-      initAudio();
-
-      const now = actx.currentTime;
+      const t = actx.currentTime;
       const osc = actx.createOscillator();
       const gain = actx.createGain();
       osc.connect(gain);
       gain.connect(actx.destination);
 
-      if (type === 'click') {
-        // Crisp meso pickup blip
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(800, now);
-        osc.frequency.exponentialRampToValueAtTime(1200, now + 0.08);
-        gain.gain.setValueAtTime(0.2, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
-        osc.start(now);
-        osc.stop(now + 0.09);
-      } else if (type === 'clear') {
-        // Classic 8-bit style Maple Level Up arpeggio
-        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-        notes.forEach((freq, idx) => {
-          const subOsc = actx.createOscillator();
-          const subGain = actx.createGain();
-          subOsc.type = 'square';
-          subOsc.frequency.setValueAtTime(freq, now + idx * 0.07);
-          subGain.gain.setValueAtTime(0.12, now + idx * 0.07);
-          subGain.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.07 + 0.18);
-          subOsc.connect(subGain);
-          subGain.connect(actx.destination);
-          subOsc.start(now + idx * 0.07);
-          subOsc.stop(now + idx * 0.07 + 0.19);
-        });
-      } else if (type === 'sub') {
-        // Red warning double buzz
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(320, now);
-        osc.frequency.setValueAtTime(240, now + 0.08);
-        gain.gain.setValueAtTime(0.25, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.18);
-        osc.start(now);
-        osc.stop(now + 0.19);
-      } else if (type === 'slime') {
-        // Bloop jiggle tone
+      if (type === 'foil-tap') {
+        // High crisp card snap
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(300, now);
-        osc.frequency.exponentialRampToValueAtTime(600, now + 0.12);
-        gain.gain.setValueAtTime(0.3, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
-        osc.start(now);
-        osc.stop(now + 0.16);
+        osc.frequency.setValueAtTime(1400, t);
+        osc.frequency.exponentialRampToValueAtTime(800, t + 0.06);
+        gain.gain.setValueAtTime(0.18, t);
+        gain.gain.exponentialRampToValueAtTime(0.01, t + 0.06);
+        osc.start(t);
+        osc.stop(t + 0.07);
+      } else if (type === 'foil-clear') {
+        // Shimmering chime chord
+        [1046.5, 1318.5, 1567.9, 2093.0].forEach((freq, idx) => {
+          const o = actx.createOscillator();
+          const g = actx.createGain();
+          o.type = 'triangle';
+          o.frequency.setValueAtTime(freq, t + idx * 0.05);
+          g.gain.setValueAtTime(0.1, t + idx * 0.05);
+          g.gain.exponentialRampToValueAtTime(0.001, t + idx * 0.05 + 0.22);
+          o.connect(g);
+          g.connect(actx.destination);
+          o.start(t + idx * 0.05);
+          o.stop(t + idx * 0.05 + 0.23);
+        });
+      } else if (type === 'foil-sub') {
+        // Warning buzz blip
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, t);
+        osc.frequency.linearRampToValueAtTime(180, t + 0.12);
+        gain.gain.setValueAtTime(0.2, t);
+        gain.gain.exponentialRampToValueAtTime(0.01, t + 0.12);
+        osc.start(t);
+        osc.stop(t + 0.13);
       }
     }
 
-    /* ==========================================================
-       3. RENDER ENGINE
-       ========================================================= */
-    const jobIcons = {
-      'Night Walker': '🗡️',
-      'Bishop': '✨',
-      'Sia Astelle': '⭐',
-      'Paladin': '🛡️',
-      'Shade': '👊',
-      'Dual Blade': '⚔️',
-      'Buccaneer': '⚡',
-      'Hero': '🪓',
-      'Bowmaster': '🏹',
-      'Luminous': '🔮',
-      'Phantom': '🃏',
-      'Adele': '🗡️'
-    };
+    function toggleMute() {
+      sfxMuted = !sfxMuted;
+      document.getElementById('sound-btn').textContent = sfxMuted ? '🔇 SFX Off' : '🔊 SFX On';
+    }
 
-    function renderSquads() {
-      const container = document.getElementById('squad-container');
+    /* ==========================================================
+       3. RENDER CARDS & DECK VIEWS
+       ========================================================== */
+    function render() {
+      const container = document.getElementById('decks-container');
       container.innerHTML = '';
 
-      const filtered = currentFilter === 'ALL' 
-        ? squads 
-        : squads.filter(s => s.bossKey === currentFilter);
+      const filtered = activeCategory === 'ALL' 
+        ? decks 
+        : decks.filter(d => d.category === activeCategory);
 
-      filtered.forEach((squad) => {
-        const card = document.createElement('article');
-        card.className = 'boss-card';
+      filtered.forEach(deck => {
+        const clearedCount = deck.members.filter(m => m.status === 'CLEARED').length;
+        const totalCount = deck.members.length;
+        const clearPct = Math.round((clearedCount / totalCount) * 100) || 0;
 
-        const clearedCount = squad.members.filter(m => m.status === 'CLEARED').length;
-        const totalCount = squad.members.length;
+        const section = document.createElement('section');
+        section.className = 'deck-section';
 
-        let membersHtml = '';
-        squad.members.forEach((m, idx) => {
-          const statusClass = m.status === 'CLEARED' ? 'status-cleared' : (m.status === 'SUB' ? 'status-sub' : '');
-          const badgeClass = m.status === 'CLEARED' ? 'badge-cleared' : (m.status === 'SUB' ? 'badge-sub' : 'badge-ready');
-          const badgeText = m.status === 'CLEARED' ? '⭐ CLEARED' : (m.status === 'SUB' ? '🔴 SUB NEEDED' : '🟡 READY');
-          const jobIcon = jobIcons[m.job] || '⚔️';
+        let cardsHtml = '';
+        deck.members.forEach((m, idx) => {
+          const sealText = m.status === 'CLEARED' ? '✦ CLEARED' : (m.status === 'SUB' ? '⚠ SUB NEEDED' : 'READY');
+          const sealClass = m.status === 'CLEARED' ? 'status-cleared' : (m.status === 'SUB' ? 'status-sub' : 'status-ready');
 
-          membersHtml += `
-            <div class="raider-slot ${statusClass}" onclick="cycleStatus('${squad.id}', ${idx})">
-              <div class="raider-left">
-                <div class="raider-job-badge">${jobIcon}</div>
-                <div class="raider-meta">
-                  <div class="raider-ign">${escapeHtml(m.ign)}</div>
-                  <div class="raider-subinfo">
-                    <span>${escapeHtml(m.job)}</span> • 
-                    <span class="cp-tag">${m.cp}</span> • 
-                    <span>${m.role}</span>
+          cardsHtml += `
+            <div class="gacha-card-wrapper" onclick="toggleSeal('${deck.id}', ${idx})" onmousemove="handleTilt(event, this)" onmouseleave="resetTilt(this)">
+              <div class="gacha-card">
+                <div class="card-holo-sheen"></div>
+                
+                <div class="card-rarity-row">
+                  <span class="rarity-pill rarity-${m.rarity}">${m.rarity}</span>
+                  <span class="card-stars">${m.stars}</span>
+                </div>
+
+                <div class="card-art-box">
+                  <div class="art-glow"></div>
+                  <div class="character-avatar">${m.avatar}</div>
+                </div>
+
+                <div class="card-details">
+                  <div class="card-char-name">
+                    <span>${escapeStr(m.ign)}</span>
+                    <span class="card-job-badge">${escapeStr(m.job)}</span>
+                  </div>
+
+                  <div class="card-stats-grid">
+                    <div class="stat-cell">
+                      <span class="stat-cell-label">Combat Power</span>
+                      <span class="stat-cell-val power">${m.cp}</span>
+                    </div>
+                    <div class="stat-cell">
+                      <span class="stat-cell-label">Assigned Role</span>
+                      <span class="stat-cell-val">${m.role}</span>
+                    </div>
+                  </div>
+
+                  <div class="card-action-bar">
+                    <div class="status-foil-seal ${sealClass}">
+                      ${sealText}
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="status-badge ${badgeClass}">${badgeText}</div>
             </div>
           `;
         });
 
-        card.innerHTML = `
-          <div class="card-top">
-            <div class="boss-identity">
-              <div class="boss-icon-wrap">${squad.icon}</div>
+        section.innerHTML = `
+          <div class="deck-header">
+            <div class="deck-info">
+              <div class="deck-emblem">${deck.emblem}</div>
               <div>
-                <div class="boss-name">${escapeHtml(squad.bossName)}</div>
-                <span class="boss-diff ${squad.difficulty === 'Chaos' ? 'diff-chaos' : 'diff-hard'}">${squad.difficulty} MODE</span>
+                <div class="deck-title">${escapeStr(deck.title)}</div>
+                <div class="deck-meta">${escapeStr(deck.difficulty)} • ${escapeStr(deck.mechanicTip)}</div>
               </div>
             </div>
-            <div class="party-counter">${clearedCount} / ${totalCount} Cleared</div>
+            <div class="deck-stats">
+              <span class="badge-clear-rate">${clearedCount}/${totalCount} Cleared (${clearPct}%)</span>
+            </div>
           </div>
 
-          <div class="raider-list">
-            ${membersHtml}
-          </div>
-
-          <div class="card-footer-tip">
-            <span>💡</span>
-            <span>${escapeHtml(squad.tip)}</span>
+          <div class="card-grid">
+            ${cardsHtml}
           </div>
         `;
 
-        container.appendChild(card);
+        container.appendChild(section);
       });
+
+      updateGlobalStats();
     }
 
-    function cycleStatus(squadId, memberIdx) {
-      const squad = squads.find(s => s.id === squadId);
-      if (!squad) return;
-      const member = squad.members[memberIdx];
+    function toggleSeal(deckId, idx) {
+      const deck = decks.find(d => d.id === deckId);
+      if (!deck) return;
+      const member = deck.members[idx];
 
       if (member.status === 'READY') {
         member.status = 'CLEARED';
-        playMapleSfx('clear');
+        playSfx('foil-clear');
       } else if (member.status === 'CLEARED') {
         member.status = 'SUB';
-        playMapleSfx('sub');
+        playSfx('foil-sub');
       } else {
         member.status = 'READY';
-        playMapleSfx('click');
+        playSfx('foil-tap');
       }
 
-      saveState();
-      renderSquads();
+      persist();
+      render();
     }
 
-    function filterBoss(bossKey) {
-      currentFilter = bossKey;
-      document.querySelectorAll('.btn-tab').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.textContent.includes(bossKey === 'ALL' ? 'All' : bossKey)) {
-          btn.classList.add('active');
+    /* 3D Dynamic Card Tilt & Sheen following mouse (Catcha style) */
+    function handleTilt(e, cardEl) {
+      const rect = cardEl.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -10;
+      const rotateY = ((x - centerX) / centerX) * 10;
+
+      cardEl.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    }
+
+    function resetTilt(cardEl) {
+      cardEl.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+    }
+
+    function setCategory(cat) {
+      activeCategory = cat;
+      document.querySelectorAll('.pill-tab').forEach(b => {
+        b.classList.remove('active');
+        if (b.textContent.toUpperCase().includes(cat === 'ALL' ? 'ALL' : cat)) {
+          b.classList.add('active');
         }
       });
-      playMapleSfx('click');
-      renderSquads();
+      playSfx('foil-tap');
+      render();
+    }
+
+    function updateGlobalStats() {
+      let total = 0;
+      let cleared = 0;
+      decks.forEach(d => {
+        total += d.members.length;
+        cleared += d.members.filter(m => m.status === 'CLEARED').length;
+      });
+      const pct = total === 0 ? 0 : Math.round((cleared / total) * 100);
+      document.getElementById('global-clear-pct').textContent = `${pct}% (${cleared}/${total})`;
     }
 
     /* ==========================================================
-       4. RESET COUNTDOWN TIMER (Thursday 00:00 SGT / UTC+8)
+       4. RESET COUNTDOWN TIMER
        ========================================================== */
-    function updateResetCountdown() {
-      const timerEl = document.getElementById('reset-timer');
+    function updateCountdown() {
       const now = new Date();
+      const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+      const serverTime = new Date(utc + 8 * 3600000); // UTC+8 SGT
 
-      // Find next Thursday 00:00 UTC+8 (Server Time)
-      // Convert now to UTC milliseconds
-      const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);
-      const serverOffset = 8 * 3600000;
-      const serverTime = new Date(utcTime + serverOffset);
-
-      let targetReset = new Date(serverTime);
-      const dayOfWeek = serverTime.getDay(); // 0 = Sun, 4 = Thu
-      let daysUntilThursday = (4 - dayOfWeek + 7) % 7;
-
-      if (daysUntilThursday === 0 && (serverTime.getHours() > 0 || serverTime.getMinutes() > 0 || serverTime.getSeconds() > 0)) {
-        daysUntilThursday = 7;
+      let target = new Date(serverTime);
+      const day = serverTime.getDay();
+      let diffDays = (4 - day + 7) % 7;
+      if (diffDays === 0 && (serverTime.getHours() > 0 || serverTime.getMinutes() > 0 || serverTime.getSeconds() > 0)) {
+        diffDays = 7;
       }
+      target.setDate(serverTime.getDate() + diffDays);
+      target.setHours(0, 0, 0, 0);
 
-      targetReset.setDate(serverTime.getDate() + daysUntilThursday);
-      targetReset.setHours(0, 0, 0, 0);
+      const diff = target.getTime() - serverTime.getTime();
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
 
-      const diff = targetReset.getTime() - serverTime.getTime();
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      const pad = (n) => String(n).padStart(2, '0');
-      timerEl.textContent = `${days}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
+      document.getElementById('live-countdown').textContent = `${d}d ${h}h ${m}m`;
     }
-
-    setInterval(updateResetCountdown, 1000);
-    updateResetCountdown();
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
 
     /* ==========================================================
-       5. MODAL: ADD NEW MEMBER
+       5. MODAL & ADD RAIDER
        ========================================================== */
+    const jobAvatars = {
+      'Night Walker': '🥷', 'Bishop': '✨', 'Sia Astelle': '⭐', 'Paladin': '🛡️',
+      'Shade': '👊', 'Dual Blade': '⚔️', 'Buccaneer': '⚡', 'Hero': '🪓',
+      'Bowmaster': '🏹', 'Luminous': '🔮', 'Phantom': '🃏', 'Adele': '🗡️'
+    };
+
     function openAddModal() {
-      const select = document.getElementById('form-squad-select');
-      select.innerHTML = squads.map(s => `<option value="${s.id}">${escapeHtml(s.bossName)}</option>`).join('');
-      document.getElementById('add-modal').classList.add('active');
-      playMapleSfx('click');
+      const select = document.getElementById('form-deck-id');
+      select.innerHTML = decks.map(d => `<option value="${d.id}">${escapeStr(d.title)}</option>`).join('');
+      document.getElementById('add-modal').classList.add('show');
+      playSfx('foil-tap');
     }
 
     function closeAddModal() {
-      document.getElementById('add-modal').classList.remove('active');
-      playMapleSfx('click');
+      document.getElementById('add-modal').classList.remove('show');
     }
 
-    function submitNewMember() {
-      const squadId = document.getElementById('form-squad-select').value;
+    function saveNewRaider() {
+      const deckId = document.getElementById('form-deck-id').value;
       const ign = document.getElementById('form-ign').value.trim();
       const job = document.getElementById('form-job').value;
-      const cpVal = document.getElementById('form-cp').value.trim() || '40';
+      const cpVal = document.getElementById('form-cp').value.trim() || '45';
       const role = document.getElementById('form-role').value;
 
       if (!ign) {
-        alert('Please enter an IGN for the character!');
+        alert('Please enter an IGN!');
         return;
       }
 
-      const squad = squads.find(s => s.id === squadId);
-      if (squad) {
-        squad.members.push({
+      const deck = decks.find(d => d.id === deckId);
+      if (deck) {
+        deck.members.push({
           ign: ign,
           job: job,
+          avatar: jobAvatars[job] || '⚔️',
           cp: `${cpVal}M`,
           role: role,
+          stars: '★★★★★',
+          rarity: parseFloat(cpVal) >= 60 ? 'arcane' : (parseFloat(cpVal) >= 50 ? 'mythic' : 'legend'),
           status: 'READY'
         });
-        saveState();
-        renderSquads();
+        persist();
+        render();
         closeAddModal();
-        playMapleSfx('clear');
+        playSfx('foil-clear');
         document.getElementById('form-ign').value = '';
         document.getElementById('form-cp').value = '';
       }
     }
 
     /* ==========================================================
-       6. DISCORD ROSTER EXPORTER
+       6. DISCORD EXPORT
        ========================================================== */
-    function exportDiscord() {
-      let output = `🍁 **UTENSILS EXPEDITION ROSTER • MAPLESTORY M** 🍁\n`;
-      output += `*Weekly Server Reset: Thursdays 00:00 SGT*\n\n`;
-
-      squads.forEach(s => {
-        output += `⚔️ **${s.bossName}** [${s.members.filter(m => m.status === 'CLEARED').length}/${s.members.length} CLEARED]\n`;
-        s.members.forEach(m => {
-          const statusEmoji = m.status === 'CLEARED' ? '✅ [CLEARED]' : (m.status === 'SUB' ? '🚨 [SUB NEEDED]' : '🟡 [READY]');
-          output += `• ${statusEmoji} **${m.ign}** (${m.job} | ${m.cp} | ${m.role})\n`;
+    function copyDiscordRoster() {
+      let out = `🎴 **UTENSILS EXPEDITION CARDS • ASIA 2 SCANIA**\n`;
+      decks.forEach(d => {
+        const clears = d.members.filter(m => m.status === 'CLEARED').length;
+        out += `\n**${d.title}** [${clears}/${d.members.length} Cleared]\n`;
+        d.members.forEach(m => {
+          const seal = m.status === 'CLEARED' ? '✅ [CLEARED]' : (m.status === 'SUB' ? '🚨 [SUB NEEDED]' : '🟡 [READY]');
+          out += `• ${seal} **${m.ign}** (${m.job} | ${m.cp} | ${m.role})\n`;
         });
-        output += `\n`;
       });
 
-      navigator.clipboard.writeText(output).then(() => {
-        playMapleSfx('clear');
+      navigator.clipboard.writeText(out).then(() => {
+        playSfx('foil-clear');
         const toast = document.getElementById('toast');
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 3500);
+        toast.classList.add('visible');
+        setTimeout(() => toast.classList.remove('visible'), 3200);
       });
     }
 
-    function escapeHtml(str) {
+    function escapeStr(str) {
       return str.replace(/[&<>'"]/g, 
-        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+        t => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[t] || t)
       );
     }
 
-    /* ==========================================================
-       7. FALLING MAPLE LEAVES & PARTICLES (CANVAS)
-       ========================================================== */
-    const canvas = document.getElementById('fx-canvas');
-    const ctx = canvas.getContext('2d');
-    let width, height;
-    const leaves = [];
-    const stars = [];
-
-    function resizeCanvas() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    // Create Autumn Leaves
-    for (let i = 0; i < 28; i++) {
-      leaves.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        size: 14 + Math.random() * 16,
-        speedY: 0.9 + Math.random() * 1.6,
-        speedX: -0.6 + Math.random() * 1.2,
-        rotation: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * 0.04,
-        swayAmplitude: 20 + Math.random() * 30,
-        swaySpeed: 0.02 + Math.random() * 0.03,
-        swayOffset: Math.random() * Math.PI * 2,
-        color: ['#ff5a00', '#ff9900', '#ffbe1a', '#e11d48', '#d97706'][Math.floor(Math.random() * 5)]
-      });
-    }
-
-    // Create Ambient Dream Stars
-    for (let i = 0; i < 60; i++) {
-      stars.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        r: Math.random() * 1.6 + 0.4,
-        alpha: Math.random(),
-        speed: 0.015 + Math.random() * 0.02
-      });
-    }
-
-    function drawMapleLeaf(ctx, size, color) {
-      ctx.fillStyle = color;
-      ctx.beginPath();
-      // Stylized 5-pointed Maple Leaf silhouette
-      ctx.moveTo(0, -size);
-      ctx.lineTo(size * 0.35, -size * 0.45);
-      ctx.lineTo(size * 0.85, -size * 0.55);
-      ctx.lineTo(size * 0.45, -size * 0.1);
-      ctx.lineTo(size * 0.75, size * 0.45);
-      ctx.lineTo(size * 0.25, size * 0.35);
-      ctx.lineTo(0, size * 0.85); // stem base
-      ctx.lineTo(-size * 0.25, size * 0.35);
-      ctx.lineTo(-size * 0.75, size * 0.45);
-      ctx.lineTo(-size * 0.45, -size * 0.1);
-      ctx.lineTo(-size * 0.85, -size * 0.55);
-      ctx.lineTo(-size * 0.35, -size * 0.45);
-      ctx.closePath();
-      ctx.fill();
-    }
-
-    function animateFX() {
-      ctx.clearRect(0, 0, width, height);
-
-      // Render Twinkling Stars
-      stars.forEach(s => {
-        s.alpha += s.speed;
-        const currentAlpha = Math.abs(Math.sin(s.alpha));
-        ctx.fillStyle = `rgba(255, 255, 255, ${currentAlpha * 0.75})`;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      // Render Falling Maple Leaves
-      leaves.forEach(l => {
-        l.y += l.speedY;
-        l.swayOffset += l.swaySpeed;
-        l.x += l.speedX + Math.sin(l.swayOffset) * 0.8;
-        l.rotation += l.rotationSpeed;
-
-        if (l.y > height + 40) {
-          l.y = -30;
-          l.x = Math.random() * width;
-        }
-        if (l.x > width + 40) l.x = -30;
-        if (l.x < -40) l.x = width + 30;
-
-        ctx.save();
-        ctx.translate(l.x, l.y);
-        ctx.rotate(l.rotation);
-        drawMapleLeaf(ctx, l.size, l.color);
-        ctx.restore();
-      });
-
-      requestAnimationFrame(animateFX);
-    }
-
-    // Start Everything
-    renderSquads();
-    animateFX();
+    render();
   </script>
 </body>
 </html>
